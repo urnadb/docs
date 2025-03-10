@@ -14,6 +14,8 @@
   </url><url>
     <loc>http://localhost:1313/guide/</loc>
   </url><url>
+    <loc>http://localhost:1313/guide/data/</loc>
+  </url><url>
     <loc>http://localhost:1313/guide/architecture/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/deploy/</loc>

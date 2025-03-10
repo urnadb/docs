@@ -2,7 +2,7 @@
 title: 使用指南
 type: docs
 prev: guide/index
-next: guide/deploy/
+next: guide/architecture
 sidebar:
   open: true
 ---
