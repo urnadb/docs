@@ -16,15 +16,16 @@
     
     
     <item>
-      <title>数据管理</title>
-      <link>http://localhost:1313/guide/data/</link>
+      <title>Java SDK</title>
+      <link>http://localhost:1313/sdk/java-sdk/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/data/</guid>
+      <guid>http://localhost:1313/sdk/java-sdk/</guid>
       <description>
         
         
-        
+        &lt;p&gt;这里介绍整个服务器的架构设计和运行方式，如何配置长期运行的服务&lt;/p&gt;
+
       </description>
     </item>
     
@@ -34,6 +35,19 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/guide/architecture/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>JavaScript SDK</title>
+      <link>http://localhost:1313/sdk/javascript-sdk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/sdk/javascript-sdk/</guid>
       <description>
         
         
@@ -73,6 +87,19 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/guide/layout/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>数据管理</title>
+      <link>http://localhost:1313/guide/data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/guide/data/</guid>
       <description>
         
         
