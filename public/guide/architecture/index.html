@@ -10,18 +10,25 @@
 <link rel="icon" href="/images/wiredb-org.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/images/wiredb-org.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>架构设计 – WireDB Document</title>
-  <meta name="description" content="" /><link rel="canonical" href="http://localhost:1313/guide/architecture/" itemprop="url" />
+  <meta name="description" content="数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。
+相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。" /><link rel="canonical" href="http://localhost:1313/guide/architecture/" itemprop="url" />
 
 <meta property="og:title" content="架构设计" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。
+相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/guide/architecture/" /><meta property="article:section" content="guide" />
 
 
 
   <meta itemprop="name" content="架构设计">
+  <meta itemprop="description" content="数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。
+相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。">
+  <meta itemprop="wordCount" content="9">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="架构设计">
+  <meta name="twitter:description" content="数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。
+相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -220,6 +227,13 @@
               
             </li></ul>
       </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/community/"
+    
+  >开发者社区
+    </a></li>
     </ul>
 
     <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
@@ -307,6 +321,13 @@
               
             </li></ul>
       </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/community/"
+    
+  >开发者社区
+    </a></li>
         
       </ul>
     </div>
@@ -348,7 +369,9 @@
 
         <div class="content">
           <h1>架构设计</h1>
-          
+          <p>数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。</p>
+<p>相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。</p>
+
         </div>
         <div class="hx-mt-16"></div>
         <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a

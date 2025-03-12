@@ -17,6 +17,8 @@
   </url><url>
     <loc>http://localhost:1313/sdk/</loc>
   </url><url>
+    <loc>http://localhost:1313/community/</loc>
+  </url><url>
     <loc>http://localhost:1313/guide/configure/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/layout/</loc>
