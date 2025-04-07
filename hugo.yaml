@@ -46,4 +46,8 @@ menu:
       params:
         icon: github
 
-  
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
