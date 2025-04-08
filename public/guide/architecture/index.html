@@ -14,16 +14,16 @@
 相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。无论是关系型 SQL 数据库还是 NoSQL 数据库，它们都有一个共同的核心组件存储引擎，这是数据库设计与实现的关键核心部分。
 目前数据库存储引擎可以分为两大类，一类是基于内存的 （in-Memory）实现，例如 Redis 和 Memcached 这类的将数据全部存储在内存中；另外一种则是类似于 MySQL 的 InnoDB 和 LevelDB 这种将数据存储在磁盘中。两者都有各自的优势和劣势，基于内存的存储引擎通常存储的数据量较少，但其访问速度往往比基于磁盘的存储引擎快好几个数量级，而基于磁盘的存储引擎访问速度较慢，但存储数据量要比内存引擎多几个数量级。通常内存的价格要比磁盘的贵很多，这也是在选择存储硬件时要考虑的成本问题。
 存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。
-持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Redis 和 Memcached 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
-综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured File System 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：" /><link rel="canonical" href="http://localhost:1313/guide/architecture/" itemprop="url" />
+持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
+综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：" /><link rel="canonical" href="http://localhost:1313/guide/architecture/" itemprop="url" />
 
 <meta property="og:title" content="架构设计" />
 <meta property="og:description" content="数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。
 相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。无论是关系型 SQL 数据库还是 NoSQL 数据库，它们都有一个共同的核心组件存储引擎，这是数据库设计与实现的关键核心部分。
 目前数据库存储引擎可以分为两大类，一类是基于内存的 （in-Memory）实现，例如 Redis 和 Memcached 这类的将数据全部存储在内存中；另外一种则是类似于 MySQL 的 InnoDB 和 LevelDB 这种将数据存储在磁盘中。两者都有各自的优势和劣势，基于内存的存储引擎通常存储的数据量较少，但其访问速度往往比基于磁盘的存储引擎快好几个数量级，而基于磁盘的存储引擎访问速度较慢，但存储数据量要比内存引擎多几个数量级。通常内存的价格要比磁盘的贵很多，这也是在选择存储硬件时要考虑的成本问题。
 存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。
-持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Redis 和 Memcached 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
-综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured File System 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：
+持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
+综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：
 
 " />
 <meta property="og:type" content="article" />
@@ -36,8 +36,8 @@
 相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。无论是关系型 SQL 数据库还是 NoSQL 数据库，它们都有一个共同的核心组件存储引擎，这是数据库设计与实现的关键核心部分。
 目前数据库存储引擎可以分为两大类，一类是基于内存的 （in-Memory）实现，例如 Redis 和 Memcached 这类的将数据全部存储在内存中；另外一种则是类似于 MySQL 的 InnoDB 和 LevelDB 这种将数据存储在磁盘中。两者都有各自的优势和劣势，基于内存的存储引擎通常存储的数据量较少，但其访问速度往往比基于磁盘的存储引擎快好几个数量级，而基于磁盘的存储引擎访问速度较慢，但存储数据量要比内存引擎多几个数量级。通常内存的价格要比磁盘的贵很多，这也是在选择存储硬件时要考虑的成本问题。
 存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。
-持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Redis 和 Memcached 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
-综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured File System 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：">
+持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
+综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：">
   <meta itemprop="wordCount" content="53">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="架构设计">
@@ -45,8 +45,8 @@
 相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。无论是关系型 SQL 数据库还是 NoSQL 数据库，它们都有一个共同的核心组件存储引擎，这是数据库设计与实现的关键核心部分。
 目前数据库存储引擎可以分为两大类，一类是基于内存的 （in-Memory）实现，例如 Redis 和 Memcached 这类的将数据全部存储在内存中；另外一种则是类似于 MySQL 的 InnoDB 和 LevelDB 这种将数据存储在磁盘中。两者都有各自的优势和劣势，基于内存的存储引擎通常存储的数据量较少，但其访问速度往往比基于磁盘的存储引擎快好几个数量级，而基于磁盘的存储引擎访问速度较慢，但存储数据量要比内存引擎多几个数量级。通常内存的价格要比磁盘的贵很多，这也是在选择存储硬件时要考虑的成本问题。
 存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。
-持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Redis 和 Memcached 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
-综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured File System 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：">
+持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
+综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -222,7 +222,23 @@
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/tls-http/"
     
-  >使用 TLS 连接
+  >TLS 连接
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/guide/container/"
+    
+  >容器运行
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/guide/question/"
+    
+  >常见问题
     </a>
               
             </li></ul>
@@ -324,7 +340,23 @@
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/tls-http/"
     
-  >使用 TLS 连接
+  >TLS 连接
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/guide/container/"
+    
+  >容器运行
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/guide/question/"
+    
+  >常见问题
     </a>
               
             </li></ul>
@@ -407,8 +439,8 @@
 <p>相比之下，NoSQL 数据库更适用于大规模数据存储和高吞吐、低延迟的应用场景。由于 NoSQL 不受固定数据结构和关系的限制，具有更灵活的扩展能力，并且支持节点的动态扩展，从而更好地适应分布式环境。无论是关系型 SQL 数据库还是 NoSQL 数据库，它们都有一个共同的核心组件存储引擎，这是数据库设计与实现的关键核心部分。</p>
 <p>目前数据库存储引擎可以分为两大类，一类是基于内存的 （in-Memory）实现，例如 Redis 和 Memcached 这类的将数据全部存储在内存中；另外一种则是类似于 MySQL 的 InnoDB 和 LevelDB 这种将数据存储在磁盘中。两者都有各自的优势和劣势，基于内存的存储引擎通常存储的数据量较少，但其访问速度往往比基于磁盘的存储引擎快好几个数量级，而基于磁盘的存储引擎访问速度较慢，但存储数据量要比内存引擎多几个数量级。通常内存的价格要比磁盘的贵很多，这也是在选择存储硬件时要考虑的成本问题。</p>
 <p>存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。</p>
-<p>持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Redis 和 Memcached 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。</p>
-<p>综上所述，针对这些场景的问题 WireDB 采用了基于 <a href="https://en.wikipedia.org/wiki/Log-structured_file_system" target="_blank" rel="noopener">Log-Structured File System</a> 日志结构化文件系统的存储引擎实现，存储引擎会以 <strong>Append-Only Log</strong> 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：</p>
+<p>持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。</p>
+<p>综上所述，针对这些场景的问题 <strong>WireDB</strong> 采用了基于 <a href="https://en.wikipedia.org/wiki/Log-structured_merge-tree" target="_blank" rel="noopener">Log-Structured Megre Tree</a> 日志结构化文件系统的存储引擎实现，存储引擎会以 <strong>Append-Only Log</strong> 的方式将所有的数据操作写入到数据文件中。同时 <strong>WireDB</strong> 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：</p>
 <img src="/images/engine.png" alt="Engine" width="80%" />
 <img src="/images/architecture.png" alt="Architecture" width="80%" />
 
