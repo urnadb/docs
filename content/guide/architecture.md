@@ -21,18 +21,18 @@ weight: 1
 
 综上所述，针对这些场景的问题 **WireDB** 采用了基于 [Log-Structured Megre Tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree) 日志结构化文件系统的存储引擎实现，存储引擎会以 **Append-Only Log** 的方式将所有的数据操作写入到数据文件中。同时 **WireDB** 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：
 
-<img src="/images/engine.png" alt="Engine" width="80%" />
+<img src="/images/engine.png" alt="bitcask-engine" width="100%" />
 
-其核心持久化机制基于预写日志 Write-Ahead Logging 简称 **WAL** ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 **segment** 记录，即可高效恢复内存中的索引结构。
+其核心持久化机制基于预写日志 Write-Ahead Logging 简称 **WAL** ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 **Segment** 记录，即可高效恢复内存中的索引结构。
 
 在 WireDB 中对这些 WAL 数据文件有一个统称为叫 **Region** 文件，这些文件有单个固定大小限制，当一个数据文件写满之后就会被关闭，会重新创建一个新的 **Active** 活跃的 Region 文件进行数据记录的进行写入。被关闭的 Region 文件会被视为冷数据文件，随着数据库不间断长时间运行 Region 文件会不断递增逐渐占用磁盘空间。此时数据库进程就需要对旧的 Region 文件执行压缩 Compaction 和定期清理，以降低存储压力并提高查崩溃数据恢复时的启动效率，压缩流程原理图：
 
 
 
-<img src="/images/compression-dirty-region.png" alt="Engine" width="80%" />
+<img src="/images/compress-dirty-region.png" alt="btcask-compress" width="100%" />
 
 
 
-<img src="/images/architecture.png" alt="Architecture" width="80%" />
+<img src="/images/architecture.png" alt="Architecture" width="100%" />
 
 
