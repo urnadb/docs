@@ -41,7 +41,7 @@
 持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
 存储引擎 综上所述，针对这些场景的问题 WireDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 WireDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：
 其核心持久化机制基于预写日志 Write-Ahead Logging 简称 WAL ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 segment 记录，即可高效恢复内存中的索引结构。">
-  <meta itemprop="wordCount" content="98">
+  <meta itemprop="wordCount" content="100">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="架构设计">
   <meta name="twitter:description" content="数据库系统的核心作用是存储和管理数据，并能够从海量数据中高效检索所需记录。传统的 SQL 关系型数据库在数据量增长到一定规模时，容易遇到单机性能瓶颈。此外为了满足 ACID 特性，它们在扩展性和分布式事务支持方面存在一定挑战。
@@ -460,8 +460,8 @@
     <a href="#%e5%ad%98%e5%82%a8%e5%bc%95%e6%93%8e" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>综上所述，针对这些场景的问题 <strong>WireDB</strong> 采用了基于 <a href="https://en.wikipedia.org/wiki/Log-structured_merge-tree" target="_blank" rel="noopener">Log-Structured Megre Tree</a> 日志结构化文件系统的存储引擎实现，存储引擎会以 <strong>Append-Only Log</strong> 的方式将所有的数据操作写入到数据文件中。同时 <strong>WireDB</strong> 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：</p>
 <img src="/images/engine.png" alt="Engine" width="80%" />
 <p>其核心持久化机制基于预写日志 Write-Ahead Logging 简称 <strong>WAL</strong> ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 <strong>segment</strong> 记录，即可高效恢复内存中的索引结构。</p>
-<p>在 <strong>WireDB</strong> 中对这些 WAL 数据文件有一个统称为叫文件，这些文件有单个大小限制，当一个数据文件写满之后就会被关闭，会创建一个新的数据进行进行写入。关闭的 Region 文件会成为冷数据文件，随着数据库进行不断运行长时间运行 Region 文件会不断递增不断的占用磁盘空间，这时就需要对这些旧的 Region 文件进行压缩和定时清理。</p>
-<p>在 WireDB 中，这些 WAL 日志数据文件被统一称为  <strong>Region</strong>  文件，每个 Region 文件有固定的大小限制，当写满后将被关闭，并新建一个 Active Region 活跃的文件用于后续写入。被关闭的 Region 文件被视为冷数据文件，随着数据库的持续运行，Region 文件数量会不断增加，逐渐占用更多的磁盘空间。</p>
+<p>在 WireDB 中对这些 WAL 数据文件有一个统称为叫 <strong>Region</strong> 文件，这些文件有单个大小限制，当一个数据文件写满之后就会被关闭，会创建一个新的数据进行进行写入。关闭的 Region 文件会成为冷数据文件，随着数据库进行不断运行长时间运行 Region 文件会不断递增不断的占用磁盘空间，这时就需要对这些旧的 Region 文件进行压缩和定时清理。</p>
+<p>在 WireDB 中，这些 WAL 日志数据文件被统一称为  Region  文件，每个 Region 文件有固定的大小限制，当写满后将被关闭，并新建一个 Active Region 活跃的文件用于后续写入。被关闭的 Region 文件被视为冷数据文件，随着数据库的持续运行，Region 文件数量会不断增加，逐渐占用更多的磁盘空间。</p>
 <p>为此数据库进程需要对旧的 Region 文件执行压缩 Compaction 和定期清理，以降低存储压力并提高查崩溃数据恢复时的启动效率，压缩流程原理图：</p>
 <img src="/images/compression-dirty-region.png" alt="Engine" width="80%" />
 <img src="/images/architecture.png" alt="Architecture" width="80%" />
