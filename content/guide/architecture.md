@@ -16,9 +16,20 @@ weight: 1
 
 持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
 
+
+## 存储引擎
+
 综上所述，针对这些场景的问题 **WireDB** 采用了基于 [Log-Structured Megre Tree](https://en.wikipedia.org/wiki/Log-structured_merge-tree) 日志结构化文件系统的存储引擎实现，存储引擎会以 **Append-Only Log** 的方式将所有的数据操作写入到数据文件中。同时 **WireDB** 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，其工作原理如下图：
 
 <img src="/images/engine.png" alt="Engine" width="80%" />
+
+其核心持久化机制基于预写日志 Write-Ahead Logging 简称 **WAL** ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 **segment** 记录，即可高效恢复内存中的索引结构。
+
+在 **WireDB** 中对这些 WAL 数据文件有一个统称为叫 **Region** 文件，这些文件有单个大小限制，当一个数据文件写满之后就会被关闭，会创建一个新的数据进行进行写入。关闭的 Region 文件会成为冷数据文件，随着数据库进行不断运行长时间运行 Region 文件会不断递增不断的占用磁盘空间，这时就需要对这些旧的 Region 文件进行压缩和定时清理。
+
+
+
+
 
 <img src="/images/architecture.png" alt="Architecture" width="80%" />
 
