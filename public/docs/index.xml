@@ -49,6 +49,7 @@
 &lt;p&gt;其核心持久化机制基于预写日志 Write-Ahead Logging 简称 &lt;strong&gt;WAL&lt;/strong&gt; ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 &lt;strong&gt;Segment&lt;/strong&gt; 记录，即可高效恢复内存中的索引结构。&lt;/p&gt;
 &lt;p&gt;在 WireDB 中对这些 WAL 数据文件有一个统称为叫 &lt;strong&gt;Region&lt;/strong&gt; 文件，这些文件有单个固定大小限制，当一个数据文件写满之后就会被关闭，会重新创建一个新的 &lt;strong&gt;Active&lt;/strong&gt; 活跃的 Region 文件进行数据记录的进行写入。被关闭的 Region 文件会被视为冷数据文件，随着数据库不间断长时间运行 Region 文件会不断递增逐渐占用磁盘空间。此时数据库进程就需要对旧的 Region 文件执行压缩 Compaction 和定期清理，以降低存储压力并提高查崩溃数据恢复时的启动效率，压缩流程原理图：&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/compress-dirty-region.png&#34; alt=&#34;btcask-compress&#34; width=&#34;100%&#34; /&gt;
+&lt;p&gt;目前工业级采用此存储模型实现的产品有 Amazon Dynamo 数据库，&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/architecture.png&#34; alt=&#34;Architecture&#34; width=&#34;100%&#34; /&gt;
 
       </description>

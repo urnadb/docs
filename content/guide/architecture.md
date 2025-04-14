@@ -31,6 +31,8 @@ weight: 1
 
 <img src="/images/compress-dirty-region.png" alt="btcask-compress" width="100%" />
 
+目前工业级采用此存储模型实现的产品有 Amazon Dynamo 数据库，
+
 
 
 <img src="/images/architecture.png" alt="Architecture" width="100%" />
