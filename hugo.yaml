@@ -1,14 +1,14 @@
-baseURL: https://docs.wiredb.org/
+baseURL: https://docs.momentdb.org/
 languageCode: zh-cn
-title: WireDB Document
+title: MomentDB Document
 
 params:
   navbar:
     displayTitle: true
     displayLogo: true
     logo:
-      path: images/wiredb-org.png
-      dark: images/wiredb-org.png
+      path: images/momentdb-org.png
+      dark: images/momentdb-org.png
       link: /
       width: 28
       height: 12
@@ -42,7 +42,7 @@ menu:
         type: search
     - name: GitHub
       weight: 3
-      url: "https://github.com/auula/wiredb"
+      url: "https://github.com/auula/momentdb"
       params:
         icon: github
 
