@@ -32,9 +32,9 @@ weight: 1
 
 目前工业级的存储系统中，RaikDB 是一个采用类似模型实现的数据库产品，RaikDB 是基于 Amazon Dynamo 论文的设计理念构建而成。其 RaikDB 底层也是采用的顺序写入的日志式存储引擎，并将其命名为 [**Bitcask**](https://riak.com/assets/bitcask-intro.pdf) 存储模型，以提升写入性能和读写效率。
 
-该模型与 MomentDB 所采用的存储引擎在设计理念上有异曲同工之妙。该 Bitcask 存储引擎会在进行数据压缩 Compaction 时会生成 Hint 文件。Hint 文件的作用是在存储引擎重启后，加速内存索引的重建过程，从而避免每次启动都需要全量扫描数据文件，提高了系统的启动效率。但 Hint 文件是在 Compaction 过程中生成的，因此 Hint 只是某个时刻的内存索引快照信息，并不能代表是实时的内存索引信息。
+该模型与 MomentDB 所采用的存储引擎在设计理念上颇为相似。Bitcask 存储引擎在执行数据压缩 Compaction 时会生成 Hint 文件，其作用是在存储引擎重启时，辅助快速重建内存索引，从而避免每次启动都需全量扫描数据文件，显著提升系统的启动效率。然而 Hint 文件仅在 Compaction 过程中生成，所记录的只是当时内存索引的快照，无法反映实时状态。
 
-在 MomentDB 存储引擎中针对这个问题做出改进，
+针对这一问题 MomentDB 在存储引擎中进行改进，将 Hint 文件机制替换为 **Checkpoint** 功能，系统会在固定时间间隔内，定期将当前内存索引持久化为 Checkpoint 文件写入磁盘。当服务器进程发生异常崩溃，也可通过读取 Checkpoint 快照快速恢复内存索引状态。在实际恢复流程中，MomentDB 会优先加载最近一次的 Checkpoint 快照，并从该时间点之后的 Region 文件中继续回放增量数据。通过这种方式，有效提升了系统启动恢复的速度，减少了启动耗时，同时兼顾了数据一致性与运行效率。
 
 <img src="/images/architecture.png" alt="architecture" width="100%" />
 
