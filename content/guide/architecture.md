@@ -30,7 +30,11 @@ weight: 1
 
 <img src="/images/compress-dirty-region.png" alt="btcask-compress" width="100%" />
 
-目前工业级的存储系统中，RaikDB 是一个采用类似模型实现的数据库产品，RaikDB 是基于 Amazon Dynamo 论文的设计理念构建而成。其 RaikDB 底层也是采用的顺序写入的日志式存储引擎，并将其命名为 [**Bitcask**](https://riak.com/assets/bitcask-intro.pdf) 存储模型，以提升写入性能和读写效率。该模型和 MomentDB 所以存储引擎有异曲同工之处，但它的 hint 文件是在 Compaction 过程产生的，
+目前工业级的存储系统中，RaikDB 是一个采用类似模型实现的数据库产品，RaikDB 是基于 Amazon Dynamo 论文的设计理念构建而成。其 RaikDB 底层也是采用的顺序写入的日志式存储引擎，并将其命名为 [**Bitcask**](https://riak.com/assets/bitcask-intro.pdf) 存储模型，以提升写入性能和读写效率。
+
+该模型与 MomentDB 所采用的存储引擎在设计理念上有异曲同工之妙。该 Bitcask 存储引擎会在进行数据压缩 Compaction 时会生成 Hint 文件。Hint 文件的作用是在存储引擎重启后，加速内存索引的重建过程，从而避免每次启动都需要全量扫描数据文件，提高了系统的启动效率。但 Hint 文件是在 Compaction 过程中生成的，因此 Hint 只是某个时刻的内存索引快照信息，并不能代表是实时的内存索引信息。
+
+在 MomentDB 存储引擎中针对这个问题做出改进，
 
 <img src="/images/architecture.png" alt="architecture" width="100%" />
 
