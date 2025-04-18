@@ -46,3 +46,6 @@ root@2c2m:~# docker logs 66ae91bc73a6
 > [!IMPORTANT]
 > 采用容器的方式运行有多的弊端：例如 MomentDB 容器的数据目录和宿主机没有配置正确的映射关系，会导致每次重启之后数据丢失；另外一个问题就是 Docker 这种容器引擎会在正常关闭容器时引入超时机制，如果 MomentDB 中的内存索引非常大的时候就会导致无法正常退出，Docker 默认超时机制会强制关闭 MomentDB 所在容器，导致内存中数据无法正常持久化到磁盘。
 
+## Linux 部署
+
+推荐使用 MomentDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 [Releases](https://github.com/auula/momentdb/releases/tag/v1.1.2) 页面下载 MomentDB 的可执行文件。下载得到的是 zip 压缩包，使用 `unzip` 命令就可以得到对应的 MomentDB 二进制可执行文件。
