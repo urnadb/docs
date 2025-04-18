@@ -10,18 +10,39 @@
 <link rel="icon" href="/images/wiredb-org.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/images/wiredb-org.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>部署运行 – MomentDB Document</title>
-  <meta name="description" content="" /><link rel="canonical" href="http://localhost:1313/guide/deploy/" itemprop="url" />
+  <meta name="description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+Docker 容器 使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
+docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：" /><link rel="canonical" href="http://localhost:1313/guide/deploy/" itemprop="url" />
 
 <meta property="og:title" content="部署运行" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+Docker 容器
+    使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
+
+
+docker pull auula/momentdb:latest
+  
+    
+    
+  
+
+
+运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/guide/deploy/" /><meta property="article:section" content="guide" />
 
 
 
   <meta itemprop="name" content="部署运行">
+  <meta itemprop="description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+Docker 容器 使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
+docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
+  <meta itemprop="wordCount" content="180">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="部署运行">
+  <meta name="twitter:description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+Docker 容器 使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
+docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -166,6 +187,14 @@
     
   >部署运行
     </a>
+  
+    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
+              <a
+                href="#docker-%e5%ae%b9%e5%99%a8"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >Docker 容器</a>
+            </li>
+          </ul>
   
               
             </li><li class="hx-flex hx-flex-col "><a
@@ -386,8 +415,12 @@
 </div></div></aside>
     
 <nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
-    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4">
-      <div class=" hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
+    <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">On this page</p><ul>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#docker-%e5%ae%b9%e5%99%a8">Docker 容器
+        </a>
+      </li></ul>
+      <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
         <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
           <span>Scroll to top</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
@@ -410,7 +443,63 @@
 
         <div class="content">
           <h1>部署运行</h1>
-          
+          <p>目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 <strong>Linux 裸机部署</strong> 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。</p>
+<h2>Docker 容器<span class="hx-absolute -hx-mt-20" id="docker-容器"></span>
+    <a href="#docker-%e5%ae%b9%e5%99%a8" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>使用 Docker 可以快速部署 <a href="https://hub.docker.com/r/auula/momentdb" target="_blank" rel="noopener">momentdb:latest</a> 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker pull auula/momentdb:latest</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<p>运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 2668:2668 auula/momentdb:latest</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<p>MomentDB 提供使用 RESTful API 的方式进行数据交互，理论上任意具备 HTTP 协议的客户端都支持访问和操作 MomentDB 服务实例。在调用 RESTful API 时需要在请求头中添加 <code>Auth-Token</code> 进行鉴权，该密钥由 MomentDB 进程自动生成，可通过容器运行时日志获取，使用以下命令查看启动日志：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@2c2m:~# docker logs 66ae91bc73a6
+</span></span><span style="display:flex;"><span>           __  ___                    __  ___  ___
+</span></span><span style="display:flex;"><span>          /  |/  /__  __ _  ___ ___  / /_/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>         / /|_/ / _ <span style="color:#ae81ff">\/</span>  <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#ae81ff">\/</span> -_<span style="color:#f92672">)</span> _ <span style="color:#ae81ff">\/</span> __/ // / _  |
+</span></span><span style="display:flex;"><span>        /_/  /_/<span style="color:#ae81ff">\_</span>__/_/_/_/<span style="color:#ae81ff">\_</span>_/_//_/<span style="color:#ae81ff">\_</span>_/____/____/  v1.1.2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  MomentDB is a NoSQL database based on Log-structured file system.
+</span></span><span style="display:flex;"><span>  Software License: Apache 2.0  Website: https://momentdb.github.io
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading custom config file was successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Logging output initialized successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading and parsing region data files...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Regions compression activated successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Setting server whitelist IP successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> File system setup completed successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:59 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> HTTP server started at http://192.168.31.221:2668 🚀</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+
         </div>
         <div class="hx-mt-16"></div>
         <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a

@@ -51,8 +51,10 @@
 &lt;img src=&#34;http://localhost:1313/images/compress-dirty-region.png&#34; alt=&#34;btcask-compress&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;目前工业级的存储系统中，RaikDB 是一个采用类似模型实现的数据库产品，RaikDB 是基于 Amazon Dynamo 论文的设计理念构建而成。其 RaikDB 底层也是采用的顺序写入的日志式存储引擎，并将其命名为 &lt;a href=&#34;https://riak.com/assets/bitcask-intro.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Bitcask&lt;/strong&gt;&lt;/a&gt; 存储模型，以提升写入性能和读写效率。&lt;/p&gt;
 &lt;p&gt;该模型与 MomentDB 所采用的存储引擎在设计理念上颇为相似。Bitcask 存储引擎在执行数据压缩 Compaction 时会生成 Hint 文件，其作用是在存储引擎重启时，辅助快速重建内存索引，从而避免每次启动都需全量扫描数据文件，显著提升系统的启动效率。然而 Hint 文件仅在 Compaction 过程中生成，所记录的只是当时内存索引的快照，无法反映实时状态。&lt;/p&gt;
-&lt;p&gt;针对这一问题 MomentDB 在存储引擎中进行改进，将 Hint 文件机制替换为 &lt;strong&gt;Checkpoint&lt;/strong&gt; 功能，系统会在固定时间间隔内，定期将当前内存索引持久化为 Checkpoint 文件写入磁盘。当服务器进程发生异常崩溃，也可通过读取 Checkpoint 快照快速恢复内存索引状态。在实际恢复流程中，MomentDB 会优先加载最近一次的 Checkpoint 快照，并从该时间点之后的 Region 文件中继续回放增量数据。通过这种方式，有效提升了系统启动恢复的速度，减少了启动耗时，同时兼顾了数据一致性与运行效率。&lt;/p&gt;
+&lt;p&gt;针对这一问题 MomentDB 在存储引擎中进行了改进，将 Hint 文件机制替换为 &lt;strong&gt;Checkpoint&lt;/strong&gt; 功能，系统会在固定时间间隔内，定期将当前内存索引持久化为 checkpoint 文件写入磁盘。当服务器进程发生异常崩溃，也可通过读取 checkpoint 快照快速恢复内存索引状态。在实际恢复流程中，MomentDB 会优先加载最近一次的 checkpoint 快照，并从该时间点之后的 Region 文件中继续回放增量数据。通过这种方式，有效提升了系统启动恢复的速度，减少了启动耗时，同时兼顾了数据一致性与运行效率。&lt;/p&gt;
+&lt;p&gt;在此存储引擎设计的基础上，MomentDB 构建了内置的 HTTP 服务器，并引入了多种数据结构的抽象层，进一步构成了完整的 MomentDB 产品体系。这些模块构成了一个相互协作、功能完善的 MomentDB 产品，架构图如下：&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/architecture.png&#34; alt=&#34;architecture&#34; width=&#34;100%&#34; /&gt;
+&lt;p&gt;单机数据库的核心在于其存储引擎，负责实现数据的持久化，并高效地处理数据的写入与读取，是数据库系统性能与可靠性的基础保障。目前 MomentDB 支持单机部署，适用于轻量级和中等规模的应用场景。未来版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。&lt;/p&gt;
 
       </description>
     </item>
@@ -79,7 +81,63 @@
       <description>
         
         
-        
+        &lt;p&gt;目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 &lt;strong&gt;Linux 裸机部署&lt;/strong&gt; 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。&lt;/p&gt;
+&lt;h2&gt;Docker 容器&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;docker-容器&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#docker-%e5%ae%b9%e5%99%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;使用 Docker 可以快速部署 &lt;a href=&#34;https://hub.docker.com/r/auula/momentdb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;momentdb:latest&lt;/a&gt; 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker pull auula/momentdb:latest&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;docker run -p 2668:2668 auula/momentdb:latest&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;MomentDB 提供使用 RESTful API 的方式进行数据交互，理论上任意具备 HTTP 协议的客户端都支持访问和操作 MomentDB 服务实例。在调用 RESTful API 时需要在请求头中添加 &lt;code&gt;Auth-Token&lt;/code&gt; 进行鉴权，该密钥由 MomentDB 进程自动生成，可通过容器运行时日志获取，使用以下命令查看启动日志：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;root@2c2m:~# docker logs 66ae91bc73a6
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           __  ___                    __  ___  ___
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          /  |/  /__  __ _  ___ ___  / /_/ _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         / /|_/ / _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt;  &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; -_&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; __/ // / _  |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        /_/  /_/&lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;__/_/_/_/&lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;_/_//_/&lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;_/____/____/  v1.1.2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  MomentDB is a NoSQL database based on Log-structured file system.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Software License: Apache 2.0  Website: https://momentdb.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:58 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Loading custom config file was successfully
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:58 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Logging output initialized successfully
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:58 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Loading and parsing region data files...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:58 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Regions compression activated successfully
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:58 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Setting server whitelist IP successfully
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:58 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; File system setup completed successfully
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;MDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2025/04/18 18:41:59 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; HTTP server started at http://192.168.31.221:2668 🚀&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
       </description>
     </item>
     
