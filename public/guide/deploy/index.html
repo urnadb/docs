@@ -10,12 +10,12 @@
 <link rel="icon" href="/images/wiredb-org.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/images/wiredb-org.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>部署运行 – MomentDB Document</title>
-  <meta name="description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+  <meta name="description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 MomentDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器 使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
 docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：" /><link rel="canonical" href="http://localhost:1313/guide/deploy/" itemprop="url" />
 
 <meta property="og:title" content="部署运行" />
-<meta property="og:description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+<meta property="og:description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 MomentDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器
     使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
 
@@ -34,13 +34,13 @@ docker pull auula/momentdb:latest
 
 
   <meta itemprop="name" content="部署运行">
-  <meta itemprop="description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+  <meta itemprop="description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 MomentDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器 使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
 docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
-  <meta itemprop="wordCount" content="180">
+  <meta itemprop="wordCount" content="175">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="部署运行">
-  <meta name="twitter:description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 Linux 裸机部署 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。
+  <meta name="twitter:description" content="目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 MomentDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器 使用 Docker 可以快速部署 momentdb:latest 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：
 docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
 
@@ -443,7 +443,7 @@ docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并
 
         <div class="content">
           <h1>部署运行</h1>
-          <p>目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署以及适用于 Linux 系统的可执行文件。作为 MomentDB 项目的开发者，我更推荐采用 <strong>Linux 裸机部署</strong> 的方式，特别是在将 MomentDB 作为长期运行服务的场景中。相较于容器化运行，裸机部署可更充分地利用底层资源，并允许用户根据实际需求手动调整存储引擎参数，从而获得更高的性能稳定性和资源利用率。建议使用主流 Linux 发行版例如 REHL 和 SUSE 、Ubuntu 来运行 MomentDB，以实现最佳的运行效率和服务保障。</p>
+          <p>目前 MomentDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 MomentDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。</p>
 <h2>Docker 容器<span class="hx-absolute -hx-mt-20" id="docker-容器"></span>
     <a href="#docker-%e5%ae%b9%e5%99%a8" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>使用 Docker 可以快速部署 <a href="https://hub.docker.com/r/auula/momentdb" target="_blank" rel="noopener">momentdb:latest</a> 的镜像来测试 MomentDB 提供的服务，运行以下命令即可拉取 MomentDB 镜像：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
@@ -483,13 +483,12 @@ docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并
 </span></span><span style="display:flex;"><span>  MomentDB is a NoSQL database based on Log-structured file system.
 </span></span><span style="display:flex;"><span>  Software License: Apache 2.0  Website: https://momentdb.github.io
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading custom config file was successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Logging output initialized successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading and parsing region data files...
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Regions compression activated successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Setting server whitelist IP successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:58 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> File system setup completed successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:41:59 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> HTTP server started at http://192.168.31.221:2668 🚀</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:45 <span style="color:#f92672">[</span>WARN<span style="color:#f92672">]</span> The default password is: iYPNxjlFt2FnKy8XUh6henLMJ
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:45 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Logging output initialized successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:45 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading and parsing region data files...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:46 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Regions compression activated successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:46 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> File system setup completed successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:46 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> HTTP server started at http://192.168.31.221:2668 🚀</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -498,6 +497,13 @@ docker pull auula/momentdb:latest 运行 MomentDB 镜像启动容器服务，并
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
+</div>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Important</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>采用容器的方式运行有多的弊端：例如 MomentDB 容器的数据目录和宿主机没有配置正确的映射关系，会导致每次重启之后数据丢失；另外一个问题就是 Docker 这种容器引擎会在正常关闭容器时引入超时机制，如果 MomentDB 中的内存索引非常大的时候就会导致无法正常退出，Docker 默认超时机制会强制关闭 MomentDB 所在容器，导致内存中数据无法正常持久化到磁盘。</p></div>
+  </div>
 </div>
 
         </div>
