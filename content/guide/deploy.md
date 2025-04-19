@@ -27,20 +27,20 @@ UrnaDB 提供使用 RESTful API 的方式进行数据交互，理论上任意具
 
 ```bash
 root@2c2m:~# docker logs 66ae91bc73a6
-           __  ___                    __  ___  ___
-          /  |/  /__  __ _  ___ ___  / /_/ _ \/ _ )
-         / /|_/ / _ \/  ' \/ -_) _ \/ __/ // / _  |
-        /_/  /_/\___/_/_/_/\__/_//_/\__/____/____/  v1.1.2
+              __  __              ___  ___
+             / / / /______  ___ _/ _ \/ _ )
+            / /_/ / __/ _ \/ _ `/ // / _  |
+            \____/_/ /_//_/\_,_/____/____/  v1.1.2
 
-  UrnaDB is a NoSQL database based on Log-structured file system.
-  Software License: Apache 2.0  Website: https://UrnaDB.github.io
+  UrnaDB is a NoSQL that supports multiple data types and transactions.
+  Software License: Apache 2.0       Website: https://urnadb.github.io
 
-[MDB:C] 2025/04/18 18:48:45 [WARN] The default password is: iYPNxjlFt2FnKy8XUh6henLMJ
-[MDB:C] 2025/04/18 18:48:45 [INFO] Logging output initialized successfully
-[MDB:C] 2025/04/18 18:48:45 [INFO] Loading and parsing region data files...
-[MDB:C] 2025/04/18 18:48:46 [INFO] Regions compression activated successfully
-[MDB:C] 2025/04/18 18:48:46 [INFO] File system setup completed successfully
-[MDB:C] 2025/04/18 18:48:46 [INFO] HTTP server started at http://192.168.31.221:2668 🚀
+[UrnaDB:C] 2023/06/04 18:35:15 [WARN] The default password is: QGVkh8niwL2TSkj72icaKBC9B
+[UrnaDB:C] 2023/06/04 18:35:15 [INFO] Logging output initialized successfully
+[UrnaDB:C] 2023/06/04 18:35:15 [INFO] Loading and parsing region data files...
+[UrnaDB:C] 2023/06/04 18:35:15 [INFO] Regions compression activated successfully
+[UrnaDB:C] 2023/06/04 18:35:15 [INFO] File system setup completed successfully
+[UrnaDB:C] 2023/06/04 18:35:15 [INFO] HTTP server started at http://192.168.31.221:2668 🚀
 ```
 
 > [!IMPORTANT]
@@ -48,7 +48,7 @@ root@2c2m:~# docker logs 66ae91bc73a6
 
 ## Linux 部署
 
-推荐使用 UrnaDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 [Releases](https://github.com/auula/UrnaDB/releases/tag/v1.1.2) 页面下载 UrnaDB 的可执行文件；下载得到的是 zip 压缩包，使用 `unzip` 命令对压缩包进行解压，命令如下：
+推荐使用 UrnaDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 [Releases](https://github.com/auula/urnadb/releases/tag/v1.1.2) 页面下载 UrnaDB 的可执行文件；下载得到的是 zip 压缩包，使用 `unzip` 命令对压缩包进行解压，命令如下：
 
 ```bash
 unzip urnadb-linux-amd64.zip 

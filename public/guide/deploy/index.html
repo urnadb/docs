@@ -37,7 +37,7 @@ docker pull auula/urnadb:latest
   <meta itemprop="description" content="目前 UrnaDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 UrnaDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器 使用 Docker 可以快速部署 urnadb:latest 的镜像来测试 UrnaDB 提供的服务，运行以下命令即可拉取 UrnaDB 镜像：
 docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
-  <meta itemprop="wordCount" content="200">
+  <meta itemprop="wordCount" content="194">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="部署运行">
   <meta name="twitter:description" content="目前 UrnaDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 UrnaDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
@@ -485,20 +485,20 @@ docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且�
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@2c2m:~# docker logs 66ae91bc73a6
-</span></span><span style="display:flex;"><span>           __  ___                    __  ___  ___
-</span></span><span style="display:flex;"><span>          /  |/  /__  __ _  ___ ___  / /_/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>         / /|_/ / _ <span style="color:#ae81ff">\/</span>  <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#ae81ff">\/</span> -_<span style="color:#f92672">)</span> _ <span style="color:#ae81ff">\/</span> __/ // / _  |
-</span></span><span style="display:flex;"><span>        /_/  /_/<span style="color:#ae81ff">\_</span>__/_/_/_/<span style="color:#ae81ff">\_</span>_/_//_/<span style="color:#ae81ff">\_</span>_/____/____/  v1.1.2
+</span></span><span style="display:flex;"><span>              __  __              ___  ___
+</span></span><span style="display:flex;"><span>             / / / /______  ___ _/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            / /_/ / __/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#e6db74">`</span>/ // / _  |
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">\_</span>___/_/ /_//_/<span style="color:#ae81ff">\_</span>,_/____/____/  v1.1.2
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  UrnaDB is a NoSQL database based on Log-structured file system.
-</span></span><span style="display:flex;"><span>  Software License: Apache 2.0  Website: https://UrnaDB.github.io
+</span></span><span style="display:flex;"><span>  UrnaDB is a NoSQL that supports multiple data types and transactions.
+</span></span><span style="display:flex;"><span>  Software License: Apache 2.0       Website: https://urnadb.github.io
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:45 <span style="color:#f92672">[</span>WARN<span style="color:#f92672">]</span> The default password is: iYPNxjlFt2FnKy8XUh6henLMJ
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:45 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Logging output initialized successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:45 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading and parsing region data files...
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:46 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Regions compression activated successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:46 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> File system setup completed successfully
-</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>MDB:C<span style="color:#f92672">]</span> 2025/04/18 18:48:46 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> HTTP server started at http://192.168.31.221:2668 🚀</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>WARN<span style="color:#f92672">]</span> The default password is: QGVkh8niwL2TSkj72icaKBC9B
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Logging output initialized successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Loading and parsing region data files...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Regions compression activated successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> File system setup completed successfully
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> HTTP server started at http://192.168.31.221:2668 🚀</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -516,7 +516,7 @@ docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且�
   </div>
 </div>
 <h2>Linux 部署<span class="hx-absolute -hx-mt-20" id="linux-部署"></span>
-    <a href="#linux-%e9%83%a8%e7%bd%b2" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>推荐使用 UrnaDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 <a href="https://github.com/auula/UrnaDB/releases/tag/v1.1.2" target="_blank" rel="noopener">Releases</a> 页面下载 UrnaDB 的可执行文件；下载得到的是 zip 压缩包，使用 <code>unzip</code> 命令对压缩包进行解压，命令如下：</p>
+    <a href="#linux-%e9%83%a8%e7%bd%b2" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>推荐使用 UrnaDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 <a href="https://github.com/auula/urnadb/releases/tag/v1.1.2" target="_blank" rel="noopener">Releases</a> 页面下载 UrnaDB 的可执行文件；下载得到的是 zip 压缩包，使用 <code>unzip</code> 命令对压缩包进行解压，命令如下：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>unzip urnadb-linux-amd64.zip </span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
