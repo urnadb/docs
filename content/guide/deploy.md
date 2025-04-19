@@ -54,7 +54,7 @@ root@2c2m:~# docker logs 66ae91bc73a6
 unzip wiredb-linux-amd64.zip 
 ```
 
-解压完成将会得到对应的 MomentDB 二进制可执行文件，可以直接使用通过二进制文件启动一个 MomentDB 数据库进程，命令如下：
+解压完成之后将获得对应的 MomentDB 二进制可执行文件，可直接使用该文件启动 MomentDB 数据库进程，启动命令如下：
 
 ```bash
 
