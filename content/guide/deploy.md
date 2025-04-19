@@ -48,4 +48,14 @@ root@2c2m:~# docker logs 66ae91bc73a6
 
 ## Linux 部署
 
-推荐使用 MomentDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 [Releases](https://github.com/auula/momentdb/releases/tag/v1.1.2) 页面下载 MomentDB 的可执行文件。下载得到的是 zip 压缩包，使用 `unzip` 命令就可以得到对应的 MomentDB 二进制可执行文件。
+推荐使用 MomentDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 [Releases](https://github.com/auula/momentdb/releases/tag/v1.1.2) 页面下载 MomentDB 的可执行文件。下载得到的是 zip 压缩包，使用 `unzip` 命令对压缩包进行解压，命令如下：
+
+```bash
+unzip wiredb-linux-amd64.zip 
+```
+
+解压完成将会得到对应的 MomentDB 二进制可执行文件，可以直接使用通过二进制文件启动一个 MomentDB 数据库进程，命令如下：
+
+```bash
+
+```
