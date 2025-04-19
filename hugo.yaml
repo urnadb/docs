@@ -1,14 +1,14 @@
-baseURL: https://docs.momentdb.org/
+baseURL: https://docs.urnadb.org/
 languageCode: zh-cn
-title: MomentDB Document
+title: UrnaDB Document
 
 params:
   navbar:
     displayTitle: true
     displayLogo: true
     logo:
-      path: images/momentdb-org.png
-      dark: images/momentdb-org.png
+      path: images/urnadb-logo.png
+      dark: images/urnadb-logo.png
       link: /
       width: 28
       height: 12
@@ -42,7 +42,7 @@ menu:
         type: search
     - name: GitHub
       weight: 3
-      url: "https://github.com/auula/momentdb"
+      url: "https://github.com/auula/urnadb"
       params:
         icon: github
 
