@@ -37,7 +37,7 @@ docker pull auula/urnadb:latest
   <meta itemprop="description" content="目前 UrnaDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 UrnaDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器 使用 Docker 可以快速部署 urnadb:latest 的镜像来测试 UrnaDB 提供的服务，运行以下命令即可拉取 UrnaDB 镜像：
 docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
-  <meta itemprop="wordCount" content="194">
+  <meta itemprop="wordCount" content="231">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="部署运行">
   <meta name="twitter:description" content="目前 UrnaDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 UrnaDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
@@ -532,7 +532,7 @@ docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且�
 <p>解压完成之后将获得对应的 UrnaDB 二进制可执行文件，可直接使用该文件启动 UrnaDB 数据库服务进程，启动命令如下：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
-<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./urnadb</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./urnadb --config<span style="color:#f92672">=</span>config.yaml</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
   <button
     class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
     title="Copy code"
@@ -541,6 +541,64 @@ docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且�
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
+</div>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Important</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在启动 UrnaDB 数据库进程时可以通过命令行传入多个的参数，这些参数可以调整 UrnaDB 数据库一些运行参数和必要配置信息，如果什么都不传入直接启动 UrnaDB 数据库进程，被启动的 UrnaDB 进程会直接使用内置的默认参数进行运行。</p></div>
+  </div>
+</div>
+<p>下面是 UrnaDB 数据库进程在启动时能支持传入的命令行参数说明表格：</p>
+<table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>作用说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>&ndash;config</td>
+          <td>指定自定义配置文件路径</td>
+      </tr>
+      <tr>
+          <td>&ndash;port</td>
+          <td>指定服务器所监听的端口号</td>
+      </tr>
+      <tr>
+          <td>&ndash;auth</td>
+          <td>指定客户端连接时所需要认证密钥</td>
+      </tr>
+      <tr>
+          <td>&ndash;daemon</td>
+          <td>指定是否使用后台守护进程方式运行</td>
+      </tr>
+      <tr>
+          <td>&ndash;debug</td>
+          <td>开启日志跟踪调试程序运行状态</td>
+      </tr>
+  </tbody>
+</table>
+<p>例如使用后台守护进程并且指定认证密钥的方式启动一个 UrnaDB 的数据库进程，命令如下：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./urnadb --auth<span style="color:#f92672">=</span>password --daemon</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>Tip</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>相比仅通过命令行传入参数的方式，UrnaDB 还支持通过配置文件进行引导启动，也就是上面的 <code>--config</code> 参数。配置文件支持更丰富的参数选项，使用户能够更加精细地控制运行时的各项设置，从而实现更灵活、更精准的部署与调优，可以阅读下一章节的内容了解更多详情。</p></div>
+  </div>
 </div>
 
         </div>
