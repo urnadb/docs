@@ -13,7 +13,7 @@ weight: 3
 port: 2668                              # 服务 HTTP 协议端口
 mode: "std"                             # 默认为 std 标准库，另外可以设置 mmap 模式（本功能待完善）
 path: "/tmp/urnadb"                     # 数据库文件存储目录
-auth: "Are we wide open to the world?"  # 访问 HTTP 协议的秘密
+auth: "Are we wide open to the world?"  # 访问 HTTP 协议的密钥
 logpath: "/tmp/urnadb/out.log"          # urnadb 在运行时程序产生的日志存储文件
 debug: false                            # 是否开启 debug 模式
 region:                                 # 数据区
@@ -77,3 +77,15 @@ compressor:
 
 
 ## 访问控制
+
+UrnaDB 通常部署在独立的 Linux 服务器上，并通过网络对外提供数据访问服务。将数据库服务直接暴露在公共网络中是一种高风险行为，这意味着任何人都可能尝试通过客户端连接访问 UrnaDB 数据库。除了基本的访问密钥认证机制外，UrnaDB 还提供了其他安全策略，以增强整体系统的防护能力。
+
+通过 IP 白名单功能，将访问权限限制在可信任的 IP 名单内，就可以有效控制能访问 UrnaDB 数据库的人员范围，受信任的 IP 列表通过 `allowip` 配置选项进行设置：
+
+```yaml
+allowip:                                # 白名单 IP 列表，可以去掉这个字段，去掉之后白名单就不会开启
+    - 192.168.31.221
+    - 192.168.101.225
+    - 192.168.101.226
+    - 127.0.0.1
+```
