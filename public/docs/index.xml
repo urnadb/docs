@@ -113,13 +113,13 @@
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;root@2c2m:~# docker logs 66ae91bc73a6
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              __  __              ___  ___
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             / / / /______  ___ _/ _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            / /_/ / __/ _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; _ &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;/ // / _  |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;___/_/ /_//_/&lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;,_/____/____/  v1.1.2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  __  __              ___  ___
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 / / / /______  ___ _/ _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                / /_/ / __/ _ &lt;span style=&#34;color:#ae81ff&#34;&gt;\/&lt;/span&gt; _ &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;/ // / _  |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;___/_/ /_//_/&lt;span style=&#34;color:#ae81ff&#34;&gt;\_&lt;/span&gt;,_/____/____/  v1.1.2
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UrnaDB is a NoSQL that supports multiple data types and transactions.
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Software License: Apache 2.0       Website: https://urnadb.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UrnaDB is a NoSQL database support diverse data types and transactions.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UrnaDB Software License: Apache 2.0  Website: https://urnadb.github.io
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;UrnaDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2023/06/04 18:35:15 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;WARN&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; The default password is: QGVkh8niwL2TSkj72icaKBC9B
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;UrnaDB:C&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; 2023/06/04 18:35:15 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;INFO&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Logging output initialized successfully

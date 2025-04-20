@@ -37,7 +37,7 @@ docker pull auula/urnadb:latest
   <meta itemprop="description" content="目前 UrnaDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 UrnaDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
 Docker 容器 使用 Docker 可以快速部署 urnadb:latest 的镜像来测试 UrnaDB 提供的服务，运行以下命令即可拉取 UrnaDB 镜像：
 docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且映射端口到外部主机网络，执行下面的命令：">
-  <meta itemprop="wordCount" content="231">
+  <meta itemprop="wordCount" content="232">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="部署运行">
   <meta name="twitter:description" content="目前 UrnaDB 提供多种运行部署方式，包括基于 Docker 镜像的容器化部署和适用于 Linux 系统的可执行文件。作为 UrnaDB 的开发者，我更推荐在长期服务场景中采用 Linux 裸机部署。相比容器化方式，裸机部署能够更充分地利用系统资源，并支持用户根据实际需求灵活调优存储引擎参数，从而实现更高的性能稳定性与资源利用率。建议优先选择主流 Linux 发行版，如 RHEL、SUSE 或 Ubuntu，以获得最佳运行效率与服务保障。
@@ -485,13 +485,13 @@ docker pull auula/urnadb:latest 运行 UrnaDB 镜像启动容器服务，并且�
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@2c2m:~# docker logs 66ae91bc73a6
-</span></span><span style="display:flex;"><span>              __  __              ___  ___
-</span></span><span style="display:flex;"><span>             / / / /______  ___ _/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>            / /_/ / __/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#e6db74">`</span>/ // / _  |
-</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">\_</span>___/_/ /_//_/<span style="color:#ae81ff">\_</span>,_/____/____/  v1.1.2
+</span></span><span style="display:flex;"><span>                  __  __              ___  ___
+</span></span><span style="display:flex;"><span>                 / / / /______  ___ _/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                / /_/ / __/ _ <span style="color:#ae81ff">\/</span> _ <span style="color:#e6db74">`</span>/ // / _  |
+</span></span><span style="display:flex;"><span>                <span style="color:#ae81ff">\_</span>___/_/ /_//_/<span style="color:#ae81ff">\_</span>,_/____/____/  v1.1.2
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  UrnaDB is a NoSQL that supports multiple data types and transactions.
-</span></span><span style="display:flex;"><span>  Software License: Apache 2.0       Website: https://urnadb.github.io
+</span></span><span style="display:flex;"><span>  UrnaDB is a NoSQL database support diverse data types and transactions.
+</span></span><span style="display:flex;"><span>  UrnaDB Software License: Apache 2.0  Website: https://urnadb.github.io
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>WARN<span style="color:#f92672">]</span> The default password is: QGVkh8niwL2TSkj72icaKBC9B
 </span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>UrnaDB:C<span style="color:#f92672">]</span> 2023/06/04 18:35:15 <span style="color:#f92672">[</span>INFO<span style="color:#f92672">]</span> Logging output initialized successfully
