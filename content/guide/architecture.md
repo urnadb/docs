@@ -2,7 +2,7 @@
 title: 架构设计
 type: docs
 prev: guide
-next: guide/deploy
+next: guide/deployment
 weight: 1
 ---
 

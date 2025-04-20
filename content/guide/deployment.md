@@ -27,13 +27,13 @@ UrnaDB 提供使用 RESTful API 的方式进行数据交互，理论上任意具
 
 ```bash
 root@2c2m:~# docker logs 66ae91bc73a6
-              __  __              ___  ___
-             / / / /______  ___ _/ _ \/ _ )
-            / /_/ / __/ _ \/ _ `/ // / _  |
-            \____/_/ /_//_/\_,_/____/____/  v1.1.2
+                  __  __              ___  ___
+                 / / / /______  ___ _/ _ \/ _ )
+                / /_/ / __/ _ \/ _ `/ // / _  |
+                \____/_/ /_//_/\_,_/____/____/  v1.1.2
 
-  UrnaDB is a NoSQL that supports multiple data types and transactions.
-  Software License: Apache 2.0       Website: https://urnadb.github.io
+  UrnaDB is a NoSQL database support diverse data types and transactions.
+  UrnaDB Software License: Apache 2.0  Website: https://urnadb.github.io
 
 [UrnaDB:C] 2023/06/04 18:35:15 [WARN] The default password is: QGVkh8niwL2TSkj72icaKBC9B
 [UrnaDB:C] 2023/06/04 18:35:15 [INFO] Logging output initialized successfully
