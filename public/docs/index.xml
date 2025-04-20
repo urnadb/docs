@@ -371,6 +371,30 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;如果不添加 &lt;code&gt;allowip&lt;/code&gt; 配置节点，去掉这个字段白名单就不会开启，意味着任何人都可以访问到这台运行 UrnaDB 数据库主机。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;h2&gt;检查点恢复&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;检查点恢复&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%a3%80%e6%9f%a5%e7%82%b9%e6%81%a2%e5%a4%8d&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;由于 UrnaDB 数据库存储引擎采用将所有索引数据存储在内存中的设计，一旦数据库进程意外崩溃，内存中的索引信息将会丢失，未能持久化到磁盘。这样在下一次启动时，系统需要重新扫描所有数据文件，以重建内存中的索引结构，如果数据文件体量较大，将导致启动过程变得缓慢，启动耗时较长。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，UrnaDB 数据库引入了 checkpoint 功能机制，通过定期将内存中的索引状态保存到磁盘，在发生异常重启时即可快速加载 checkpoint 文件，从而大幅缩短数据库的启动时间，相关的配置选项节点是 &lt;code&gt;checkpoint&lt;/code&gt; ：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;checkpoint&lt;/span&gt;:                             &lt;span style=&#34;color:#75715e&#34;&gt;# 是否开启索引定时快照功能&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;enable&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;interval&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1800&lt;/span&gt;                      &lt;span style=&#34;color:#75715e&#34;&gt;# 每 30 分钟生成一次索引数据快照   &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-amber-200 hx-bg-amber-100 hx-text-amber-900 dark:hx-border-amber-200/30 dark:hx-bg-amber-900/30 dark:hx-text-amber-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;开启 checkpoint 功能可以在数据库崩溃后显著加快启动恢复的速度。然而 checkpoint 文件的生成时间间隔设置同样需要谨慎权衡。如果生成间隔过短，将导致 checkpoint 文件过于频繁地写入磁盘，占用大量 I/O 资源，可能影响数据库的整体性能；而如果间隔设置过长，崩溃恢复时仍需扫描大量 Region 数据记录，反而无法发挥 checkpoint 的优势，导致启动时间较长。因此合理配置 checkpoint 的生成频率，需在性能开销与数据恢复效率之间做出平衡，建议根据实际业务的数据写入频率和系统负载，动态调整该参数以获得最佳效果。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 
       </description>
     </item>
