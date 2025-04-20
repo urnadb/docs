@@ -346,7 +346,7 @@
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;h2&gt;访问控制&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;访问控制&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#%e8%ae%bf%e9%97%ae%e6%8e%a7%e5%88%b6&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;UrnaDB 通常部署在独立的 Linux 服务器上，并通过网络对外提供数据访问服务。将数据库服务直接暴露在公共网络中是一种高风险行为，这意味着任何人都可能尝试通过客户端连接访问 UrnaDB 数据库。除了基本的访问密钥认证机制外，UrnaDB 还提供了其他安全策略，以增强整体系统的防护能力。&lt;/p&gt;
+    &lt;a href=&#34;#%e8%ae%bf%e9%97%ae%e6%8e%a7%e5%88%b6&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;UrnaDB 通常部署在独立的 Linux 服务器上，并通过网络对外提供数据访问服务。将数据库服务直接暴露在公共网络中是一种高风险行为，这意味着任何人都可能尝试通过客户端连接访问 UrnaDB 数据库。除了基本的访问密钥认证机制外，UrnaDB 还提供了 IP 白名单安全策略，以增强整体系统的防护能力。&lt;/p&gt;
 &lt;p&gt;通过 IP 白名单功能，将访问权限限制在可信任的 IP 名单内，就可以有效控制能访问 UrnaDB 数据库的人员范围，受信任的 IP 列表通过 &lt;code&gt;allowip&lt;/code&gt; 配置选项进行设置：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
@@ -363,6 +363,13 @@
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-amber-200 hx-bg-amber-100 hx-text-amber-900 dark:hx-border-amber-200/30 dark:hx-bg-amber-900/30 dark:hx-text-amber-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;如果不添加 &lt;code&gt;allowip&lt;/code&gt; 配置节点，去掉这个字段白名单就不会开启，意味着任何人都可以访问到这台运行 UrnaDB 数据库主机。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 
       </description>
