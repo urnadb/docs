@@ -48,7 +48,7 @@ root@2c2m:~# docker logs 66ae91bc73a6
 
 ## Linux 部署
 
-推荐使用 UrnaDB 的最佳方式是通过 Linux 直接部署运行，你可以从 GitHub 的 [Releases](https://github.com/auula/urnadb/releases/tag/v1.1.2) 页面下载 UrnaDB 的可执行文件；下载得到的是 zip 压缩包，使用 `unzip` 命令对压缩包进行解压，命令如下：
+推荐使用 UrnaDB 的最佳方式是通过 Linux 直接部署运行，如果你使用的 Windows 系统可以使用虚拟机软件安装 Linux 系统进行测试，也可以使用 WSL 的方式使用 Windows 中的 Ubuntu 子系统进行测试。UrnaDB 的软件包可以从 GitHub 的 [Releases](https://github.com/auula/urnadb/releases/tag/v1.1.2) 页面下载，下载得到的是 zip 压缩包，使用 `unzip` 命令对压缩包进行解压，命令如下：
 
 ```bash
 unzip urnadb-linux-amd64.zip 
