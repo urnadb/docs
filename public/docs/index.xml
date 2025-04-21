@@ -443,7 +443,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;对于普通用户而言，并不需要了解 UrnaDB 的源代码结构和实现细节。而本节内容主要面向希望深入理解 UrnaDB 内部架构、并有意参与贡献的开发者。如果你对 UrnaDB 项目感兴趣，欢迎提出改进建议或提交代码。你可以通过 GitHub 的 Issues 提交反馈或建议，也可以通过 Pull Request 的方式贡献代码，作为核心开发者我鼓励社区参与，共同完善 UrnaDB 数据库！&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;对于普通用户而言，并不需要了解 UrnaDB 的源代码结构和实现细节。而本节内容主要面向希望深入理解 UrnaDB 内部架构、并有意参与贡献的开发者。如果你对 UrnaDB 项目感兴趣，欢迎提出改进建议或提交代码。你可以通过 GitHub 的 Issues 提交反馈或建议，也可以通过 Pull Request 的方式贡献代码，作为核心开发者我鼓励社区参与共同完善 UrnaDB 数据库！&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
