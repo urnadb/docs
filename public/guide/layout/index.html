@@ -12,7 +12,7 @@
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>项目结构 – UrnaDB Document</title>
   <meta name="description" content="UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。
 UrnaDB 项目的模块组织结构如下：
-. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 自定义日志系统，可能封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，比如网络服务监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作 " /><link rel="canonical" href="http://localhost:1313/guide/layout/" itemprop="url" />
+. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 自定义日志系统，可能封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，比如网络服务监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作 Important" /><link rel="canonical" href="http://localhost:1313/guide/layout/" itemprop="url" />
 
 <meta property="og:title" content="项目结构" />
 <meta property="og:description" content="UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。
@@ -42,7 +42,9 @@ UrnaDB 项目的模块组织结构如下：
     
   
 
-" />
+
+
+  Important" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/guide/layout/" /><meta property="article:section" content="guide" />
 
@@ -51,13 +53,13 @@ UrnaDB 项目的模块组织结构如下：
   <meta itemprop="name" content="项目结构">
   <meta itemprop="description" content="UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。
 UrnaDB 项目的模块组织结构如下：
-. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 自定义日志系统，可能封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，比如网络服务监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作">
-  <meta itemprop="wordCount" content="91">
+. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 自定义日志系统，可能封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，比如网络服务监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作 Important">
+  <meta itemprop="wordCount" content="108">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="项目结构">
   <meta name="twitter:description" content="UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。
 UrnaDB 项目的模块组织结构如下：
-. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 自定义日志系统，可能封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，比如网络服务监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作">
+. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 自定义日志系统，可能封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，比如网络服务监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作 Important">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -239,14 +241,6 @@ UrnaDB 项目的模块组织结构如下：
             </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/guide/container/"
-    
-  >容器运行
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/question/"
     
   >常见问题
@@ -357,14 +351,6 @@ UrnaDB 项目的模块组织结构如下：
             </li><li class="hx-flex hx-flex-col "><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/guide/container/"
-    
-  >容器运行
-    </a>
-              
-            </li><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/question/"
     
   >常见问题
@@ -447,7 +433,7 @@ UrnaDB 项目的模块组织结构如下：
         <div class="content">
           <h1>项目结构</h1>
           <p>UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。</p>
-<p>UrnaDB 项目的模块组织结构如下：</p>
+<p><strong>UrnaDB 项目的模块组织结构如下：</strong></p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">.</span>
@@ -476,6 +462,13 @@ UrnaDB 项目的模块组织结构如下：
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
+</div>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Important</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>对于普通用户而言，并不需要了解 UrnaDB 的源代码结构和实现细节。而本节内容主要面向希望深入理解 UrnaDB 内部架构、并有意参与贡献的开发者。如果你对 UrnaDB 项目感兴趣，欢迎提出改进建议或提交代码。你可以通过 GitHub 的 Issues 提交反馈或建议，也可以通过 Pull Request 的方式贡献代码，作为核心开发者我鼓励社区参与，共同完善 UrnaDB 数据库！</p></div>
+  </div>
 </div>
 
         </div>
