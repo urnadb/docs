@@ -10,18 +10,74 @@
 <link rel="icon" href="/images/wiredb-org.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/images/wiredb-org.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>数据管理 – UrnaDB Document</title>
-  <meta name="description" content="" /><link rel="canonical" href="http://localhost:1313/guide/data/" itemprop="url" />
+  <meta name="description" content="数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。
+对于使用者而言，进行定期对数据文件的备份，不仅能够在磁盘故障时快速恢复数据，还可以在将 UrnaDB 数据库迁移到其他机器时，直接复制数据文件实现快速部署和恢复，无需额外的工具支持，下面为 UrnaDB 数据库在运行过程所产生的数据文件结构：
+data/ ├── 0000000001.db ├── 0000000002.db ├── index.db ├── ckpt.1745325326.2.ids └── ckpt.1745328927.2.tmp 后缀名 作用说明 index.db 数据记录文件对应的索引记录文件。 *.db 数据记录文件随着时间推移文件名会递增。 *.ids 用于快速恢复内存索引记录的检查点文件。 *.tmp 检查点生成过程中的临时快照文件可以被清理掉。 out.log 最新的 urnadb 运行时程序产生的日志记录文件。 Important" /><link rel="canonical" href="http://localhost:1313/guide/data/" itemprop="url" />
 
 <meta property="og:title" content="数据管理" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。
+对于使用者而言，进行定期对数据文件的备份，不仅能够在磁盘故障时快速恢复数据，还可以在将 UrnaDB 数据库迁移到其他机器时，直接复制数据文件实现快速部署和恢复，无需额外的工具支持，下面为 UrnaDB 数据库在运行过程所产生的数据文件结构：
+
+
+data/
+├── 0000000001.db
+├── 0000000002.db
+├── index.db
+├── ckpt.1745325326.2.ids
+└── ckpt.1745328927.2.tmp
+  
+    
+    
+  
+
+
+
+  
+      
+          后缀名
+          作用说明
+      
+  
+  
+      
+          index.db
+          数据记录文件对应的索引记录文件。
+      
+      
+          *.db
+          数据记录文件随着时间推移文件名会递增。
+      
+      
+          *.ids
+          用于快速恢复内存索引记录的检查点文件。
+      
+      
+          *.tmp
+          检查点生成过程中的临时快照文件可以被清理掉。
+      
+      
+          out.log
+          最新的 urnadb 运行时程序产生的日志记录文件。
+      
+  
+
+
+  Important" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/guide/data/" /><meta property="article:section" content="guide" />
 
 
 
   <meta itemprop="name" content="数据管理">
+  <meta itemprop="description" content="数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。
+对于使用者而言，进行定期对数据文件的备份，不仅能够在磁盘故障时快速恢复数据，还可以在将 UrnaDB 数据库迁移到其他机器时，直接复制数据文件实现快速部署和恢复，无需额外的工具支持，下面为 UrnaDB 数据库在运行过程所产生的数据文件结构：
+data/ ├── 0000000001.db ├── 0000000002.db ├── index.db ├── ckpt.1745325326.2.ids └── ckpt.1745328927.2.tmp 后缀名 作用说明 index.db 数据记录文件对应的索引记录文件。 *.db 数据记录文件随着时间推移文件名会递增。 *.ids 用于快速恢复内存索引记录的检查点文件。 *.tmp 检查点生成过程中的临时快照文件可以被清理掉。 out.log 最新的 urnadb 运行时程序产生的日志记录文件。 Important">
+  <meta itemprop="wordCount" content="46">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="数据管理">
+  <meta name="twitter:description" content="数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。
+对于使用者而言，进行定期对数据文件的备份，不仅能够在磁盘故障时快速恢复数据，还可以在将 UrnaDB 数据库迁移到其他机器时，直接复制数据文件实现快速部署和恢复，无需额外的工具支持，下面为 UrnaDB 数据库在运行过程所产生的数据文件结构：
+data/ ├── 0000000001.db ├── 0000000002.db ├── index.db ├── ckpt.1745325326.2.ids └── ckpt.1745328927.2.tmp 后缀名 作用说明 index.db 数据记录文件对应的索引记录文件。 *.db 数据记录文件随着时间推移文件名会递增。 *.ids 用于快速恢复内存索引记录的检查点文件。 *.tmp 检查点生成过程中的临时快照文件可以被清理掉。 out.log 最新的 urnadb 运行时程序产生的日志记录文件。 Important">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -394,7 +450,63 @@
 
         <div class="content">
           <h1>数据管理</h1>
-          
+          <p>数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。</p>
+<p>对于使用者而言，进行定期对数据文件的备份，不仅能够在磁盘故障时快速恢复数据，还可以在将 UrnaDB 数据库迁移到其他机器时，直接复制数据文件实现快速部署和恢复，无需额外的工具支持，下面为 UrnaDB 数据库在运行过程所产生的数据文件结构：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ae81ff">data/</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">├── 0000000001.db</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">├── 0000000002.db</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">├── index.db</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">├── ckpt.1745325326.2.ids</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">└── ckpt.1745328927.2.tmp</span></span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>后缀名</th>
+          <th>作用说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>index.db</td>
+          <td>数据记录文件对应的索引记录文件。</td>
+      </tr>
+      <tr>
+          <td>*.db</td>
+          <td>数据记录文件随着时间推移文件名会递增。</td>
+      </tr>
+      <tr>
+          <td>*.ids</td>
+          <td>用于快速恢复内存索引记录的检查点文件。</td>
+      </tr>
+      <tr>
+          <td>*.tmp</td>
+          <td>检查点生成过程中的临时快照文件可以被清理掉。</td>
+      </tr>
+      <tr>
+          <td>out.log</td>
+          <td>最新的 urnadb 运行时程序产生的日志记录文件。</td>
+      </tr>
+  </tbody>
+</table>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Important</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在数据文件的存储目录中，最核心的文件是以 <code>*.db</code> 为后缀的数据文件。这类文件至关重要不能丢失。相比之下，其他辅助文件（如索引或检查点文件）虽然能够提升性能或加快恢复速度，但在发生丢失时是可以容忍的。UrnaDB 在启动时，如果检测到其他辅助文件缺失，只要 <code>*.db</code> 数据文件仍然存在，就能够基于这些 <code>*.db</code> 文件自动重建索引和其他必要的数据文件，从而完成数据库的恢复过程。</p></div>
+  </div>
+</div>
+
         </div>
         <div class="hx-mt-16"></div>
         <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden"><a
