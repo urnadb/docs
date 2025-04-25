@@ -512,7 +512,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;在数据文件的存储目录中，最核心的文件是以 &lt;code&gt;*.db&lt;/code&gt; 为后缀的数据文件。这类文件至关重要不能丢失。相比之下，其他辅助文件（如索引或检查点文件）虽然能够提升性能或加快恢复速度，但在发生丢失时是可以容忍的。UrnaDB 在启动时，如果检测到其他辅助文件缺失，只要 &lt;code&gt;*.db&lt;/code&gt; 数据文件仍然存在，就能够基于这些 &lt;code&gt;*.db&lt;/code&gt; 文件自动重建索引和其他必要的数据文件，从而完成数据库的恢复过程。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;在数据文件的存储目录中，最核心的文件是以 &lt;code&gt;*.db&lt;/code&gt; 为后缀的数据文件，这类文件至关重要不能丢失。相比之下，其他辅助文件（如索引或检查点文件）虽然能够提升性能或加快恢复速度，但在发生丢失时是可以容忍的。UrnaDB 在启动时，如果检测到其他辅助文件缺失，只要 &lt;code&gt;*.db&lt;/code&gt; 数据文件仍然存在，就能够基于这些 &lt;code&gt;*.db&lt;/code&gt; 文件自动重建索引和其他必要的数据文件，从而完成数据库的恢复过程。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -528,7 +528,8 @@
       <description>
         
         
-        
+        &lt;p&gt;尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。&lt;/p&gt;
+
       </description>
     </item>
     
@@ -541,7 +542,11 @@
       <description>
         
         
-        
+        &lt;h5&gt;启动扫描数据文件顺序是怎么样的？&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;启动扫描数据文件顺序是怎么样的&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%90%af%e5%8a%a8%e6%89%ab%e6%8f%8f%e6%95%b0%e6%8d%ae%e6%96%87%e4%bb%b6%e9%a1%ba%e5%ba%8f%e6%98%af%e6%80%8e%e4%b9%88%e6%a0%b7%e7%9a%84&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;h5&gt;采用容器的方式运行需要注意哪些？&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;采用容器的方式运行需要注意哪些&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e9%87%87%e7%94%a8%e5%ae%b9%e5%99%a8%e7%9a%84%e6%96%b9%e5%bc%8f%e8%bf%90%e8%a1%8c%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e5%93%aa%e4%ba%9b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;h5&gt;如何设置垃圾回收器的执行时机？&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;如何设置垃圾回收器的执行时机&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e5%a6%82%e4%bd%95%e8%ae%be%e7%bd%ae%e5%9e%83%e5%9c%be%e5%9b%9e%e6%94%b6%e5%99%a8%e7%9a%84%e6%89%a7%e8%a1%8c%e6%97%b6%e6%9c%ba&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h5&gt;&lt;h3&gt;&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;
       </description>
     </item>
     

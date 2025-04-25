@@ -503,7 +503,7 @@ data/ ├── 0000000001.db ├── 0000000002.db ├── index.db ├─�
   <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Important</p>
 
   <div class="hx-w-full hx-min-w-0 hx-leading-7">
-    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在数据文件的存储目录中，最核心的文件是以 <code>*.db</code> 为后缀的数据文件。这类文件至关重要不能丢失。相比之下，其他辅助文件（如索引或检查点文件）虽然能够提升性能或加快恢复速度，但在发生丢失时是可以容忍的。UrnaDB 在启动时，如果检测到其他辅助文件缺失，只要 <code>*.db</code> 数据文件仍然存在，就能够基于这些 <code>*.db</code> 文件自动重建索引和其他必要的数据文件，从而完成数据库的恢复过程。</p></div>
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在数据文件的存储目录中，最核心的文件是以 <code>*.db</code> 为后缀的数据文件，这类文件至关重要不能丢失。相比之下，其他辅助文件（如索引或检查点文件）虽然能够提升性能或加快恢复速度，但在发生丢失时是可以容忍的。UrnaDB 在启动时，如果检测到其他辅助文件缺失，只要 <code>*.db</code> 数据文件仍然存在，就能够基于这些 <code>*.db</code> 文件自动重建索引和其他必要的数据文件，从而完成数据库的恢复过程。</p></div>
   </div>
 </div>
 
