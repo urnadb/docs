@@ -10,21 +10,83 @@
 <link rel="icon" href="/images/wiredb-org.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/images/wiredb-org.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>TLS 连接 – UrnaDB Document</title>
-  <meta name="description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。" /><link rel="canonical" href="http://localhost:1313/guide/tls-http/" itemprop="url" />
+  <meta name="description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。
+UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务器之间的数据通信是通过 HTTP 进行的。然而 HTTP 协议在传输过程中采用明文传输方式，意味着数据包在网络上传输时可能会被截获或篡改，从而存在数据泄露的风险，可能导致数据库中的敏感信息被泄露。
+Important
+在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
+# HTTP 配置（监听 80 端口） server { listen 80; server_name your-domain.com; # 替换为你的域名 # 强制将所有 HTTP 请求重定向到 HTTPS return 301 https://$host$request_uri; } # HTTPS 配置（监听 443 端口） server { listen 443 ssl; server_name your-domain.com; # 替换为你的域名 ssl_certificate /etc/nginx/ssl/ssl.crt; # SSL 证书路径 ssl_certificate_key /etc/nginx/ssl/ssl.key; # SSL 密钥路径 ssl_protocols TLSv1.2 TLSv1.3; # 推荐使用 TLS 1.2 和 1.3 ssl_ciphers &#39;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#39;; # 优化的密码套件 ssl_prefer_server_ciphers on; # 优先使用服务器配置的密码套件 # 启用 HSTS（HTTP 严格传输安全） add_header Strict-Transport-Security &#34;max-age=31536000; includeSubDomains&#34; always; location / { proxy_pass http://localhost:2668; # 将请求代理到 HTTP 服务（例如，本地 8080 端口） proxy_set_header Host $host; # 保留原始 Host 头 proxy_set_header X-Real-IP $remote_addr; # 设置客户端真实 IP proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 设置代理链路的客户端 IP proxy_set_header X-Forwarded-Proto $scheme; # 保留协议（http 或 https） proxy_set_header X-Forwarded-Port 443; # 设置代理的端口 proxy_redirect off; # 关闭重定向 } } " /><link rel="canonical" href="http://localhost:1313/guide/tls-http/" itemprop="url" />
 
 <meta property="og:title" content="TLS 连接" />
-<meta property="og:description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。" />
+<meta property="og:description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。
+UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务器之间的数据通信是通过 HTTP 进行的。然而 HTTP 协议在传输过程中采用明文传输方式，意味着数据包在网络上传输时可能会被截获或篡改，从而存在数据泄露的风险，可能导致数据库中的敏感信息被泄露。
+
+  Important
+
+  
+    在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
+  
+
+
+
+# HTTP 配置（监听 80 端口）
+server {
+    listen 80;
+    server_name your-domain.com;  # 替换为你的域名
+
+    # 强制将所有 HTTP 请求重定向到 HTTPS
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS 配置（监听 443 端口）
+server {
+    listen 443 ssl;
+    server_name your-domain.com;  # 替换为你的域名
+
+    ssl_certificate /etc/nginx/ssl/ssl.crt;       # SSL 证书路径
+    ssl_certificate_key /etc/nginx/ssl/ssl.key;   # SSL 密钥路径
+
+    ssl_protocols TLSv1.2 TLSv1.3;  # 推荐使用 TLS 1.2 和 1.3
+    ssl_ciphers &#39;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#39;;  # 优化的密码套件
+    ssl_prefer_server_ciphers on;  # 优先使用服务器配置的密码套件
+
+    # 启用 HSTS（HTTP 严格传输安全）
+    add_header Strict-Transport-Security &#34;max-age=31536000; includeSubDomains&#34; always;
+
+    location / {
+        proxy_pass http://localhost:2668;  # 将请求代理到 HTTP 服务（例如，本地 8080 端口）
+        proxy_set_header Host $host;       # 保留原始 Host 头
+        proxy_set_header X-Real-IP $remote_addr;  # 设置客户端真实 IP
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  # 设置代理链路的客户端 IP
+        proxy_set_header X-Forwarded-Proto $scheme;  # 保留协议（http 或 https）
+        proxy_set_header X-Forwarded-Port 443;  # 设置代理的端口
+        proxy_redirect off;  # 关闭重定向
+    }
+}
+  
+    
+    
+  
+
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/guide/tls-http/" /><meta property="article:section" content="guide" />
 
 
 
   <meta itemprop="name" content="TLS 连接">
-  <meta itemprop="description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。">
-  <meta itemprop="wordCount" content="3">
+  <meta itemprop="description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。
+UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务器之间的数据通信是通过 HTTP 进行的。然而 HTTP 协议在传输过程中采用明文传输方式，意味着数据包在网络上传输时可能会被截获或篡改，从而存在数据泄露的风险，可能导致数据库中的敏感信息被泄露。
+Important
+在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
+# HTTP 配置（监听 80 端口） server { listen 80; server_name your-domain.com; # 替换为你的域名 # 强制将所有 HTTP 请求重定向到 HTTPS return 301 https://$host$request_uri; } # HTTPS 配置（监听 443 端口） server { listen 443 ssl; server_name your-domain.com; # 替换为你的域名 ssl_certificate /etc/nginx/ssl/ssl.crt; # SSL 证书路径 ssl_certificate_key /etc/nginx/ssl/ssl.key; # SSL 密钥路径 ssl_protocols TLSv1.2 TLSv1.3; # 推荐使用 TLS 1.2 和 1.3 ssl_ciphers &#39;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#39;; # 优化的密码套件 ssl_prefer_server_ciphers on; # 优先使用服务器配置的密码套件 # 启用 HSTS（HTTP 严格传输安全） add_header Strict-Transport-Security &#34;max-age=31536000; includeSubDomains&#34; always; location / { proxy_pass http://localhost:2668; # 将请求代理到 HTTP 服务（例如，本地 8080 端口） proxy_set_header Host $host; # 保留原始 Host 头 proxy_set_header X-Real-IP $remote_addr; # 设置客户端真实 IP proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 设置代理链路的客户端 IP proxy_set_header X-Forwarded-Proto $scheme; # 保留协议（http 或 https） proxy_set_header X-Forwarded-Port 443; # 设置代理的端口 proxy_redirect off; # 关闭重定向 } }">
+  <meta itemprop="wordCount" content="149">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="TLS 连接">
-  <meta name="twitter:description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。">
+  <meta name="twitter:description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。
+UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务器之间的数据通信是通过 HTTP 进行的。然而 HTTP 协议在传输过程中采用明文传输方式，意味着数据包在网络上传输时可能会被截获或篡改，从而存在数据泄露的风险，可能导致数据库中的敏感信息被泄露。
+Important
+在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
+# HTTP 配置（监听 80 端口） server { listen 80; server_name your-domain.com; # 替换为你的域名 # 强制将所有 HTTP 请求重定向到 HTTPS return 301 https://$host$request_uri; } # HTTPS 配置（监听 443 端口） server { listen 443 ssl; server_name your-domain.com; # 替换为你的域名 ssl_certificate /etc/nginx/ssl/ssl.crt; # SSL 证书路径 ssl_certificate_key /etc/nginx/ssl/ssl.key; # SSL 密钥路径 ssl_protocols TLSv1.2 TLSv1.3; # 推荐使用 TLS 1.2 和 1.3 ssl_ciphers &#39;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#39;; # 优化的密码套件 ssl_prefer_server_ciphers on; # 优先使用服务器配置的密码套件 # 启用 HSTS（HTTP 严格传输安全） add_header Strict-Transport-Security &#34;max-age=31536000; includeSubDomains&#34; always; location / { proxy_pass http://localhost:2668; # 将请求代理到 HTTP 服务（例如，本地 8080 端口） proxy_set_header Host $host; # 保留原始 Host 头 proxy_set_header X-Real-IP $remote_addr; # 设置客户端真实 IP proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 设置代理链路的客户端 IP proxy_set_header X-Forwarded-Proto $scheme; # 保留协议（http 或 https） proxy_set_header X-Forwarded-Port 443; # 设置代理的端口 proxy_redirect off; # 关闭重定向 } }">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -398,6 +460,59 @@
         <div class="content">
           <h1>TLS 连接</h1>
           <p>尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。</p>
+<p>UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务器之间的数据通信是通过 HTTP 进行的。然而 HTTP 协议在传输过程中采用明文传输方式，意味着数据包在网络上传输时可能会被截获或篡改，从而存在数据泄露的风险，可能导致数据库中的敏感信息被泄露。</p>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Important</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。</p></div>
+  </div>
+</div>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><pre><code># HTTP 配置（监听 80 端口）
+server {
+    listen 80;
+    server_name your-domain.com;  # 替换为你的域名
+
+    # 强制将所有 HTTP 请求重定向到 HTTPS
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS 配置（监听 443 端口）
+server {
+    listen 443 ssl;
+    server_name your-domain.com;  # 替换为你的域名
+
+    ssl_certificate /etc/nginx/ssl/ssl.crt;       # SSL 证书路径
+    ssl_certificate_key /etc/nginx/ssl/ssl.key;   # SSL 密钥路径
+
+    ssl_protocols TLSv1.2 TLSv1.3;  # 推荐使用 TLS 1.2 和 1.3
+    ssl_ciphers &#39;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#39;;  # 优化的密码套件
+    ssl_prefer_server_ciphers on;  # 优先使用服务器配置的密码套件
+
+    # 启用 HSTS（HTTP 严格传输安全）
+    add_header Strict-Transport-Security &#34;max-age=31536000; includeSubDomains&#34; always;
+
+    location / {
+        proxy_pass http://localhost:2668;  # 将请求代理到 HTTP 服务（例如，本地 8080 端口）
+        proxy_set_header Host $host;       # 保留原始 Host 头
+        proxy_set_header X-Real-IP $remote_addr;  # 设置客户端真实 IP
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  # 设置代理链路的客户端 IP
+        proxy_set_header X-Forwarded-Proto $scheme;  # 保留协议（http 或 https）
+        proxy_set_header X-Forwarded-Port 443;  # 设置代理的端口
+        proxy_redirect off;  # 关闭重定向
+    }
+}</code></pre></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
 
         </div>
         <div class="hx-mt-16"></div>
