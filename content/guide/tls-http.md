@@ -52,5 +52,5 @@ server {
 }
 ```
 
-> [!IMPORTANT]
+> [!TIP]
 > 理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件都可以作为 UrnaDB 的安全代理层，要使用 TLS/HTTPS 协议来进行网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 安全证书原理是基于计算机密码学的，这里不做更多介绍，要想申请 TLS 证书可以使用 [ACME.sh](https://get.acme.sh) 脚本工具进行申请配置。
