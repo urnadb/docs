@@ -13,9 +13,9 @@ UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务�
 > [!IMPORTANT]
 > 在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
 
+UrnaDB 内置的 HTTP Server 当前不支持 TLS/HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：
 
-
-```conf
+```nginx
 # HTTP 配置（监听 80 端口）
 server {
     listen 80;
@@ -51,3 +51,6 @@ server {
     }
 }
 ```
+
+> [!IMPORTANT]
+> 理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件都可以作为 UrnaDB 的安全代理层，要使用 TLS/HTTPS 协议来进行网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 安全证书原理是基于计算机密码学的，这里不做更多介绍，要想申请 TLS 证书可以使用 [ACME.sh](https://get.acme.sh) 脚本工具进行申请配置。
