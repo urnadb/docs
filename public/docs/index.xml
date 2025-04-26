@@ -587,7 +587,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z&#34;/&gt;&lt;/svg&gt;Tip&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件都可以作为 UrnaDB 的安全代理层，要使用 TLS/HTTPS 协议来进行网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 安全证书原理是基于计算机密码学的，这里不做更多介绍，要想申请 TLS 证书可以使用 &lt;a href=&#34;https://get.acme.sh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ACME.sh&lt;/a&gt; 脚本工具进行申请配置。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件，都可以作为 UrnaDB 的安全代理层，要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开。如需申请 TLS 证书，可以使用 ACME.sh 脚本工具进行申请和配置。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
