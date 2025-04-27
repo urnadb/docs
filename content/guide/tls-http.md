@@ -53,4 +53,4 @@ server {
 ```
 
 > [!TIP]
-> 理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件，都可以作为 UrnaDB 的安全代理层，要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开。如需申请 TLS 证书，可以使用 ACME.sh 脚本工具进行申请和配置。
+> 理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件，都可以作为 UrnaDB 的安全代理层，要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开，如需申请 TLS 证书，可以使用 [ACME.sh](https://www.acme.sh) 脚本工具进行申请和配置。
