@@ -276,7 +276,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;UrnaDB 的存储引擎会将最终数据写入指定的文件中，这些数据文件将存储在配置文件中 path 节点指定的路径下。存储引擎依赖操作系统的文件系统，推荐使用 Linux 的 XFS 文件系统，并建议将一块单独格式化的硬盘挂载到 path 节点指定的路径，以便让 UrnaDB 数据库进程独占对该磁盘数据的访问。&lt;/p&gt;
+&lt;p&gt;UrnaDB 的存储引擎将数据写入指定文件，存储位置由配置文件中的 &lt;code&gt;path&lt;/code&gt; 节点指定。存储引擎依赖操作系统的文件系统，推荐使用 Linux 的 XFS 文件系统，并建议将一块单独格式化的硬盘挂载到该路径，以确保 UrnaDB 数据库进程独占访问该磁盘的数据。&lt;/p&gt;
 &lt;h2&gt;数据区&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;数据区&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#%e6%95%b0%e6%8d%ae%e5%8c%ba&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Region 是 UrnaDB 中最核心的功能模块之一，其相关的配置参数用于控制数据区运行时的行为，例如可以通过配置启用或禁用 Region 的垃圾回收机制，并设置单个 Region 区域的最大容量限制；相关的配置选项节点是 &lt;code&gt;region&lt;/code&gt; ：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
