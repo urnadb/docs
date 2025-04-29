@@ -19,13 +19,17 @@
 <meta property="og:url" content="http://localhost:1313/" />
 
   <meta itemprop="name" content="UrnaDB Document">
-  <meta itemprop="description" content="主页内容 什么场景适合选择使用 wiredb 这个作为数据库 什么时候推荐开启数据压缩和数据加密功能 启动一个数据库需要时间，关闭数据库需要的时间，特别是容器环境下一定要注意 数据库启动文件扫描顺序是什么样的？当崩溃恢复时正确的操作步骤是什么样子的？">
+  <meta itemprop="description" content="UrnaDB 数据库 UrnaDB 是一款融合了内存与磁盘存储介质的 NoSQL 数据库，支持事务控制和多种数据类型。与常见的 Redis 数据库相比，UrnaDB 提供了更具扩展性和成本优势的磁盘存储能力，Redis 通常仅依赖内存存储，而 UrnaDB 仅需将索引加载至内存，数据记录则保存在磁盘中，这种设计既保证了数据访问的高性能，也显著降低了内存占用。
+UrnaDB 采用高效的内存索引结构，支持对海量数据的快速查找，即便数据集极大，也能保持查询响应的高效性。对于希望在有限硬件资源下存储更多数据的用户而言，UrnaDB 提供更低硬件资源的成本解决方案，UrnaDB 支持数据压缩功能，利用压缩算法有效减少磁盘空间使用，从而进一步降低硬件成本；在数据安全方面 UrnaDB 提供基于 IP 白名单的访问控制机制，并支持磁盘级的静态数据加密，确保数据存储过程中的安全性。
+如果你有大规模数据存储、高查询性能、低成本运行和数据安全方面的需求，UrnaDB 数据库是值得考虑的解决方案，想了解更多欢迎继续阅读本手册的其他部分。">
   <meta itemprop="datePublished" content="2025-03-01T22:56:35+08:00">
   <meta itemprop="dateModified" content="2025-03-01T22:56:35+08:00">
-  <meta itemprop="wordCount" content="7">
+  <meta itemprop="wordCount" content="22">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="UrnaDB Document">
-  <meta name="twitter:description" content="主页内容 什么场景适合选择使用 wiredb 这个作为数据库 什么时候推荐开启数据压缩和数据加密功能 启动一个数据库需要时间，关闭数据库需要的时间，特别是容器环境下一定要注意 数据库启动文件扫描顺序是什么样的？当崩溃恢复时正确的操作步骤是什么样子的？">
+  <meta name="twitter:description" content="UrnaDB 数据库 UrnaDB 是一款融合了内存与磁盘存储介质的 NoSQL 数据库，支持事务控制和多种数据类型。与常见的 Redis 数据库相比，UrnaDB 提供了更具扩展性和成本优势的磁盘存储能力，Redis 通常仅依赖内存存储，而 UrnaDB 仅需将索引加载至内存，数据记录则保存在磁盘中，这种设计既保证了数据访问的高性能，也显著降低了内存占用。
+UrnaDB 采用高效的内存索引结构，支持对海量数据的快速查找，即便数据集极大，也能保持查询响应的高效性。对于希望在有限硬件资源下存储更多数据的用户而言，UrnaDB 提供更低硬件资源的成本解决方案，UrnaDB 支持数据压缩功能，利用压缩算法有效减少磁盘空间使用，从而进一步降低硬件成本；在数据安全方面 UrnaDB 提供基于 IP 白名单的访问控制机制，并支持磁盘级的静态数据加密，确保数据存储过程中的安全性。
+如果你有大规模数据存储、高查询性能、低成本运行和数据安全方面的需求，UrnaDB 数据库是值得考虑的解决方案，想了解更多欢迎继续阅读本手册的其他部分。">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -359,7 +363,7 @@
 <nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
     <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">On this page</p><ul>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#%e4%b8%bb%e9%a1%b5%e5%86%85%e5%ae%b9">主页内容
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#urnadb-%e6%95%b0%e6%8d%ae%e5%ba%93">UrnaDB 数据库
         </a>
       </li></ul>
       <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
@@ -382,13 +386,10 @@
 
         <div class="content">
           
-          <h2>主页内容<span class="hx-absolute -hx-mt-20" id="主页内容"></span>
-    <a href="#%e4%b8%bb%e9%a1%b5%e5%86%85%e5%ae%b9" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ol>
-<li>什么场景适合选择使用 wiredb 这个作为数据库</li>
-<li>什么时候推荐开启数据压缩和数据加密功能</li>
-<li>启动一个数据库需要时间，关闭数据库需要的时间，特别是容器环境下一定要注意</li>
-<li>数据库启动文件扫描顺序是什么样的？当崩溃恢复时正确的操作步骤是什么样子的？</li>
-</ol>
+          <h2>UrnaDB 数据库<span class="hx-absolute -hx-mt-20" id="urnadb-数据库"></span>
+    <a href="#urnadb-%e6%95%b0%e6%8d%ae%e5%ba%93" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>UrnaDB 是一款融合了内存与磁盘存储介质的 NoSQL 数据库，支持事务控制和多种数据类型。与常见的 Redis 数据库相比，UrnaDB 提供了更具扩展性和成本优势的磁盘存储能力，Redis 通常仅依赖内存存储，而 UrnaDB 仅需将索引加载至内存，数据记录则保存在磁盘中，这种设计既保证了数据访问的高性能，也显著降低了内存占用。</p>
+<p>UrnaDB 采用高效的内存索引结构，支持对海量数据的快速查找，即便数据集极大，也能保持查询响应的高效性。对于希望在有限硬件资源下存储更多数据的用户而言，UrnaDB 提供更低硬件资源的成本解决方案，UrnaDB 支持数据压缩功能，利用压缩算法有效减少磁盘空间使用，从而进一步降低硬件成本；在数据安全方面 UrnaDB 提供基于 IP 白名单的访问控制机制，并支持磁盘级的静态数据加密，确保数据存储过程中的安全性。</p>
+<p>如果你有大规模数据存储、高查询性能、低成本运行和数据安全方面的需求，UrnaDB 数据库是值得考虑的解决方案，想了解更多欢迎继续阅读本手册的其他部分。</p>
 
         </div>
         <div class="hx-mt-16"></div>
