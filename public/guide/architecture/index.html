@@ -432,6 +432,7 @@
 <img src="/images/compress-dirty-region.png" alt="btcask-compress" width="100%" />
 <p>目前工业级的存储系统中，RaikDB 是一个采用类似模型实现的数据库产品，RaikDB 是基于 Amazon Dynamo 论文的设计理念构建而成。其 RaikDB 底层也是采用的顺序写入的日志式存储引擎，并将其命名为 <a href="https://riak.com/assets/bitcask-intro.pdf" target="_blank" rel="noopener"><strong>Bitcask</strong></a> 存储模型，以提升写入性能和读写效率。</p>
 <p>该模型与 UrnaDB 所采用的存储引擎在设计理念上颇为相似。Bitcask 存储引擎在执行数据压缩 Compaction 时会生成 Hint 文件，其作用是在存储引擎重启时，辅助快速重建内存索引，从而避免每次启动都需全量扫描数据文件，显著提升系统的启动效率。然而 Hint 文件仅在 Compaction 过程中生成，所记录的只是当时内存索引的快照，无法反映实时状态。</p>
+<img src="/images/checkpoint.png" alt="checkpoint" width="100%" />
 <p>针对这一问题 UrnaDB 在存储引擎中进行了改进，将 Hint 文件机制替换为 <strong>Checkpoint</strong> 功能，系统会在固定时间间隔内，定期将当前内存索引持久化为 checkpoint 文件写入磁盘。当服务器进程发生异常崩溃，也可通过读取 checkpoint 快照快速恢复内存索引状态。在实际恢复流程中，UrnaDB 会优先加载最近一次的 checkpoint 快照，并从该时间点之后的 Region 文件中继续回放增量数据。通过这种方式，有效提升了系统启动恢复的速度，减少了启动耗时，同时兼顾了数据一致性与运行效率。</p>
 <p>在此存储引擎设计的基础上，UrnaDB 构建了内置的 HTTP 服务器，并引入了多种数据结构的抽象层，进一步构成了完整的 UrnaDB 产品体系。这些模块构成了一个相互协作、功能完善的 UrnaDB 产品，架构图如下：</p>
 <img src="/images/architecture.png" alt="architecture" width="100%" />
