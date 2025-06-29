@@ -18,7 +18,7 @@ logpath: "/tmp/urnadb/out.log"          # urnadb 在运行时程序产生的日�
 debug: false                            # 是否开启 debug 模式
 region:                                 # 数据区
     enable: true                        # 是否开启数据压缩功能
-    cron: "0 0 3 * * *"                 # 垃圾回收器执行周期改为 cron 的格式
+    cron: "0 0 3 * *"                   # 垃圾回收器执行周期改为 cron 的格式
     threshold: 2                        # 默认个数据文件大小，单位 GB
 encryptor:                              # 是否开启静态数据加密功能
     enable: false
@@ -44,7 +44,7 @@ Region 是 UrnaDB 中最核心的功能模块之一，其相关的配置参数�
 ```yaml
 region:                                 # 数据区
     enable: true                        # 是否开启数据压缩功能
-    cron: "0 0 3 * * *"                 # 垃圾回收器执行周期改为 cron 的格式
+    cron: "0 0 3 * *"                   # 垃圾回收器执行周期改为 cron 的格式
     threshold: 2                        # 默认个数据文件大小，单位 GB
 ```
 
