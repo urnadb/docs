@@ -13,7 +13,7 @@ UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务�
 > [!IMPORTANT]
 > 在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
 
-UrnaDB 内置的 HTTP Server 当前不支持 TLS/HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：
+UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：
 
 ```nginx
 # HTTP 配置（监听 80 端口）
@@ -53,4 +53,4 @@ server {
 ```
 
 > [!TIP]
-> 理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件，都可以作为 UrnaDB 的安全代理层，要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开，如需申请 TLS 证书，可以使用 [ACME.sh](https://www.acme.sh) 脚本工具进行申请和配置。
+> 理论上任何支持反向代理和 TLS/TCP 网络协议的软件都可以作为 UrnaDB 的安全代理层，例如通用的 TLS/SSL 隧道工具 [Stunnel](https://www.stunnel.org) ，Stunnel 可以为任意基于 TCP 的客户端和服务器程序提供加密通信功能，因此 Stunnel 也可以充当 UrnaDB 的 HTTP 通信协议安全代理层。要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开，如需申请 TLS 证书，可以使用 [ACME.sh](https://www.acme.sh) 脚本工具进行申请和配置。

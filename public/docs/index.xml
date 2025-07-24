@@ -546,7 +546,7 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;UrnaDB 内置的 HTTP Server 当前不支持 TLS/HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：&lt;/p&gt;
+&lt;p&gt;UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# HTTP 配置（监听 80 端口）
@@ -596,7 +596,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z&#34;/&gt;&lt;/svg&gt;Tip&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;理论上任何支持反向代理和 TLS/HTTPS 协议的 Web 服务器软件，都可以作为 UrnaDB 的安全代理层，要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开，如需申请 TLS 证书，可以使用 &lt;a href=&#34;https://www.acme.sh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ACME.sh&lt;/a&gt; 脚本工具进行申请和配置。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;理论上任何支持反向代理和 TLS/TCP 网络协议的软件都可以作为 UrnaDB 的安全代理层，例如通用的 TLS/SSL 隧道工具 &lt;a href=&#34;https://www.stunnel.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Stunnel&lt;/a&gt; ，Stunnel 可以为任意基于 TCP 的客户端和服务器程序提供加密通信功能，因此 Stunnel 也可以充当 UrnaDB 的 HTTP 通信协议安全代理层。要启用 TLS/HTTPS 网络通信，必须先配置 TLS（Transport Layer Security）安全数字证书。TLS 证书基于计算机密码学原理，这里不作详细展开，如需申请 TLS 证书，可以使用 &lt;a href=&#34;https://www.acme.sh&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ACME.sh&lt;/a&gt; 脚本工具进行申请和配置。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
