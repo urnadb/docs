@@ -44,7 +44,7 @@
 &lt;p&gt;存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。&lt;/p&gt;
 &lt;p&gt;持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。&lt;/p&gt;
 &lt;h2&gt;存储引擎&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;存储引擎&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#%e5%ad%98%e5%82%a8%e5%bc%95%e6%93%8e&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;综上所述，针对这些场景的问题 &lt;strong&gt;UrnaDB&lt;/strong&gt; 采用了基于 &lt;a href=&#34;https://en.wikipedia.org/wiki/Log-structured_merge-tree&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Log-Structured Megre Tree&lt;/a&gt; 日志结构化文件系统的存储引擎实现，存储引擎会以 &lt;strong&gt;Append-Only Log&lt;/strong&gt; 的方式将所有的数据操作写入到数据文件中。同时 &lt;strong&gt;UrnaDB&lt;/strong&gt; 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：&lt;/p&gt;
+    &lt;a href=&#34;#%e5%ad%98%e5%82%a8%e5%bc%95%e6%93%8e&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;单机数据库的核心在于其存储引擎，负责实现数据的持久化，并高效地处理数据的写入与读取，是数据库系统性能与可靠性的基础保障。针对这些场景的问题 &lt;strong&gt;UrnaDB&lt;/strong&gt; 采用了基于 &lt;a href=&#34;https://en.wikipedia.org/wiki/Log-structured_merge-tree&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Log-Structured Megre Tree&lt;/a&gt; 日志结构化文件系统的存储引擎实现，存储引擎会以 &lt;strong&gt;Append-Only Log&lt;/strong&gt; 的方式将所有的数据操作写入到数据文件中。同时 &lt;strong&gt;UrnaDB&lt;/strong&gt; 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/engine.png&#34; alt=&#34;bitcask-engine&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;其核心持久化机制基于预写日志 Write-Ahead Logging 简称 &lt;strong&gt;WAL&lt;/strong&gt; ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 &lt;strong&gt;Segment&lt;/strong&gt; 记录，即可高效恢复内存中的索引结构。&lt;/p&gt;
 &lt;p&gt;在 UrnaDB 中对这些 WAL 数据文件有一个统称为叫 &lt;strong&gt;Region&lt;/strong&gt; 文件，这些文件有单个固定大小限制，当一个数据文件写满之后就会被关闭，会重新创建一个新的 &lt;strong&gt;Active&lt;/strong&gt; 活跃的 Region 文件进行数据记录的进行写入。被关闭的 Region 文件会被视为冷数据文件，随着数据库不间断长时间运行 Region 文件会不断递增逐渐占用磁盘空间。此时数据库进程就需要对旧的 Region 文件执行压缩 Compaction 和定期清理，以降低存储压力并提高查崩溃数据恢复时的启动效率，压缩流程原理图：&lt;/p&gt;
@@ -53,9 +53,11 @@
 &lt;p&gt;该模型与 UrnaDB 所采用的存储引擎在设计理念上颇为相似。Bitcask 存储引擎在执行数据压缩 Compaction 时会生成 Hint 文件，其作用是在存储引擎重启时，辅助快速重建内存索引，从而避免每次启动都需全量扫描数据文件，显著提升系统的启动效率。然而 Hint 文件仅在 Compaction 过程中生成，所记录的只是当时内存索引的快照，无法反映实时状态。&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/checkpoint.png&#34; alt=&#34;checkpoint&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;针对这一问题 UrnaDB 在存储引擎中进行了改进，将 Hint 文件机制替换为 &lt;strong&gt;Checkpoint&lt;/strong&gt; 功能，系统会在固定时间间隔内，定期将当前内存索引持久化为 checkpoint 文件写入磁盘。当服务器进程发生异常崩溃，也可通过读取 checkpoint 快照快速恢复内存索引状态。在实际恢复流程中，UrnaDB 会优先加载最近一次的 checkpoint 快照，并从该时间点之后的 Region 文件中继续回放增量数据。通过这种方式，有效提升了系统启动恢复的速度，减少了启动耗时，同时兼顾了数据一致性与运行效率。&lt;/p&gt;
-&lt;p&gt;在此存储引擎设计的基础上，UrnaDB 构建了内置的 HTTP 服务器，并引入了多种数据结构的抽象层，进一步构成了完整的 UrnaDB 产品体系。这些模块构成了一个相互协作、功能完善的 UrnaDB 产品，架构图如下：&lt;/p&gt;
+&lt;h2&gt;服务进程&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;服务进程&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#%e6%9c%8d%e5%8a%a1%e8%bf%9b%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在此存储引擎设计的基础上，UrnaDB 构建了内置的 HTTP 协议服务器用于数据事物处理，在 UrnaDB 内部有多种数据结构的抽象层，进一步构成了完整的 UrnaDB 产品体系。这些模块构成了一个相互协作、功能完善的 UrnaDB 产品，架构图如下：&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/architecture.png&#34; alt=&#34;architecture&#34; width=&#34;100%&#34; /&gt;
-&lt;p&gt;单机数据库的核心在于其存储引擎，负责实现数据的持久化，并高效地处理数据的写入与读取，是数据库系统性能与可靠性的基础保障。目前 UrnaDB 支持单机部署，适用于轻量级和中等规模的应用场景。未来版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。&lt;/p&gt;
+&lt;p&gt;UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。UrnaDB 的服务端对外提供数据交互接口是基于 HTTP 协议的 RESTful API ，只需要通过支持 HTTP 协议客户端软件就可以进行数据操作，这里推荐使用 curl 软件进行数据交互操作，也可以使用官方提供的多语言 SDK 来集成使用，具体如何使用请查阅 SDK 部分的文档内容。&lt;/p&gt;
+&lt;p&gt;UrnaDB 未来版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。&lt;/p&gt;
 
       </description>
     </item>
@@ -600,6 +602,19 @@
   &lt;/div&gt;
 &lt;/div&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>动态交换</title>
+      <link>http://localhost:1313/guide/operations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/guide/operations/</guid>
+      <description>
+        
+        
+        
       </description>
     </item>
     
