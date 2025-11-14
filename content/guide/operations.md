@@ -19,7 +19,7 @@ curl -X POST http://192.168.31.221:2668/tables/tab-01/rows \
     "score": 95.5,
     "tags": ["admin", "user"],
     "meta": {
-      "editor": "system"
+      "editor": "system
     }
   }
 }
