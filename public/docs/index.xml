@@ -662,6 +662,24 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;在创建命名空间的时候可以指定该命名空间的生命周期，生命周期是指该命名空间创建之后能存活多久，一般以秒为单位，当到达期限后 UrnaDB 的垃圾回收器会主动删除该命名空间释放其占用的存储空间。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;例如在创建 &lt;strong&gt;users&lt;/strong&gt; 命名空间的指定它的生命周期为 1800 秒，在 1800 秒之后会被垃圾回收器主动删除，代码如下：&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X PUT http://192.168.31.221:2668/tables/users &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;  -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Auth-Token: 73suyb7iNeZsmqhvaxgEn7Ug2&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;-H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;-d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;  &amp;#34;ttl&amp;#34;: 1800
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;下面是一张 Table 命名空间中的 Rows 结构的 JSON 抽象，该命名空间中的数据记录都不是相同的 schema 布局，其中的 &lt;code&gt;t_id&lt;/code&gt; 为数据库主动分配的自增主键：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 

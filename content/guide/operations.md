@@ -36,6 +36,20 @@ curl -X PUT http://192.168.31.221:2668/tables/users \
 > [!IMPORTANT]
 > 在创建命名空间的时候可以指定该命名空间的生命周期，生命周期是指该命名空间创建之后能存活多久，一般以秒为单位，当到达期限后 UrnaDB 的垃圾回收器会主动删除该命名空间释放其占用的存储空间。
 
+
+例如在创建 **users** 命名空间的指定它的生命周期为 1800 秒，在 1800 秒之后会被垃圾回收器主动删除，代码如下：
+
+```bash
+curl -X PUT http://192.168.31.221:2668/tables/users \
+  -H "Auth-Token: 73suyb7iNeZsmqhvaxgEn7Ug2" \
+-H "Content-Type: application/json" \
+-d '{
+  "ttl": 1800
+}'
+```
+
+
+
 下面是一张 Table 命名空间中的 Rows 结构的 JSON 抽象，该命名空间中的数据记录都不是相同的 schema 布局，其中的 `t_id` 为数据库主动分配的自增主键：
 
 ```json
