@@ -10,7 +10,7 @@ UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Vari
 > [!IMPORTANT]
 > 客户端与 UrnaDB 服务端之间的数据交互通过 **PQL** 协议，PQL（Patch Query Language）是一种基于 HTTP + JSON 的数据操作与查询协议，为客户端与服务器之间的结构化数据交换提供了统一、简单且可扩展的接口，任何能够发起 HTTP 请求的软件都可以作为 PQL 客户端；以下内容将介绍如何使用 PQL API 与服务器进行数据交换示例。
 
-### 📇 Table 命名空间
+## 📇 Table 命名空间
 
 > [!TIP]
 > **Table** 命名空间的结构类似关系数据库 SQL 中的一张表结构，一旦创建完成之后 Table 会为每条记录分配一个全局唯一递增的 `t_id` 索引，Table 的每列可以存储任何有映射关系的半结构化数据，例如编程语言中的 struct 和 class 字段都可以使用 Table 进行存储。相比于关系数据库 SQL 中表有更高的灵活性，不需要提前定义表 schema 结构，可以在使用的过程中灵活的动态添加、删除和修改这些记录字段。
@@ -248,7 +248,7 @@ curl -X DELETE  http://192.168.31.221:2668/tables/users \
 > [!WARNING]
 > Table 是一组多个对象记录组成集合，同一个 Table 命名空间随着不断插入新的数据，会导致 Table 越来越大并且有锁的开销，多条记录共享一把 Table 锁有性能损失，所有不建议在单个 Table 命名空间中存储数据较多数据记录。
 
-### 📂 Record 命名空间
+## 📂 Record 命名空间
 
 > [!TIP]
 > **Record** 命名空间的结构类似 MongoDB 中的 Document 结构，Record 通常直接映射编程语言中的 class 的一条记录，OOP 面向对象编程中的对象可以直接映射为 Record 记录。在高并发场景下 Record 一条记录对应一把锁，有着事物处理性能高的优势。Record 一段创建就不能改了，适应场景就是更新不频繁的数据，例如社交论坛系统中帖子功能，一条帖子可以对应一条 Record 记录，如果更新了直接设置一条新的 Record 映射即可。
@@ -348,7 +348,7 @@ curl -X DELETE  http://192.168.31.221:2668/records/142857 \
 }
 ```
 
-### 📦 Variant 命名空间
+## 📦 Variant 命名空间
 
 > [!TIP]
 > **Variant** 命名空间是一个通用的动态数据容器，可用于存储多种基础数据类型，例如 String、Boolean、Integer 和 Double 等，它为不同类型的数据提供了统一的 API，使业务层能够以一致且灵活的方式进行操作。
@@ -420,5 +420,5 @@ HTTP 会响应返回 JSON 格式的内容如下：
 ```
 
 
-### 🔐 Lock 命名空间
+## 🔐 Lock 命名空间
 
