@@ -354,10 +354,10 @@ curl -X DELETE  http://192.168.31.221:2668/records/142857 \
 > **Variant** 命名空间是一个通用的动态数据容器，可用于存储多种基础数据类型，例如 String、Boolean、Integer 和 Double 等，它为不同类型的数据提供了统一的 API，使业务层能够以一致且灵活的方式进行操作。
 
 
-在 Variant 命名空间中，具体的数据类型由首次写入的值决定，并在后续操作中保持一致，例如创建一个名为 **viwes** 的 Variant 命名空间，它的值是整数 Integer 基础数据类型，示例如下：
+在 Variant 命名空间中，具体的数据类型由首次写入的值决定，并在后续操作中保持一致，例如创建一个名为 **views** 的 Variant 命名空间，它的值是整数 Integer 基础数据类型，示例如下：
 
 ```bash
-curl -X PUT http://192.168.31.221:2668/variants/viwes \
+curl -X PUT http://192.168.31.221:2668/variants/views \
   -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t" \
   -H "Content-Type: application/json" \
   -d '{"variant": 0 }'
@@ -380,7 +380,7 @@ curl -X PUT http://192.168.31.221:2668/variants/viwes \
 当 **views** 创建并初始化成功后，即可对其数值执行类似 Redis 中的 INCR 自增操作，示例如下：
 
 ```bash
-curl -X POST http://192.168.31.221:2668/variants/viwes \
+curl -X POST http://192.168.31.221:2668/variants/views \
   -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t" \
   -H "Content-Type: application/json" \
   -d '{"delta": 1 }'
@@ -404,7 +404,7 @@ curl -X POST http://192.168.31.221:2668/variants/viwes \
 获取名为 **views** 的命名空间中的值，示例如下：
 
 ```bash
-curl -X GET http://192.168.31.221:2668/variants/viwes \
+curl -X GET http://192.168.31.221:2668/variants/views \
   -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t"
 ```
 
