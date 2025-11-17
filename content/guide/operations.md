@@ -1,5 +1,5 @@
 ---
-title: 数据交互
+title: PQL 协议
 type: docs
 prev: guide/tls-http
 weight: 7
@@ -7,6 +7,8 @@ weight: 7
 
 UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。后续的文档统一称之为 NameSpace 命名空间，同一命名空间中存储都是同一类型的数据模型的数据，了解不同命名空间的数据模型及其特性，有助于开发者根据业务需求选择最合适的数据模型，从而高效实现上层业务功能。
 
+> [!IMPORTANT]
+> 客户端与 UrnaDB 服务端之间的数据交互通过 **PQL** 协议，PQL（Patch Query Language）是一种基于 HTTP + JSON 的数据操作与查询协议，为客户端与服务器之间的结构化数据交换提供了统一、简单且可扩展的接口，任何能够发起 HTTP 请求的软件都可以作为 PQL 客户端；以下内容将介绍如何使用 PQL API 与服务器进行数据交换示例。
 
 ### 📇 Table 命名空间
 
@@ -96,8 +98,7 @@ curl -X POST http://192.168.31.221:2668/tables/users/rows \
       "editor": "system
     }
   }
-}
-'
+}'
 ```
 
 从 **users** 的命名空间中查询所有的数据记录，类似于关系数据库 SQL 中的 `SELECT * FROM ...` 语句，也类似于其他文档型数据库 MongoDB 中的 `findAll` 操作，代码如下：
@@ -250,13 +251,13 @@ curl -X DELETE  http://192.168.31.221:2668/tables/users \
 ### 📂 Record 命名空间
 
 > [!TIP]
-> **Record** 结构类似关 MongoDB 中的 Document 结构，Record 通常直接映射编程语言中的 class 的一条记录，OOP 面向对象编程中的对象可以直接映射为 Record 记录。在高并发场景下 Record 一条记录对应一把锁，有着事物处理性能高的优势。Record 一段创建就不能改了，适应场景就是更新不频繁的数据，例如社交论坛系统中帖子功能，一条帖子可以对应一条 Record 记录，如果更新了直接设置一条新的 Record 映射即可。
+> **Record** 命名空间的结构类似 MongoDB 中的 Document 结构，Record 通常直接映射编程语言中的 class 的一条记录，OOP 面向对象编程中的对象可以直接映射为 Record 记录。在高并发场景下 Record 一条记录对应一把锁，有着事物处理性能高的优势。Record 一段创建就不能改了，适应场景就是更新不频繁的数据，例如社交论坛系统中帖子功能，一条帖子可以对应一条 Record 记录，如果更新了直接设置一条新的 Record 映射即可。
 
 
-创建一条名为 **article-001** 的 Record 命名空间，并设置所需存储的数据记录值。例如一张帖子的抽象，操作示例如下：
+创建一条名为 **142857** 的 Record 命名空间，并设置所需存储的数据记录值。例如一张帖子的抽象，操作示例如下：
 
 ```bash
-curl -X PUT http://192.168.31.221:2668/records/article-001 \
+curl -X PUT http://192.168.31.221:2668/records/142857 \
   -H "Content-Type: application/json" \
   -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra" \
   -d '{
@@ -274,16 +275,16 @@ curl -X PUT http://192.168.31.221:2668/records/article-001 \
 ```
 
 > [!IMPORTANT]
-> 同样在创建 Record 记录数据时可以指定 `ttl` 字段，来指定 Record 的生命周期。
+> 这个 **142857** 可以看作是一篇文章的 POST ID 编号，业务层只需要提供这个 ID 就可以查询到这条帖子数据，类似于关系数据库中一条记录的唯一主键；同样在创建 Record 记录数据时可以指定 `ttl` 字段，`ttl` 的值单位是秒用来设置 Record 的生命周期。
 
-在 Record 命名空间中查询一条名为 **article-001** 的数据记录，操作示例如下：
+在 Record 命名空间中查询一条名为 **142857** 的数据记录，操作示例如下：
 
 ```bash
-curl -X GET http://192.168.31.221:2668/records/article-001 \
+curl -X GET http://192.168.31.221:2668/records/142857 \
   -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra"
 ```
 
-如果执行成功会返回 **article-001** 中存储的完整数据记录：
+如果执行成功会返回 **142857** 中存储的完整数据记录：
 
 ```json
 {
@@ -305,10 +306,10 @@ curl -X GET http://192.168.31.221:2668/records/article-001 \
 }
 ```
 
-对已存在的 **article-001** 数据记录查询某个 `column` 操作，类似于关系数据库 SQL 中的 `SELECT column FROM ...` 语句，例如搜索查询操作示例：
+对已存在的 **142857** 数据记录查询某个 `column` 操作，类似于关系数据库 SQL 中的 `SELECT column FROM ...` 语句，例如搜索查询操作示例：
 
 ```bash
-curl -X POST http://192.168.31.221:2668/records/article-001 \
+curl -X POST http://192.168.31.221:2668/records/142857 \
   -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra" \
   -H "Content-Type: application/json" \
   -d '{
@@ -316,7 +317,7 @@ curl -X POST http://192.168.31.221:2668/records/article-001 \
   }'
 ```
 
-如果上面请求执行成功，会返回 **article-001** 中 `tags` 所存储的匹配的的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
+如果上面请求执行成功，会返回 **142857** 中 `tags` 所存储的匹配的的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
 
 ```json
 {
@@ -329,14 +330,14 @@ curl -X POST http://192.168.31.221:2668/records/article-001 \
 }
 ```
 
-对已经存在的 **article-001** 记录执行删除操作，这个对应着关系数据库 SQL 中的 `DROP TABLE ...` 语句，代码如下：
+对已经存在的 **142857** 记录执行删除操作，这个对应着关系数据库 SQL 中的 `DROP TABLE ...` 语句，代码如下：
 
 ```bash
-curl -X DELETE  http://192.168.31.221:2668/records/article-001 \
+curl -X DELETE  http://192.168.31.221:2668/records/142857 \
   -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra"
 ```
 
-如果上面请求执行成功会删除对应的 **article-001** 中所存储的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
+如果上面请求执行成功会删除对应的 **142857** 中所存储的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
 
 ```json
 {
@@ -349,8 +350,75 @@ curl -X DELETE  http://192.168.31.221:2668/records/article-001 \
 
 ### 📦 Variant 命名空间
 
+> [!TIP]
+> **Variant** 命名空间是一个通用的动态数据容器，可用于存储多种基础数据类型，例如 String、Boolean、Integer 和 Double 等，它为不同类型的数据提供了统一的 API，使业务层能够以一致且灵活的方式进行操作。
 
-### 🔐 Lock 分布式锁
+
+在 Variant 命名空间中，具体的数据类型由首次写入的值决定，并在后续操作中保持一致，例如创建一个名为 **viwes** 的 Variant 命名空间，它的值是整数 Integer 基础数据类型，示例如下：
+
+```bash
+curl -X PUT http://192.168.31.221:2668/variants/viwes \
+  -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t" \
+  -H "Content-Type: application/json" \
+  -d '{"variant": 0 }'
+```
+
+如果上面命令执行成功会返回 **views** 命名空间初始值，HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "data": {
+        "variant": 0
+    }
+}
+```
+
+> [!IMPORTANT]
+> 同样在创建 Variant 命名空间时可以指定 `ttl` 来设置生命周期，其值单位为秒。
+
+当 **views** 创建并初始化成功后，即可对其数值执行类似 Redis 中的 INCR 自增操作，示例如下：
+
+```bash
+curl -X POST http://192.168.31.221:2668/variants/viwes \
+  -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t" \
+  -H "Content-Type: application/json" \
+  -d '{"delta": 1 }'
+```
+
+如果 INCR 自增操作命令执行成功，HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "data": {
+        "variant": 1
+    }
+}
+```
+
+> [!IMPORTANT]
+> 请求体中的 `delta` 值可以是 -1 负数，这样就可以实现原子自减操作。如果 Variant 中存储的是 Boolen 和 String 这些操作就会失效，并返回类型错误信息。
 
 
+获取名为 **views** 的命名空间中的值，示例如下：
+
+```bash
+curl -X GET http://192.168.31.221:2668/veriants/viwes \
+  -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t"
+```
+
+HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "data": {
+        "variant": 1
+    }
+}
+```
+
+
+### 🔐 Lock 命名空间
 
