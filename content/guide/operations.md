@@ -404,7 +404,7 @@ curl -X POST http://192.168.31.221:2668/variants/viwes \
 获取名为 **views** 的命名空间中的值，示例如下：
 
 ```bash
-curl -X GET http://192.168.31.221:2668/veriants/viwes \
+curl -X GET http://192.168.31.221:2668/variants/viwes \
   -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t"
 ```
 
