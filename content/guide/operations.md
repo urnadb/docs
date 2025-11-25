@@ -1,5 +1,5 @@
 ---
-title: PQL 协议
+title: 动态交互
 type: docs
 prev: guide/tls-http
 weight: 7
@@ -421,4 +421,78 @@ HTTP 会响应返回 JSON 格式的内容如下：
 
 
 ## 🔐 Lock 命名空间
+
+> [!TIP]
+> **Lock** 命名空间是一个分布式租期锁服务，用于在分布式环境中协调多个客户端对共享资源的访问，能实现类似于基于 Redis 和 ETCD 分布式锁服务的功能。**Lock** 命名空间特别适用于需要确保数据一致性的场景，如分布式任务调度、资源分配、配置更新等操作，为分布式应用提供了可靠的同步机制。
+
+Lock 提供的它提供了以下核心功能：
+
+1. **互斥锁定**：确保同一时间只有一个客户端能够获取特定的锁。
+2. **自动过期**：支持设置锁的超时时间，防止死锁情况。
+3. **锁续期**：允许持有锁的客户端延长锁的有效期。
+4. **非阻塞获取**：支持尝试获取锁而不阻塞当前线程。
+5. **锁状态查询**：可以查询锁的当前状态和持有者信息。
+
+
+在 Lock 命名空间中创建一个名为 **orders** 的分布式租期锁，锁的名称通常对应需要保护的资源标识符，这样可以通过锁名直接关联到具体的业务资源。通过 **orders** 这个锁名，可以方便地查询锁的当前状态、持有者信息以及剩余租期时间，实现对订单相关操作的分布式同步控制，示例如下：
+
+```bash
+curl -X PUT http://192.168.101.252:2668/locks/orders -v \
+  -H "Auth-Token: FUCHLQlqEK3kZ5HfKt6fhgRF1" \
+  -H "Content-Type: application/json" \
+  -d '{"ttl": 30 }'
+```
+
+如果上锁成功会返回对应锁的 Token 凭证，这个 Token 是方便于客户端续租和解锁使用的，HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "data": {
+        "token": "01KAXPB8D4MNMG731BBZ8MAV28"
+    }
+}
+```
+
+当上锁成功后客户端可以安全地执行资源相关的业务操作，在有效租期内，客户端对资源的独占访问是受保护的。但在实际业务场景中客户端的操作时间可能超出预期的锁租期，为了防止锁自动过期导致其他客户端意外获取锁，当客户端需要延长持锁时间时，应主动对锁进行续租操作，确保在业务完成前始终保持对资源的独占控制，示例如下：
+
+```bash
+curl -X PATCH http://192.168.101.252:2668/locks/orders  \
+  -H "Auth-Token: FUCHLQlqEK3kZ5HfKt6fhgRF1" \
+  -H "Content-Type: application/json" \
+  -d '{ "token": "01KAXPB8D4MNMG731BBZ8MAV28" }'
+```
+
+
+如果对锁续租成功，HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "data": {
+        "token": "01KAXPB8D4MNMG731BBZ8MAV28"
+    }
+}
+```
+
+客户端对持有的锁进行提前释放和解锁，解锁时同样需要带有锁对应的 Token 凭证，示例如下：
+
+```bash
+curl -X DELETE http://192.168.101.252:2668/locks/orders  \
+  -H "Auth-Token: FUCHLQlqEK3kZ5HfKt6fhgRF1" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "token": "01KAXQH79VG3JPT4DJFV74EG97"
+  }'
+```
+
+如果解锁成功，HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "data": "deleted lock successfully."
+}
+```
+
 
