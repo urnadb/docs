@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>UrnaDB Document – 快速开始</title>
-    <link>http://localhost:1313/docs/</link>
+    <link>http://localhost:64819/docs/</link>
     <description>Recent content in 快速开始 on UrnaDB Document</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 01 Mar 2025 22:56:40 +0800</lastBuildDate>
     
-	  <atom:link href="http://localhost:1313/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:64819/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Java SDK</title>
-      <link>http://localhost:1313/sdk/java-sdk/</link>
+      <link>http://localhost:64819/sdk/java-sdk/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/sdk/java-sdk/</guid>
+      <guid>http://localhost:64819/sdk/java-sdk/</guid>
       <description>
         
         
@@ -31,10 +31,10 @@
     
     <item>
       <title>架构设计</title>
-      <link>http://localhost:1313/guide/architecture/</link>
+      <link>http://localhost:64819/guide/architecture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/architecture/</guid>
+      <guid>http://localhost:64819/guide/architecture/</guid>
       <description>
         
         
@@ -45,17 +45,17 @@
 &lt;p&gt;持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。&lt;/p&gt;
 &lt;h2&gt;存储引擎&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;存储引擎&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#%e5%ad%98%e5%82%a8%e5%bc%95%e6%93%8e&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;单机数据库的核心在于其存储引擎，负责实现数据的持久化，并高效地处理数据的写入与读取，是数据库系统性能与可靠性的基础保障。针对这些场景的问题 &lt;strong&gt;UrnaDB&lt;/strong&gt; 采用了基于 &lt;a href=&#34;https://en.wikipedia.org/wiki/Log-structured_merge-tree&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Log-Structured Megre Tree&lt;/a&gt; 日志结构化文件系统的存储引擎实现，存储引擎会以 &lt;strong&gt;Append-Only Log&lt;/strong&gt; 的方式将所有的数据操作写入到数据文件中。同时 &lt;strong&gt;UrnaDB&lt;/strong&gt; 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：&lt;/p&gt;
-&lt;img src=&#34;http://localhost:1313/images/engine.png&#34; alt=&#34;bitcask-engine&#34; width=&#34;100%&#34; /&gt;
+&lt;img src=&#34;http://localhost:64819/images/engine.png&#34; alt=&#34;bitcask-engine&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;其核心持久化机制基于预写日志 Write-Ahead Logging 简称 &lt;strong&gt;WAL&lt;/strong&gt; ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 &lt;strong&gt;Segment&lt;/strong&gt; 记录，即可高效恢复内存中的索引结构。&lt;/p&gt;
 &lt;p&gt;在 UrnaDB 中对这些 WAL 数据文件有一个统称为叫 &lt;strong&gt;Region&lt;/strong&gt; 文件，这些文件有单个固定大小限制，当一个数据文件写满之后就会被关闭，会重新创建一个新的 &lt;strong&gt;Active&lt;/strong&gt; 活跃的 Region 文件进行数据记录的进行写入。被关闭的 Region 文件会被视为冷数据文件，随着数据库不间断长时间运行 Region 文件会不断递增逐渐占用磁盘空间。此时数据库进程就需要对旧的 Region 文件执行压缩 Compaction 和定期清理，以降低存储压力并提高查崩溃数据恢复时的启动效率，压缩流程原理图：&lt;/p&gt;
-&lt;img src=&#34;http://localhost:1313/images/compress-dirty-region.png&#34; alt=&#34;btcask-compress&#34; width=&#34;100%&#34; /&gt;
+&lt;img src=&#34;http://localhost:64819/images/compress-dirty-region.png&#34; alt=&#34;btcask-compress&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;目前工业级的存储系统中，RaikDB 是一个采用类似模型实现的数据库产品，RaikDB 是基于 Amazon Dynamo 论文的设计理念构建而成。其 RaikDB 底层也是采用的顺序写入的日志式存储引擎，并将其命名为 &lt;a href=&#34;https://riak.com/assets/bitcask-intro.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Bitcask&lt;/strong&gt;&lt;/a&gt; 存储模型，以提升写入性能和读写效率。&lt;/p&gt;
 &lt;p&gt;该模型与 UrnaDB 所采用的存储引擎在设计理念上颇为相似。Bitcask 存储引擎在执行数据压缩 Compaction 时会生成 Hint 文件，其作用是在存储引擎重启时，辅助快速重建内存索引，从而避免每次启动都需全量扫描数据文件，显著提升系统的启动效率。然而 Hint 文件仅在 Compaction 过程中生成，所记录的只是当时内存索引的快照，无法反映实时状态。&lt;/p&gt;
-&lt;img src=&#34;http://localhost:1313/images/checkpoint.png&#34; alt=&#34;checkpoint&#34; width=&#34;100%&#34; /&gt;
+&lt;img src=&#34;http://localhost:64819/images/checkpoint.png&#34; alt=&#34;checkpoint&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;针对这一问题 UrnaDB 在存储引擎中进行了改进，将 Hint 文件机制替换为 &lt;strong&gt;Checkpoint&lt;/strong&gt; 功能，系统会在固定时间间隔内，定期将当前内存索引持久化为 checkpoint 文件写入磁盘。当服务器进程发生异常崩溃，也可通过读取 checkpoint 快照快速恢复内存索引状态。在实际恢复流程中，UrnaDB 会优先加载最近一次的 checkpoint 快照，并从该时间点之后的 Region 文件中继续回放增量数据。通过这种方式，有效提升了系统启动恢复的速度，减少了启动耗时，同时兼顾了数据一致性与运行效率。&lt;/p&gt;
 &lt;h2&gt;服务进程&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;服务进程&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#%e6%9c%8d%e5%8a%a1%e8%bf%9b%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在此存储引擎设计的基础上，UrnaDB 构建了内置的 HTTP 协议服务器用于数据事物处理，在 UrnaDB 内部有多种数据结构的抽象层，进一步构成了完整的 UrnaDB 产品体系。这些模块构成了一个相互协作、功能完善的 UrnaDB 产品，架构图如下：&lt;/p&gt;
-&lt;img src=&#34;http://localhost:1313/images/architecture.png&#34; alt=&#34;architecture&#34; width=&#34;100%&#34; /&gt;
+&lt;img src=&#34;http://localhost:64819/images/architecture.png&#34; alt=&#34;architecture&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。UrnaDB 的服务端对外提供数据交互接口是基于 HTTP 协议的 RESTful API ，只需要通过支持 HTTP 协议客户端软件就可以进行数据操作，这里推荐使用 curl 软件进行数据交互操作，也可以使用官方提供的多语言 SDK 来集成使用，具体如何使用请查阅 SDK 部分的文档内容。&lt;/p&gt;
 &lt;p&gt;UrnaDB 未来版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。&lt;/p&gt;
 
@@ -64,10 +64,10 @@
     
     <item>
       <title>JavaScript SDK</title>
-      <link>http://localhost:1313/sdk/javascript-sdk/</link>
+      <link>http://localhost:64819/sdk/javascript-sdk/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/sdk/javascript-sdk/</guid>
+      <guid>http://localhost:64819/sdk/javascript-sdk/</guid>
       <description>
         
         
@@ -78,10 +78,10 @@
     
     <item>
       <title>部署运行</title>
-      <link>http://localhost:1313/guide/deployment/</link>
+      <link>http://localhost:64819/guide/deployment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/deployment/</guid>
+      <guid>http://localhost:64819/guide/deployment/</guid>
       <description>
         
         
@@ -238,10 +238,10 @@
     
     <item>
       <title>配置参数</title>
-      <link>http://localhost:1313/guide/configure/</link>
+      <link>http://localhost:64819/guide/configure/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/configure/</guid>
+      <guid>http://localhost:64819/guide/configure/</guid>
       <description>
         
         
@@ -412,10 +412,10 @@
     
     <item>
       <title>项目结构</title>
-      <link>http://localhost:1313/guide/layout/</link>
+      <link>http://localhost:64819/guide/layout/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/layout/</guid>
+      <guid>http://localhost:64819/guide/layout/</guid>
       <description>
         
         
@@ -463,10 +463,10 @@
     
     <item>
       <title>数据管理</title>
-      <link>http://localhost:1313/guide/data/</link>
+      <link>http://localhost:64819/guide/data/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/data/</guid>
+      <guid>http://localhost:64819/guide/data/</guid>
       <description>
         
         
@@ -532,10 +532,10 @@
     
     <item>
       <title>TLS 连接</title>
-      <link>http://localhost:1313/guide/tls-http/</link>
+      <link>http://localhost:64819/guide/tls-http/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/tls-http/</guid>
+      <guid>http://localhost:64819/guide/tls-http/</guid>
       <description>
         
         
@@ -606,11 +606,11 @@
     </item>
     
     <item>
-      <title>动态交互</title>
-      <link>http://localhost:1313/guide/operations/</link>
+      <title>API 交互</title>
+      <link>http://localhost:64819/guide/operations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/guide/operations/</guid>
+      <guid>http://localhost:64819/guide/operations/</guid>
       <description>
         
         
@@ -1367,6 +1367,13 @@
     &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
   &lt;/button&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-amber-200 hx-bg-amber-100 hx-text-amber-900 dark:hx-border-amber-200/30 dark:hx-bg-amber-900/30 dark:hx-text-amber-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;本篇文档将帮助开发者理解 UrnaDB 支持的数据结构及其对应的 HTTP API 设计，借助这些统一的接口，开发者可以基于任意编程语言实现自己的 SDK 或进一步扩展 UrnaDB 的能力。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 
       </description>

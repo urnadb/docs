@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=64819&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
@@ -14,7 +14,7 @@
 UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务器之间的数据通信是通过 HTTP 进行的。然而 HTTP 协议在传输过程中采用明文传输方式，意味着数据包在网络上传输时可能会被截获或篡改，从而存在数据泄露的风险，可能导致数据库中的敏感信息被泄露。
 Important
 在设计 UrnaDB 数据库架构时，我已经充分考虑到这一问题，选择基于 HTTP 协议进行数据交换的原因主要有以下几点：首先 HTTP 协议是当前最广泛使用的网络应用层协议，天生支持分布式网络请求处理。任何支持 HTTP 协议的应用程序都可以作为客户端参与通信，目前 HTTP 协议已经发展到 HTTP/2.0 版本，带来了许多性能优化，如多路复用、头部压缩等，进一步提升了效率，此外基于 TLS 协议的 HTTPS 连接可以保障数据传输的安全性，确保网络通信的隐私和完整性。
-UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：" /><link rel="canonical" href="http://localhost:1313/guide/tls-http/" itemprop="url" />
+UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：" /><link rel="canonical" href="http://localhost:64819/guide/tls-http/" itemprop="url" />
 
 <meta property="og:title" content="TLS 连接" />
 <meta property="og:description" content="尽管采用可靠且安全的数据管理方式，并将数据文件保存在主机磁盘中，同时通过限制主机访问权限和静态数据加密来减少潜在的数据泄露风险，这些措施仍然不足以全面保障数据安全。由于 UrnaDB 部署在远程服务器上，业务应用层在访问数据时必须经过网络传输，因此在传输过程中仍存在被截获或篡改的风险。
@@ -28,7 +28,7 @@ UrnaDB 数据库的对外服务层基于 HTTP 协议，因此客户端与服务�
 
 UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划在后续版本中添加此功能，目前的 TLS 解决方案是通过 Nginx 反向代理来提供 HTTPS 协议层的保护，具体配置如下：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/guide/tls-http/" /><meta property="article:section" content="guide" />
+<meta property="og:url" content="http://localhost:64819/guide/tls-http/" /><meta property="article:section" content="guide" />
 
 
 
@@ -229,7 +229,7 @@ UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/operations/"
     
-  >动态交互
+  >API 交互
     </a>
               
             </li></ul>
@@ -339,7 +339,7 @@ UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/operations/"
     
-  >动态交互
+  >API 交互
     </a>
               
             </li></ul>
@@ -489,9 +489,9 @@ UrnaDB 内置的 HTTP Server 当前不支持基于 TLS 的 HTTPS 协议，计划
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
       ><svg class="hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>数据管理</a><a
         href="/guide/operations/"
-        title="动态交互"
+        title="API 交互"
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
-      >动态交互<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
+      >API 交互<svg class="hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div>
         
       </main>
     </article>

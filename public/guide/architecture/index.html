@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=64819&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
@@ -16,7 +16,7 @@
 存储引擎的开发者需要权衡读写性能和硬件成本的同时，重点在于如何高效存储数据和检索数据。数据库的存储引擎相当于在操作系统文件系统之上，建立的一套用于数据组织、存储与查询的逻辑管理层，最终实现是依赖于操作系统的文件系统 API 接口的，最终数据是被持久化到磁盘文件中保存，这个就对应着 ACID 中的 Durability 数据持久性。
 持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
 存储引擎 单机数据库的核心在于其存储引擎，负责实现数据的持久化，并高效地处理数据的写入与读取，是数据库系统性能与可靠性的基础保障。针对这些场景的问题 UrnaDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 UrnaDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：
-其核心持久化机制基于预写日志 Write-Ahead Logging 简称 WAL ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 Segment 记录，即可高效恢复内存中的索引结构。" /><link rel="canonical" href="http://localhost:1313/guide/architecture/" itemprop="url" />
+其核心持久化机制基于预写日志 Write-Ahead Logging 简称 WAL ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 Segment 记录，即可高效恢复内存中的索引结构。" /><link rel="canonical" href="http://localhost:64819/guide/architecture/" itemprop="url" />
 
 <meta property="og:title" content="架构设计" />
 <meta property="og:description" content="数据库系统的核心作用在于高效地存储和管理数据，并支持从海量信息中快速检索所需记录。传统的 SQL 关系型数据库在数据规模持续增长的情况下，容易遭遇单机性能瓶颈。目前提升性能的主流做法多依赖垂直扩展增强单机硬件能力，而非水平扩展增加节点以线性扩容。由于其架构限制，关系型数据库在弹性扩展性方面存在障碍，难以充分适应多节点分布式环境。同时为满足 ACID 事务特性，这类系统在支持分布式事务处理时也面临一定的技术挑战。
@@ -29,7 +29,7 @@
 
 其核心持久化机制基于预写日志 Write-Ahead Logging 简称 WAL ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 Segment 记录，即可高效恢复内存中的索引结构。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/guide/architecture/" /><meta property="article:section" content="guide" />
+<meta property="og:url" content="http://localhost:64819/guide/architecture/" /><meta property="article:section" content="guide" />
 
 
 
@@ -248,7 +248,7 @@
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/operations/"
     
-  >动态交互
+  >API 交互
     </a>
               
             </li></ul>
@@ -358,7 +358,7 @@
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/operations/"
     
-  >动态交互
+  >API 交互
     </a>
               
             </li></ul>
