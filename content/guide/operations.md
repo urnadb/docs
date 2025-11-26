@@ -317,7 +317,7 @@ curl -X POST http://192.168.31.221:2668/records/142857 \
   }'
 ```
 
-如果上面请求执行成功，会返回 **142857** 中 `tags` 所存储的匹配的的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
+如果上面请求执行成功，会返回 **142857** 中 `tags` 字段所存储的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
 
 ```json
 {
@@ -470,7 +470,7 @@ curl -X PATCH http://192.168.101.252:2668/locks/orders  \
 {
     "status": "success",
     "data": {
-        "token": "01KAXPB8D4MNMG731BBZ8MAV28"
+        "token": "01KAXQH79VG3JPT4DJFV74EG97"
     }
 }
 ```
