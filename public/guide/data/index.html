@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=64819&amp;path=livereload" data-no-instant defer></script>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
@@ -12,7 +12,7 @@
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>数据管理 – UrnaDB Document</title>
   <meta name="description" content="数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。
 对于使用者而言，进行定期对数据文件的备份，不仅能够在磁盘故障时快速恢复数据，还可以在将 UrnaDB 数据库迁移到其他机器时，直接复制数据文件实现快速部署和恢复，无需额外的工具支持，下面为 UrnaDB 数据库在运行过程所产生的数据文件结构：
-data/ ├── 0000000001.db ├── 0000000002.db ├── index.db ├── ckpt.1745325326.2.ids └── ckpt.1745328927.2.tmp 后缀名 作用说明 index.db 数据记录文件对应的索引记录文件。 *.db 数据记录文件随着时间推移文件名会递增。 *.ids 用于快速恢复内存索引记录的检查点文件。 *.tmp 检查点生成过程中的临时快照文件可以被清理掉。 out.log 最新的 urnadb 运行时程序产生的日志记录文件。 Important" /><link rel="canonical" href="http://localhost:64819/guide/data/" itemprop="url" />
+data/ ├── 0000000001.db ├── 0000000002.db ├── index.db ├── ckpt.1745325326.2.ids └── ckpt.1745328927.2.tmp 后缀名 作用说明 index.db 数据记录文件对应的索引记录文件。 *.db 数据记录文件随着时间推移文件名会递增。 *.ids 用于快速恢复内存索引记录的检查点文件。 *.tmp 检查点生成过程中的临时快照文件可以被清理掉。 out.log 最新的 urnadb 运行时程序产生的日志记录文件。 Important" /><link rel="canonical" href="http://localhost:1313/guide/data/" itemprop="url" />
 
 <meta property="og:title" content="数据管理" />
 <meta property="og:description" content="数据库系统建立在操作系统的文件子系统之上，是对底层文件的一种抽象，在数据库中，所有数据记录最终都会以文件的形式存储在物理磁盘中。因此高效地管理和维护数据库数据文件对于保障系统性能、数据安全与可靠性具有至关重要的意义。传统关系型数据库例如 MySQL 通常通过 mysqldump 等工具为数据管理提供备份与恢复支持，而 UrnaDB 的设计理念则有所不同，更强调由用户自行管理数据库文件本身，因为数据文件才是最核心最重要的资产。
@@ -64,7 +64,7 @@ data/
 
   Important" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:64819/guide/data/" /><meta property="article:section" content="guide" />
+<meta property="og:url" content="http://localhost:1313/guide/data/" /><meta property="article:section" content="guide" />
 
 
 

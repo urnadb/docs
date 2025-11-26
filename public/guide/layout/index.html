@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=64819&amp;path=livereload" data-no-instant defer></script>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
@@ -12,7 +12,7 @@
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>项目结构 – UrnaDB Document</title>
   <meta name="description" content="UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。
 UrnaDB 项目的模块组织结构如下：
-. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 进程运行日志记录模块，封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，网络服务进程监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作 Important" /><link rel="canonical" href="http://localhost:64819/guide/layout/" itemprop="url" />
+. ├── Dockerfile # 定义容器镜像的构建方式（用于部署 UrnaDB 的运行环境） ├── LICENSE # 项目的开源许可证信息 ├── README.md # 项目简介、安装使用说明、贡献指南等文档 ├── clog # 进程运行日志记录模块，封装了日志格式、输出等级等 ├── cmd # 应用 CLI 程序的入口，定义 CLI 主命令、程序解析参数初始化 ├── conf # 存放配置模板、初始化配置文件等资源 ├── config.yaml # 主配置文件，定义数据库的行为参数（如端口、路径、选项等） ├── docker-compose.yml # 多服务容器编排文件，定义 UrnaDB 与依赖服务的运行方式 ├── go.mod # Go Modules 依赖描述文件（声明项目模块名和依赖包） ├── go.sum # Go Modules 依赖校验文件（记录版本哈希） ├── server # 核心服务逻辑实现，网络服务进程监听、事物请求处理器 ├── tests # 单元测试与集成测试所需要的资源文件 ├── tools.sh # 辅助脚本，例如构建、性能测试、单元测试等工具集合 ├── types # 定义通用的数据结构和类型，用于业务程序数据结构的抽象 ├── urnadb.go # 应用程序主入口文件，启动 UrnaDB 一个数据库进程实例 ├── utils # 工具函数集合，如字符串处理、错误封装、文件工具等 └── vfs # 虚拟文件系统模块，存储引擎抽象了底层文件 I/O 操作 Important" /><link rel="canonical" href="http://localhost:1313/guide/layout/" itemprop="url" />
 
 <meta property="og:title" content="项目结构" />
 <meta property="og:description" content="UrnaDB 项目由多个核心组件构成，正如前文架构设计中所述，采用了模块化的设计理念。每个组件在功能上相对独立，并以单独的 Go 包（Package）形式组织在项目中，各个模块之间通过明确的接口定义进行协作，形成清晰的依赖关系。在实际使用时，通常通过对应组件提供的构造函数进行初始化，从而实现灵活的组合与扩展。
@@ -46,7 +46,7 @@ UrnaDB 项目的模块组织结构如下：
 
   Important" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:64819/guide/layout/" /><meta property="article:section" content="guide" />
+<meta property="og:url" content="http://localhost:1313/guide/layout/" /><meta property="article:section" content="guide" />
 
 
 
