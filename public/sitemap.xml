@@ -13,9 +13,9 @@
   </url><url>
     <loc>http://localhost:1313/sdk/javascript-sdk/</loc>
   </url><url>
-    <loc>http://localhost:1313/guide/</loc>
-  </url><url>
     <loc>http://localhost:1313/changelog/db-server/</loc>
+  </url><url>
+    <loc>http://localhost:1313/guide/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/deployment/</loc>
   </url><url>
