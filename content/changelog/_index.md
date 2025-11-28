@@ -1,7 +1,7 @@
 ---
 title: 更新日志
 type: docs
-next: changelog/sdk-update
+next: changelog/sdk
 weight: 3
 ---
 

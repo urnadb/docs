@@ -1,7 +1,7 @@
 ---
 title: Release 日志
 type: docs
-prev: changelog/sdk-update
+prev: changelog/sdk
 weight: 2
 ---
 
