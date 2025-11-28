@@ -10,7 +10,9 @@
 <link rel="icon" href="/images/wiredb-org.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/images/wiredb-org.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" /><title>使用指南 – UrnaDB Document</title>
-  <meta name="description" content=" 用户使用指南涵盖 UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化方法。 运行优化需通过修改配置文件进行，用户需熟悉各项配置参数。 数据库运行时会生成数据文件，这些文件存储关键业务数据。 为确保数据安全，用户需掌握数据文件的管理方法，并遵循定期备份的操作规范。 " /><link rel="canonical" href="http://localhost:1313/guide/" itemprop="url" />
+  <meta name="description" content="用户使用指南部分涵盖了 UrnaDB 的项目代码结构介绍、数据库程序架构设计、以及服务的部署与优化方法，如果你需要深入了解和使用 UrnaDB 服务端软件，本章节文档内容可以帮用户快速了解和使用 UrnaDB 软件。
+使用指南涵盖如下：
+UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化的方法。 UrnaDB 的各项配置参数作用说明，配置文件运行时优化使用的案例。 UrnaDB 运行时生成的数据文件，这些数据文件相关的作用介绍。 UrnaDB 的运维操作规范，用户需掌握数据文件备份和数据安全管理的方法。 UrnaDB 服务端所提供的 HTTP API 设计介绍，以及各项数据类型命名空间的使用案例。 " /><link rel="canonical" href="http://localhost:1313/guide/" itemprop="url" />
 
 <meta property="og:title" content="使用指南" />
 <meta property="og:description" content="" />
@@ -18,11 +20,15 @@
 <meta property="og:url" content="http://localhost:1313/guide/" />
 
   <meta itemprop="name" content="使用指南">
-  <meta itemprop="description" content="用户使用指南涵盖 UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化方法。 运行优化需通过修改配置文件进行，用户需熟悉各项配置参数。 数据库运行时会生成数据文件，这些文件存储关键业务数据。 为确保数据安全，用户需掌握数据文件的管理方法，并遵循定期备份的操作规范。">
-  <meta itemprop="wordCount" content="6">
+  <meta itemprop="description" content="用户使用指南部分涵盖了 UrnaDB 的项目代码结构介绍、数据库程序架构设计、以及服务的部署与优化方法，如果你需要深入了解和使用 UrnaDB 服务端软件，本章节文档内容可以帮用户快速了解和使用 UrnaDB 软件。
+使用指南涵盖如下：
+UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化的方法。 UrnaDB 的各项配置参数作用说明，配置文件运行时优化使用的案例。 UrnaDB 运行时生成的数据文件，这些数据文件相关的作用介绍。 UrnaDB 的运维操作规范，用户需掌握数据文件备份和数据安全管理的方法。 UrnaDB 服务端所提供的 HTTP API 设计介绍，以及各项数据类型命名空间的使用案例。">
+  <meta itemprop="wordCount" content="21">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="使用指南">
-  <meta name="twitter:description" content="用户使用指南涵盖 UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化方法。 运行优化需通过修改配置文件进行，用户需熟悉各项配置参数。 数据库运行时会生成数据文件，这些文件存储关键业务数据。 为确保数据安全，用户需掌握数据文件的管理方法，并遵循定期备份的操作规范。">
+  <meta name="twitter:description" content="用户使用指南部分涵盖了 UrnaDB 的项目代码结构介绍、数据库程序架构设计、以及服务的部署与优化方法，如果你需要深入了解和使用 UrnaDB 服务端软件，本章节文档内容可以帮用户快速了解和使用 UrnaDB 软件。
+使用指南涵盖如下：
+UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化的方法。 UrnaDB 的各项配置参数作用说明，配置文件运行时优化使用的案例。 UrnaDB 运行时生成的数据文件，这些数据文件相关的作用介绍。 UrnaDB 的运维操作规范，用户需掌握数据文件备份和数据安全管理的方法。 UrnaDB 服务端所提供的 HTTP API 设计介绍，以及各项数据类型命名空间的使用案例。">
 
     <link href="/css/compiled/main.css" rel="stylesheet" />
 
@@ -240,6 +246,32 @@
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/changelog/"
+    
+  >更新日志
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/changelog/sdk-update/"
+    
+  >SDK 日志
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/changelog/db-server/"
+    
+  >开发日志
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/community/"
     
   >开发者社区
@@ -350,6 +382,32 @@
           <li class=""><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/changelog/"
+    
+  >更新日志
+        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
+    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
+        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/changelog/sdk-update/"
+    
+  >SDK 日志
+    </a>
+              
+            </li><li class="hx-flex hx-flex-col "><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
+    href="/changelog/db-server/"
+    
+  >开发日志
+    </a>
+              
+            </li></ul>
+      </div></li>
+          <li class=""><a
+    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/community/"
     
   >开发者社区
@@ -392,11 +450,14 @@
 
         <div class="content">
           <h1>使用指南</h1>
-          <ul>
-<li>用户使用指南涵盖 UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化方法。</li>
-<li>运行优化需通过修改配置文件进行，用户需熟悉各项配置参数。</li>
-<li>数据库运行时会生成数据文件，这些文件存储关键业务数据。</li>
-<li>为确保数据安全，用户需掌握数据文件的管理方法，并遵循定期备份的操作规范。</li>
+          <p>用户使用指南部分涵盖了 UrnaDB 的项目代码结构介绍、数据库程序架构设计、以及服务的部署与优化方法，如果你需要深入了解和使用 UrnaDB 服务端软件，本章节文档内容可以帮用户快速了解和使用 UrnaDB 软件。</p>
+<p><strong>使用指南涵盖如下：</strong></p>
+<ul>
+<li>UrnaDB 的代码结构、数据库架构设计，以及服务的部署与优化的方法。</li>
+<li>UrnaDB 的各项配置参数作用说明，配置文件运行时优化使用的案例。</li>
+<li>UrnaDB 运行时生成的数据文件，这些数据文件相关的作用介绍。</li>
+<li>UrnaDB 的运维操作规范，用户需掌握数据文件备份和数据安全管理的方法。</li>
+<li>UrnaDB 服务端所提供的 HTTP API 设计介绍，以及各项数据类型命名空间的使用案例。</li>
 </ul>
 
         </div>

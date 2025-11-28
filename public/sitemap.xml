@@ -7,19 +7,25 @@
   </url><url>
     <loc>http://localhost:1313/sdk/java-sdk/</loc>
   </url><url>
+    <loc>http://localhost:1313/changelog/sdk-update/</loc>
+  </url><url>
     <loc>http://localhost:1313/guide/architecture/</loc>
   </url><url>
     <loc>http://localhost:1313/sdk/javascript-sdk/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/</loc>
   </url><url>
+    <loc>http://localhost:1313/changelog/db-server/</loc>
+  </url><url>
     <loc>http://localhost:1313/guide/deployment/</loc>
   </url><url>
     <loc>http://localhost:1313/sdk/</loc>
   </url><url>
-    <loc>http://localhost:1313/community/</loc>
+    <loc>http://localhost:1313/changelog/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/configure/</loc>
+  </url><url>
+    <loc>http://localhost:1313/community/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/layout/</loc>
   </url><url>
