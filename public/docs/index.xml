@@ -1471,7 +1471,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 数据库启动默认的数据恢复顺序是： index.db 再 *.ids 最后才是 *.db 。在某些极端情况下会出现检查点和索引文件同时损毁情况，在这种情况下如果从这些半损毁文件中恢复数据，可能导致记录不一致甚至造成二次损坏。这时更安全可靠的做法是使用 UrnaDB 所提供的 &lt;strong&gt;fix-dbfs&lt;/strong&gt; 工具在启动之前对数据目录中文件进行损坏数据整理，经过 &lt;strong&gt;fix-dbfs&lt;/strong&gt; 修复后的数据文件才被视为安全且一致的有效数据文件，再让 UrnaDB 正常加载启动即可恢复宕机之前的数据状态。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 数据库启动默认的数据恢复顺序是： index.db 再 *.ids 最后才是 *.db 数据文件。在某些极端情况下会出现检查点和索引文件同时损毁情况，在这种情况下如果从这些半损毁文件中恢复数据，可能导致记录不一致甚至造成二次损坏。这时更安全可靠的做法是使用 UrnaDB 所提供的 &lt;strong&gt;fix-dbfs&lt;/strong&gt; 工具在启动之前对数据目录中文件进行损坏数据整理，经过 &lt;strong&gt;fix-dbfs&lt;/strong&gt; 修复后的数据文件才被视为安全且一致的有效数据文件，再让 UrnaDB 正常加载启动即可恢复宕机之前的数据状态。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
