@@ -28,12 +28,9 @@ curl -X PUT http://192.168.31.221:2668/tables/users \
 ```json
 {
     "status": "success",
-    "data": {
-        "message": "table created successfully."
-    }
+    "message": "table created successfully"
 }
 ```
-
 
 > [!IMPORTANT]
 > 在创建命名空间的时候可以指定该命名空间的生命周期，生命周期是指该命名空间创建之后能存活多久，以秒为单位，当到达期限后 UrnaDB 的垃圾回收器会主动删除该命名空间释放其占用的存储空间。
@@ -42,12 +39,12 @@ curl -X PUT http://192.168.31.221:2668/tables/users \
 例如在创建 **users** 时通过 `ttl` 字段来指定它的生命周期为 1800 秒，在 1800 秒之后会被垃圾回收器主动删除，代码如下：
 
 ```bash
-curl -X PUT http://192.168.31.221:2668/tables/users \
+curl -X PUT "http://192.168.31.221:2668/tables/users" \
   -H "Auth-Token: 73suyb7iNeZsmqhvaxgEn7Ug2" \
--H "Content-Type: application/json" \
--d '{
-  "ttl": 1800
-}'
+  -H "Content-Type: application/json" \
+  -d '{
+    "ttl": 1800
+  }'
 ```
 
 下面是 Table 命名空间中的 Rows 结构的完整 JSON 抽象，Table 命名空间中的每条数据记录的 schema 布局是不同的，其中的 `t_id` 为数据库主动分配的自增主键：
@@ -84,27 +81,39 @@ curl -X PUT http://192.168.31.221:2668/tables/users \
 向 **users** 命名空间中插入一条数据记录，这条操作类似于关系数据库 SQL 中的 `INSERT ... INTO ... VALUES ...` 语句，代码如下：
 
 ```bash
-curl -X POST http://192.168.31.221:2668/tables/users/rows \ 
-  -H "Auth-Token: ex224JWgK5H6sKhpNk5ZbWKzM" \
+curl -X POST "http://192.168.101.252:2668/tables/users/rows" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
   -d '{
-  "rows": {
-    "name": "Leon Ding",
-    "age": 25,
-    "active": true,
-    "score": 95.5,
-    "tags": ["admin", "user"],
-    "meta": {
-      "editor": "system
+    "rows": {
+      "name": "Leon Ding",
+      "age": 25,
+      "active": true,
+      "score": 95.5,
+      "tags": ["admin", "user"],
+      "meta": {
+        "editor": "system"
+      }
     }
-  }
-}'
+  }'
+```
+
+上面命令会执行成功之后会返回对应记录的主键 `t_id` 字段，HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "message": "table rows insert successfully",
+    "data": {
+        "t_id": 1
+    }
+}
 ```
 
 从 **users** 的命名空间中查询所有的数据记录，类似于关系数据库 SQL 中的 `SELECT * FROM ...` 语句，也类似于其他文档型数据库 MongoDB 中的 `findAll` 操作，代码如下：
 
 ```bash
-curl -X GET http://192.168.31.221:2668/tables/users  \
+curl -X GET "http://192.168.31.221:2668/tables/users" \
   -H "Auth-Token: 73suyb7iNeZsmqhvaxgEn7Ug2"
 ```
 
@@ -113,21 +122,20 @@ curl -X GET http://192.168.31.221:2668/tables/users  \
 ```json
 {
     "status": "success",
+    "message": "table queried successfully",
     "data": {
-        "table": {
-            "1": {
-                "active": true,
-                "age": 25,
-                "meta": {
-                    "editor": "system"
-                },
-                "name": "Leon Ding",
-                "score": 95.5,
-                "tags": [
-                    "admin",
-                    "user"
-                ]
-            }
+        "1": {
+            "active": true,
+            "age": 25,
+            "meta": {
+                "editor": "system"
+            },
+            "name": "Leon Ding",
+            "score": 95.5,
+            "tags": [
+                "admin",
+                "user"
+            ]
         }
     }
 }
@@ -136,14 +144,14 @@ curl -X GET http://192.168.31.221:2668/tables/users  \
 从名为 **users** 的命名空间中查询一条记录，类似于关系数据库 SQL 中的 `SELECT * FROM ... WHERE ...` 的语句，查询条件是表中 **name** 字段的值为 **Leon Ding** 的记录，代码如下：
 
 ```bash
- curl -X GET http://192.168.31.221:2668/tables/users/rows  \
+curl -X GET "http://192.168.31.221:2668/tables/users/rows" \
   -H "Auth-Token: ex224JWgK5H6sKhpNk5ZbWKzM" \
   -H "Content-Type: application/json" \
   -d '{
-  "wheres": {
-    "name": "Leon Ding"
-  }
-}'
+    "wheres": {
+      "name": "Leon Ding"
+    }
+  }'
 ```
 
 如果上面操作执行成功会返回该命名空间中匹配到的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
@@ -151,45 +159,44 @@ curl -X GET http://192.168.31.221:2668/tables/users  \
 ```json
 {
     "status": "success",
-    "data": {
-        "rows": [
-            {
-                "active": true,
-                "age": 25,
-                "meta": {
-                    "editor": "system"
-                },
-                "name": "Leon Ding",
-                "score": 95.5,
-                "tags": [
-                    "admin",
-                    "user"
-                ]
+    "message": "table queried rows successfully",
+    "data": [
+        {
+            "active": true,
+            "age": 25,
+            "meta": {
+                "editor": "system"
             },
-        ]
-    }
+            "name": "Leon Ding",
+            "score": 95.5,
+            "tags": [
+                "admin",
+                "user"
+            ]
+        }
+    ]
 }
 ```
 
 根据指定的筛选条件，对 **users** 命名空间中的数据记录进行部分字段的内容更新操作，这个操作类似于关系数据库 SQL 中的 `UPDATE ... SET ... WHERE ... `语句，代码示例如下：
 
 ```bash
-curl -X PATCH http://192.168.31.221:2668/tables/users  \
+curl -X PATCH "http://192.168.31.221:2668/tables/users" \
   -H "Auth-Token: ex224JWgK5H6sKhpNk5ZbWKzM" \
   -H "Content-Type: application/json" \
   -d '{
-  "wheres": {
-    "name": "Leon Ding",
-    "active": true
-  },
-  "sets": {
-    "age": 26,
-    "name": "Leon",
-    "meta": {
-      "editor": "system"
+    "wheres": {
+      "name": "Leon Ding",
+      "active": true
+    },
+    "sets": {
+      "age": 26,
+      "name": "Leon",
+      "meta": {
+        "editor": "system"
+      }
     }
-  }
-}'
+  }'
 ```
 
 如果上面操作执行成功，会修改该命名空间中所匹配到数据记录中的值，HTTP 会响应返回 JSON 格式的内容如下：
@@ -197,23 +204,21 @@ curl -X PATCH http://192.168.31.221:2668/tables/users  \
 ```json
 {
     "status": "success",
-    "data": {
-        "message": "table rows updated successfully."
-    }
+    "message": "table rows patched successfully"
 }
 ```
 
 对 **users** 命名空间中已有的数据记录执行条件删除操作，类似于关系数据库 SQL 中的 `DELETE FROM ... WHERE ...` 的语句，代码如下：
 
 ```bash
-curl -X DELETE  http://192.168.31.221:2668/tables/users/rows  \ 
+curl -X DELETE "http://192.168.31.221:2668/tables/users/rows" \
   -H "Auth-Token: NjqwUvtNP6XQGeABhgwXIDcNw" \
   -H "Content-Type: application/json" \
--d '{
-  "wheres": {
-    "name": "Leon Ding"
-  }
-}'
+  -d '{
+    "wheres": {
+      "name": "Leon Ding"
+    }
+  }'
 ```
 
 如果上面操作执行成功，会删除该命名空间中所匹配到数据记录，HTTP 会响应返回 JSON 格式的内容如下：
@@ -221,16 +226,14 @@ curl -X DELETE  http://192.168.31.221:2668/tables/users/rows  \
 ```json
 {
     "status": "success",
-    "data": {
-        "message": "table rows remove successfully."
-    }
+    "message": "table rows remove successfully"
 }
 ```
 
 下面操作会删除 **users** 命名空间，这意味着 **users** 命名空间中存储的数据记录都会被删除，类似于关系数据库 SQL 中的 `DROP TABLE ...` 语句，代码如下：
 
 ```bash
-curl -X DELETE  http://192.168.31.221:2668/tables/users \
+curl -X DELETE "http://192.168.31.221:2668/tables/users" \
   -H "Auth-Token: 43CmqMY6r7jndrjUC7cxyJ1SV"
 ```
 
@@ -239,9 +242,7 @@ curl -X DELETE  http://192.168.31.221:2668/tables/users \
 ```json
 {
     "status": "success",
-    "data": {
-        "message": "table deleted successfully."
-    }
+    "message": "table deleted successfully"
 }
 ```
 
@@ -257,9 +258,9 @@ curl -X DELETE  http://192.168.31.221:2668/tables/users \
 创建一条名为 **142857** 的 Record 命名空间，并设置所需存储的数据记录值。例如一张帖子的抽象，操作示例如下：
 
 ```bash
-curl -X PUT http://192.168.31.221:2668/records/142857 \
+curl -X PUT "http://192.168.101.252:2668/records/142857" \
   -H "Content-Type: application/json" \
-  -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -d '{
     "record": {
       "title": "Hello UrnaDB: My First Post",
@@ -272,6 +273,15 @@ curl -X PUT http://192.168.31.221:2668/records/142857 \
     },
     "ttl": 3600
   }'
+```
+
+上面命令执行成功之后 HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "status": "success",
+    "message": "record created successfully"
+}
 ```
 
 > [!IMPORTANT]
@@ -289,19 +299,18 @@ curl -X GET http://192.168.31.221:2668/records/142857 \
 ```json
 {
     "status": "success",
+    "message": "record queried successfully",
     "data": {
-        "record": {
-            "author": "Leon Ding",
-            "category": "tech",
-            "content": "This is a forum post stored inside UrnaDB.\n\n",
-            "published": true,
-            "tags": [
-                "nosql",
-                "database",
-            ],
-            "title": "Hello UrnaDB: My First Post",
-            "views": 123
-        }
+        "author": "Leon Ding",
+        "category": "tech",
+        "content": "This is a forum post stored inside UrnaDB.\n\n",
+        "published": true,
+        "tags": [
+            "nosql",
+            "database"
+        ],
+        "title": "Hello UrnaDB: My First Post",
+        "views": 123
     }
 }
 ```
@@ -309,8 +318,8 @@ curl -X GET http://192.168.31.221:2668/records/142857 \
 对已存在的 **142857** 数据记录查询某个 `column` 操作，类似于关系数据库 SQL 中的 `SELECT column FROM ...` 语句，例如搜索查询操作示例：
 
 ```bash
-curl -X POST http://192.168.31.221:2668/records/142857 \
-  -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra" \
+curl -X POST "http://192.168.101.252:2668/records/142857" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
   -d '{
     "column": "tags"
@@ -321,20 +330,22 @@ curl -X POST http://192.168.31.221:2668/records/142857 \
 
 ```json
 {
-  "status": "success",
-  "data": {
-    "column": [
-      ["nosql", "database"]
+    "status": "success",
+    "message": "search completed successfully",
+    "data": [
+        [
+            "nosql",
+            "database"
+        ]
     ]
-  }
 }
 ```
 
 对已经存在的 **142857** 记录执行删除操作，这个对应着关系数据库 SQL 中的 `DROP TABLE ...` 语句，代码如下：
 
 ```bash
-curl -X DELETE  http://192.168.31.221:2668/records/142857 \
-  -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra"
+curl -X DELETE "http://192.168.101.252:2668/records/142857" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI"
 ```
 
 如果上面请求执行成功会删除对应的 **142857** 中所存储的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
@@ -342,9 +353,7 @@ curl -X DELETE  http://192.168.31.221:2668/records/142857 \
 ```json
 {
     "status": "success",
-    "data": {
-        "message": "record deleted successfully."
-    }
+    "message": "record deleted successfully"
 }
 ```
 
@@ -357,10 +366,12 @@ curl -X DELETE  http://192.168.31.221:2668/records/142857 \
 在 Variant 命名空间中，具体的数据类型由首次写入的值决定，并在后续操作中保持一致，例如创建一个名为 **views** 的 Variant 命名空间，它的值是整数 Integer 基础数据类型，示例如下：
 
 ```bash
-curl -X PUT http://192.168.31.221:2668/variants/views \
-  -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t" \
+curl -X PUT "http://192.168.101.252:2668/variants/views" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
-  -d '{"variant": 0 }'
+  -d '{
+    "variant": 0
+  }'
 ```
 
 如果上面命令执行成功会返回 **views** 命名空间初始值，HTTP 会响应返回 JSON 格式的内容如下：
@@ -368,6 +379,7 @@ curl -X PUT http://192.168.31.221:2668/variants/views \
 ```json
 {
     "status": "success",
+    "message": "variant created successfully",
     "data": {
         "variant": 0
     }
@@ -380,10 +392,12 @@ curl -X PUT http://192.168.31.221:2668/variants/views \
 当 **views** 创建并初始化成功后，即可对其数值执行类似 Redis 中的 INCR 自增操作，示例如下：
 
 ```bash
-curl -X POST http://192.168.31.221:2668/variants/views \
-  -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t" \
+curl -X POST "http://192.168.101.252:2668/variants/views" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
-  -d '{"delta": 1 }'
+  -d '{
+    "delta": 1
+  }'
 ```
 
 如果 INCR 自增操作命令执行成功，HTTP 会响应返回 JSON 格式的内容如下：
@@ -391,6 +405,7 @@ curl -X POST http://192.168.31.221:2668/variants/views \
 ```json
 {
     "status": "success",
+    "message": "variant incremented successfully",
     "data": {
         "variant": 1
     }
@@ -404,8 +419,8 @@ curl -X POST http://192.168.31.221:2668/variants/views \
 获取名为 **views** 的命名空间中的值，示例如下：
 
 ```bash
-curl -X GET http://192.168.31.221:2668/variants/views \
-  -H "Auth-Token: FWxQak2rdxWnw45AlGn7R955t"
+curl -X GET "http://192.168.101.252:2668/variants/views" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI"
 ```
 
 HTTP 会响应返回 JSON 格式的内容如下：
@@ -413,6 +428,7 @@ HTTP 会响应返回 JSON 格式的内容如下：
 ```json
 {
     "status": "success",
+    "message": "variant queried successfully",
     "data": {
         "variant": 1
     }
@@ -437,10 +453,12 @@ Lock 提供的它提供了以下核心功能：
 在 Lock 命名空间中创建一个名为 **orders** 的分布式租期锁，锁的名称通常对应需要保护的资源标识符，这样可以通过锁名直接关联到具体的业务资源。通过 **orders** 这个锁名，可以方便地查询锁的当前状态、持有者信息以及剩余租期时间，实现对订单相关操作的分布式同步控制，示例如下：
 
 ```bash
-curl -X PUT http://192.168.101.252:2668/locks/orders -v \
-  -H "Auth-Token: FUCHLQlqEK3kZ5HfKt6fhgRF1" \
+curl -X PUT "http://192.168.101.252:2668/locks/orders" -v \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
-  -d '{"ttl": 30 }'
+  -d '{
+    "ttl": 30
+  }'
 ```
 
 如果上锁成功会返回对应锁的 Token 凭证，这个 Token 是方便于客户端续租和解锁使用的，HTTP 会响应返回 JSON 格式的内容如下：
@@ -448,8 +466,9 @@ curl -X PUT http://192.168.101.252:2668/locks/orders -v \
 ```json
 {
     "status": "success",
+    "message": "lock created successfully",
     "data": {
-        "token": "01KAXPB8D4MNMG731BBZ8MAV28"
+        "token": "01KBCNZY9C5XM8YDT835SHW4GN"
     }
 }
 ```
@@ -457,10 +476,12 @@ curl -X PUT http://192.168.101.252:2668/locks/orders -v \
 当上锁成功后客户端可以安全地执行资源相关的业务操作，在有效租期内，客户端对资源的独占访问是受保护的。但在实际业务场景中客户端的操作时间可能超出预期的锁租期，为了防止锁自动过期导致其他客户端意外获取锁，当客户端需要延长持锁时间时，应主动对锁进行续租操作，确保在业务完成前始终保持对资源的独占控制，示例如下：
 
 ```bash
-curl -X PATCH http://192.168.101.252:2668/locks/orders  \
-  -H "Auth-Token: FUCHLQlqEK3kZ5HfKt6fhgRF1" \
+curl -X PATCH "http://192.168.101.252:2668/locks/orders" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
-  -d '{ "token": "01KAXPB8D4MNMG731BBZ8MAV28" }'
+  -d '{
+    "token": "01KAXPB8D4MNMG731BBZ8MAV28"
+  }'
 ```
 
 
@@ -469,8 +490,9 @@ curl -X PATCH http://192.168.101.252:2668/locks/orders  \
 ```json
 {
     "status": "success",
+    "message": "lease acquired successfully",
     "data": {
-        "token": "01KAXQH79VG3JPT4DJFV74EG97"
+        "token": "01KBCP1V7GF9CF27PCJDEAT961"
     }
 }
 ```
@@ -478,11 +500,11 @@ curl -X PATCH http://192.168.101.252:2668/locks/orders  \
 客户端对持有的锁进行提前释放和解锁，解锁时同样需要带有锁对应的 Token 凭证，示例如下：
 
 ```bash
-curl -X DELETE http://192.168.101.252:2668/locks/orders  \
-  -H "Auth-Token: FUCHLQlqEK3kZ5HfKt6fhgRF1" \
+curl -X DELETE "http://192.168.101.252:2668/locks/orders" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
   -d '{
-    "token": "01KAXQH79VG3JPT4DJFV74EG97"
+    "token": "01KBCP1V7GF9CF27PCJDEAT961"
   }'
 ```
 
@@ -491,7 +513,7 @@ curl -X DELETE http://192.168.101.252:2668/locks/orders  \
 ```json
 {
     "status": "success",
-    "data": "deleted lock successfully."
+    "message": "lock deleted successfully"
 }
 ```
 
