@@ -537,10 +537,10 @@ curl -X DELETE "http://192.168.101.252:2668/locks/orders" \
 > 除了基础的命名空间数据操作接口之外，UrnaDB 还提供方便指标监控 HTTP API 接口，客户端可以通过此接口来获取服务端健康状态数据信息。
 
 
-使用 **GET** 类型的 HTTP 请求发送至 UrnaDB 的 HTTP API 根端点，即可返回具体的指标监控 JSON 数据信息：
+使用 **GET** 类型的 HTTP 请求发送至 UrnaDB 的 `https://.../health` 端点 API，即可返回具体的指标监控 JSON 数据信息：
 
 ```bash
-curl -X GET "http://192.168.101.252:2668/" \
+curl -X GET "http://192.168.101.252:2668/health" \
   -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json"
 ```
@@ -549,15 +549,19 @@ HTTP 会响应返回 JSON 格式的内容如下：
 
 ```json
 {
-    "key_count": 1,
-    "gc_state": 0,
-    "disk_free": "28.09GB",
-    "disk_used": "84.62GB",
-    "disk_total": "112.71GB",
-    "mem_free": "1.50GB",
-    "mem_total": "8.00GB",
-    "disk_percent": "75.08%",
-    "space_total": "0.00GB"
+    "status": "success",
+    "message": "server is healthy",
+    "data": {
+        "key_count": 1,
+        "gc_state": 0,
+        "disk_free": "27.44GB",
+        "disk_used": "85.27GB",
+        "disk_total": "112.71GB",
+        "mem_free": "1.95GB",
+        "mem_total": "8.00GB",
+        "disk_percent": "75.65%",
+        "space_total": "0.00GB"
+    }
 }
 ```
 
