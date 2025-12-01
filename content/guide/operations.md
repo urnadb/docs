@@ -10,6 +10,17 @@ UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Vari
 > [!IMPORTANT]
 > 客户端与 UrnaDB 服务端之间的数据交互通过 **PQL** 协议，PQL（Patch Query Language）是一种基于 HTTP + JSON 的数据操作与查询协议，为客户端与服务器之间的结构化数据交换提供了统一、简单且可扩展的接口，任何能够发起 HTTP 请求的软件都可以作为 PQL 客户端；以下内容将介绍如何使用 PQL API 与服务器进行数据交换示例。
 
+**PQL** 协议统一返回的数据格式为 JSON 格式，包括 3 个字段 **status** 和 **message** 、**data** 字段，其中 **status** 字段是一个枚举类型，值可以 **success | error** 其中一种，客户端可以根据此字段判断事物操作是否执行成功；**message** 的值为给人类阅读的消息，**data** 字段的值是一个 JSON Object 对象，可以是 JSON 对象也可以是一个数组类型。
+
+```json
+{
+    "status": "success",
+    "message": "server output text message",
+    "data": ...
+}
+```
+
+
 ## 📈 Table 命名空间
 
 > [!TIP]
@@ -519,3 +530,34 @@ curl -X DELETE "http://192.168.101.252:2668/locks/orders" \
 
 > [!WARNING]
 > 本篇文档将帮助开发者理解 UrnaDB 支持的数据结构及其对应的 HTTP API 设计，借助这些统一的接口，开发者可以基于任意编程语言实现自己的 SDK 或进一步扩展 UrnaDB 的能力。
+
+
+## 🌡️ 指标监控
+> [!TIP]
+> 除了基础的命名空间数据操作接口之外，UrnaDB 还提供方便指标监控 HTTP API 接口，客户端可以通过此接口来获取服务端健康状态数据信息。
+
+
+使用 **GET** 类型的 HTTP 请求发送至 UrnaDB 的 HTTP API 根端点，即可返回具体的指标监控 JSON 数据信息：
+
+```bash
+curl -X GET "http://192.168.101.252:2668/" \
+  -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
+  -H "Content-Type: application/json"
+```
+
+HTTP 会响应返回 JSON 格式的内容如下：
+
+```json
+{
+    "key_count": 1,
+    "gc_state": 0,
+    "disk_free": "28.09GB",
+    "disk_used": "84.62GB",
+    "disk_total": "112.71GB",
+    "mem_free": "1.50GB",
+    "mem_total": "8.00GB",
+    "disk_percent": "75.08%",
+    "space_total": "0.00GB"
+}
+```
+
