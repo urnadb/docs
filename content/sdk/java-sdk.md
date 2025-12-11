@@ -6,7 +6,7 @@ next: sdk/javascript-sdk
 weight: 1
 ---
 
-Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先提供对 Java 的支持，UrnaDB 的 Java SDK 为开发者提供了简洁高效的数据库操作接口，使你能够轻松将 UrnaDB 集成到 Java 应用程序中。通过 Java SDK 可以充分利用 Java 语言的静态类型系统和丰富的生态工具链，实现类型安全的数据操作和完善的 IDE 智能提示支持。
+Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先提供对 Java 的支持，UrnaDB 的 Java SDK 为开发者提供了简洁高效的数据库操作接口，使开发者用户能够轻松将 UrnaDB 集成到 Java 应用程序中。通过 Java SDK 可以充分利用 Java 语言的静态类型系统和丰富的生态工具链，实现类型安全的数据操作和完善的 IDE 智能提示支持。
 
 ## SDK 功能
 
