@@ -17,7 +17,7 @@ Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先�
 ## 快速开始
 
 > [!IMPORTANT]
-> UrnaDB 的 Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，并且 SDK 要求兼容 JavaSE 17 或更高版本。如果用户使用其他构建方式，可以直接下载对应版本的 SDK Jar 包，手动管理依赖和项目构建。使用的 Maven 构建的项目只需要在你的 Maven 项目的 `pom.xml` 文件中添加如下 UrnaDB 的 Java SDK 依赖坐标 （Coordinate） 信息，在添加依赖时请注意 SDK 版本与 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。
+> UrnaDB 的 Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，并且 SDK 要求兼容 JavaSE 17 或更高版本。如果用户使用其他构建方式，可以直接下载对应版本的 SDK 的 Jar 包，手动管理依赖和项目构建。使用 Maven 构建的项目只需要在你的 Maven 项目的 `pom.xml` 文件中添加如下 UrnaDB 的 Java SDK 依赖坐标 （Coordinate） 信息，在添加依赖时请注意 SDK 版本与 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。
 
 ```xml
 <dependency>
