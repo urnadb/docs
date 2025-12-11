@@ -24,7 +24,7 @@ Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，用户可以�
 
 ### Maven 依赖
 
-在你的工程项目中的 `pom.xml` 文件中添加如下依赖：
+在你的 Maven 项目的 `pom.xml` 文件中添加如下 UrnaDB 的 Java SDK 依赖坐标（Coordinate） 信息，在添加依赖时请注意 SDK 版本与 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。
 
 ```xml
 <dependency>
