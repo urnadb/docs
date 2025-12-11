@@ -28,7 +28,7 @@
 &lt;h2&gt;SDK 功能&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;sdk-功能&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#sdk-%e5%8a%9f%e8%83%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;类型安全&lt;/strong&gt; 利用 Java 强类型系统，在编译期发现潜在错误，提供完整的类型检查和 IDE 智能提示。SDK 通过泛型和注解机制确保数据类型的正确性，避免运行时类型转换异常，让开发者在编写代码时就能发现潜在问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;类型安全&lt;/strong&gt; 利用 Java 强类型系统，在编译期发现潜在错误，提供完整的类型检查和 IDE 智能提示，SDK 通过泛型和注解机制确保数据类型的正确性，避免运行时类型转换异常，让开发者在编写代码时就能发现潜在问题。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;简单易用&lt;/strong&gt; 提供直观的 API 设计，无需学习复杂的 SQL 语法，通过方法链式调用完成数据操作，使用 Lambda 函数式编程风格进行数据交互操作，采用 Builder 模式和流式 API 设计，让数据库操作代码更加简洁易读，降低学习成本和维护难度。&lt;/p&gt;
