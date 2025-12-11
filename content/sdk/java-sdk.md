@@ -27,10 +27,5 @@ Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先�
 </dependency>
 ```
 
-### Gradle 依赖
-
-```gradle
-implementation 'io.github.urnadb:urnadb-java-sdk:1.0.0'
-```
 
 敬请期待更多详细内容 🚚 ！
