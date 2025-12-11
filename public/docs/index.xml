@@ -26,27 +26,20 @@
         
         &lt;p&gt;Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先提供对 Java 的支持，UrnaDB 的 Java SDK 为开发者提供了简洁高效的数据库操作接口，使你能够轻松将 UrnaDB 集成到 Java 应用程序中。通过 Java SDK 可以充分利用 Java 语言的静态类型系统和丰富的生态工具链，实现类型安全的数据操作和完善的 IDE 智能提示支持。&lt;/p&gt;
 &lt;h2&gt;SDK 功能&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;sdk-功能&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#sdk-%e5%8a%9f%e8%83%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+    &lt;a href=&#34;#sdk-%e5%8a%9f%e8%83%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;类型安全&lt;/strong&gt; 利用 Java 强类型系统，在编译期发现潜在错误，提供完整的类型检查和 IDE 智能提示。SDK 通过泛型和注解机制确保数据类型的正确性，避免运行时类型转换异常，让开发者在编写代码时就能发现潜在问题。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;简单易用&lt;/strong&gt; 提供直观的 API 设计，无需学习复杂的 SQL 语法，通过方法链式调用完成数据操作，使用 Lambda 函数式编程风格进行数据交互操作，采用 Builder 模式和流式 API 设计，让数据库操作代码更加简洁易读，降低学习成本和维护难度。&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;高性能&lt;/strong&gt; 基于 HTTP 连接池和异步处理机制，支持高并发场景下的数据库访问，内置智能连接管理、请求批处理和响应缓存机制，在保证数据一致性的同时最大化吞吐量和响应速度。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;完整功能&lt;/strong&gt; 支持 UrnaDB 的所有数据类型和操作，包括 Table、Record、Variant、Lock 等命名空间，提供事务控制、批量操作、条件查询等高级功能，满足复杂业务场景的数据处理需求。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
 &lt;h2&gt;快速开始&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;快速开始&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;UrnaDB 的 Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，并且 SDK 要求兼容 JavaSE 17 或更高版本。如果用户使用其他方式来构建和管理项目依赖，则可以直接下载对应 SDK 版本的 Jar 包，手动来管理 Jar 依赖和项目构建。&lt;/p&gt;
-&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200&#34;&gt;
+    &lt;a href=&#34;#%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200&#34;&gt;
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;添加 Maven 依赖，在你的 Maven 项目的 &lt;code&gt;pom.xml&lt;/code&gt; 文件中添加如下 UrnaDB 的 Java SDK 依赖坐标（Coordinate）信息，在添加依赖时请注意 SDK 版本与 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 的 Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，并且 SDK 要求兼容 JavaSE 17 或更高版本。如果用户使用其他构建方式，可以直接下载对应版本的 SDK Jar 包，手动管理依赖和项目构建。使用的 Maven 构建的项目只需要在你的 Maven 项目的 &lt;code&gt;pom.xml&lt;/code&gt; 文件中添加如下 UrnaDB 的 Java SDK 依赖坐标 （Coordinate） 信息，在添加依赖时请注意 SDK 版本与 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
