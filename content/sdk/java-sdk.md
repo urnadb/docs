@@ -6,7 +6,7 @@ next: sdk/javascript-sdk
 weight: 1
 ---
 
-Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先提供对 Java 的支持。UrnaDB 的 Java SDK 为开发者提供了简洁高效的数据库操作接口，使您能够轻松将 UrnaDB 集成到 Java 应用程序中。通过 Java SDK 可以充分利用 Java 语言的静态类型系统和丰富的生态工具链，实现类型安全的数据操作和完善的 IDE 智能提示支持。
+Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先提供对 Java 的支持，UrnaDB 的 Java SDK 为开发者提供了简洁高效的数据库操作接口，使您能够轻松将 UrnaDB 集成到 Java 应用程序中。通过 Java SDK 可以充分利用 Java 语言的静态类型系统和丰富的生态工具链，实现类型安全的数据操作和完善的 IDE 智能提示支持。
 
 ## SDK 功能
 
@@ -20,7 +20,7 @@ Java 是当今最流行、使用最广泛的编程语言，因此 UrnaDB 首先�
 
 ## 快速开始
 
-Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，用户可以根据项目需要选择合适的依赖管理方式，SDK 要求兼容 JavaSE 17 或更高版本。
+UrnaDB 的 Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，并且 SDK 要求兼容 JavaSE 17 或更高版本。如果用户使用其他方式来构建和管理项目依赖，则可以直接下载对应 SDK 版本的 Jar 包，手动来管理 Jar 依赖和项目构建。
 
 > [!IMPORTANT]
 > 添加 Maven 依赖，在你的 Maven 项目的 `pom.xml` 文件中添加如下 UrnaDB 的 Java SDK 依赖坐标（Coordinate）信息，在添加依赖时请注意 SDK 版本与 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。
