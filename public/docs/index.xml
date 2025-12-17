@@ -35,8 +35,8 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;🚀 快速开始&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-快速开始&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200&#34;&gt;
-  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
+    &lt;a href=&#34;#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z&#34;/&gt;&lt;/svg&gt;Tip&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 的 Java SDK 目前仅支持 Maven 项目依赖包构建管理工具，并且 SDK 要求兼容 JavaSE 17 或更高版本。如果用户使用其他构建方式，可以直接下载对应版本的 SDK 的 Jar 包，手动管理依赖和项目构建。在 Maven 项目中只需在 &lt;code&gt;pom.xml&lt;/code&gt; 中添加对应版本的 UrnaDB Java SDK 依赖坐标信息，即可获取到 Java SDK 依赖的 Jar 包文件。&lt;/p&gt;&lt;/div&gt;
@@ -59,11 +59,9 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;在添加依赖时请注意 SDK 版本与使用的 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;在添加依赖时请注意 SDK 版本与使用的 UrnaDB 数据库版本的匹配，以确保两者具有良好的兼容性和稳定性。&lt;/p&gt;
 &lt;h2&gt;📈 Table 命名空间&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-table-命名空间&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#-table-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;相较于基于 HTTP 协议的数据交互方式，官方更推荐使用 SDK 来进行操作的，例如使用 Java 语言的 SDK 可以使用 &lt;strong&gt;Lambda&lt;/strong&gt; 函数式编程风格进行数据交互操作。下面是创建一张名为 &lt;strong&gt;users&lt;/strong&gt; 表并且向 &lt;strong&gt;users&lt;/strong&gt; 表中插入一条数据记录，这条操作类似于关系数据库 SQL 中的 &lt;strong&gt;INSERT &amp;hellip; INTO &amp;hellip; VALUES &amp;hellip;&lt;/strong&gt; 语句，代码如下：&lt;/p&gt;
+    &lt;a href=&#34;#-table-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;相较于基于 HTTP 协议的数据交互方式，官方更推荐使用 SDK 来进行操作的，例如使用 Java 语言的 SDK 可以使用 &lt;strong&gt;Lambda&lt;/strong&gt; 函数式编程风格进行数据交互操作。下面是创建一张名为 &lt;strong&gt;users&lt;/strong&gt; 表并且向 &lt;strong&gt;users&lt;/strong&gt; 表中插入一条数据记录，这条操作类似于关系数据库 SQL 中的 &lt;code&gt;INSERT ... INTO ... VALUES ...&lt;/code&gt; 语句，代码如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 第二参数支持设置 120 秒&lt;/span&gt;
@@ -88,7 +86,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;根据条件对 Table 中已有数据记录进行部分字段数据内容更新的操作，这个操作类似于关系数据库 SQL 中的 &lt;strong&gt;UPDATE &amp;hellip; SET &amp;hellip; WHERE &amp;hellip;&lt;/strong&gt; 语句，代码示例如下：&lt;/p&gt;
+&lt;p&gt;根据条件对 Table 中已有数据记录进行部分字段数据内容更新的操作，这个操作类似于关系数据库 SQL 中的 &lt;code&gt;UPDATE ... SET ... WHERE ...&lt;/code&gt; 语句，代码示例如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdk.&lt;span style=&#34;color:#a6e22e&#34;&gt;tables&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;users&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;patch&lt;/span&gt;(p &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; {
@@ -110,7 +108,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;对 Table 中已有的数据记录，执行条件删除操作，类似于关系数据库 SQL 中的 &lt;strong&gt;DELETE FROM &amp;hellip; WHERE &amp;hellip;&lt;/strong&gt; 的语句，代码如下：&lt;/p&gt;
+&lt;p&gt;对 Table 中已有的数据记录，执行条件删除操作，类似于关系数据库 SQL 中的 &lt;code&gt;DELETE FROM ... WHERE ...&lt;/code&gt; 的语句，代码如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdk.&lt;span style=&#34;color:#a6e22e&#34;&gt;tables&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;users&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;remove&lt;/span&gt;(r &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; 
@@ -125,7 +123,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;对 Table 中已有的数据记录，执行条件查询操作，类似于关系数据库 SQL 中的 &lt;strong&gt;SELECT * FROM &amp;hellip; WHERE &amp;hellip;&lt;/strong&gt; 的语句，代码如下：&lt;/p&gt;
+&lt;p&gt;对 Table 中已有的数据记录，执行条件查询操作，类似于关系数据库 SQL 中的 &lt;code&gt;SELECT * FROM ... WHERE ...&lt;/code&gt; 的语句，代码如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; user &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sdk.&lt;span style=&#34;color:#a6e22e&#34;&gt;tables&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;users&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;(q &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; 
