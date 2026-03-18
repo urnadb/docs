@@ -42,7 +42,7 @@ root@2c2m:~# docker logs 66ae91bc73a6
 
 ## 🕹️ RESTful API
 
-目前 UrnaDB 服务对外提供数据交互接口是基于 HTTP 协议的 RESTful API ，只需要通过支持 HTTP 协议客户端软件就可以进行数据操作。这里推荐使用 curl 软件进行数据交互操作，UrnaDB 内部提供了多种数据结构抽象，例如 Table 、List 、ZSet 、Set 、Number 、Text 类型，这些数据类型对应着常见的业务代码所需使用的数据结构，这里以 Table 类型结构为例进行 RESTful API 数据交互的演示。
+目前 UrnaDB 服务对外提供数据交互接口是基于 HTTP 协议的 RESTful API ，只需要通过支持 HTTP 协议客户端软件就可以进行数据操作。这里推荐使用 curl 软件进行数据交互操作，UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 命名空间，这些数据类型对应着常见的业务代码所需使用的数据结构，这里以 Table 类型结构为例进行 RESTful API 数据交互的演示。
 
 Table 结构类似于 JSON 及任何有映射关系的半结构化数据，例如编程语言中的 struct 和 class 字段都可以使用 Table 进行存储，下面是一个 Table 结构 JSON 抽象，其中的 ttl 字段为设置存活时间，超过 120 秒后会被主动删除：
 
