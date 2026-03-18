@@ -711,7 +711,7 @@
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;txns/*.txn&lt;/td&gt;
-          &lt;td&gt;目前正在执行活跃的事物的 Redo 数据日志文件。&lt;/td&gt;
+          &lt;td&gt;目前正在执行活跃事物的 Redo 数据日志文件。&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
