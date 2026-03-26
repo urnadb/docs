@@ -41,7 +41,7 @@
 持久性（Durability）是存储引擎最为至关重要的功能实现，目前很多基于内存版本的 NoSQL 数据库例如 Memcached 和 Redis 在这方面做的就比较差，在 NoSQL 服务器运行过程中突然崩溃断电就会导致数据没有被持久化存储的情况，从而导致数据丢失影响到上层的业务程序。
 存储引擎 单机数据库的核心在于其存储引擎，负责实现数据的持久化，并高效地处理数据的写入与读取，是数据库系统性能与可靠性的基础保障。针对这些场景的问题 UrnaDB 采用了基于 Log-Structured Megre Tree 日志结构化文件系统的存储引擎实现，存储引擎会以 Append-Only Log 的方式将所有的数据操作写入到数据文件中。同时 UrnaDB 为了高速查询检索数据记录，存储引擎会将数据记录索引信息全部保存在内存中，从而实现高效快速的查询目标数据记录。这样的设计的好处是能以磁盘最大写入性能进行写入数据，并且还能减少读取磁盘索引所需要的时间，通过一次索引定位来读取数据记录，写入和查询流程图：
 其核心持久化机制基于预写日志 Write-Ahead Logging 简称 WAL ，在对数据执行任何操作前，都会先将操作记录写入 WAL 日志文件。WAL 文件不仅承担持久化的角色，也作为主要的数据存储载体。在数据库进程崩溃后，只需从 WAL 日志中顺序读取各条 Segment 记录，即可高效恢复内存中的索引结构。">
-  <meta itemprop="wordCount" content="159">
+  <meta itemprop="wordCount" content="161">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="架构设计">
   <meta name="twitter:description" content="数据库系统的核心作用在于高效地存储和管理数据，并支持从海量信息中快速检索所需记录。传统的 SQL 关系型数据库在数据规模持续增长的情况下，容易遭遇单机性能瓶颈。目前提升性能的主流做法多依赖垂直扩展增强单机硬件能力，而非水平扩展增加节点以线性扩容。由于其架构限制，关系型数据库在弹性扩展性方面存在障碍，难以充分适应多节点分布式环境。同时为满足 ACID 事务特性，这类系统在支持分布式事务处理时也面临一定的技术挑战。
@@ -256,7 +256,7 @@
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/transaction/"
     
-  >原子事物
+  >事物设计
     </a>
               
             </li><li class="hx-flex hx-flex-col "><a
@@ -408,7 +408,7 @@
       hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
     href="/guide/transaction/"
     
-  >原子事物
+  >事物设计
     </a>
               
             </li><li class="hx-flex hx-flex-col "><a
@@ -548,7 +548,13 @@
     <a href="#%e6%9c%8d%e5%8a%a1%e8%bf%9b%e7%a8%8b" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>在此存储引擎设计的基础上，UrnaDB 构建了内置的 HTTP 协议服务器用于数据事物处理，在 UrnaDB 内部有多种数据结构的抽象层，进一步构成了完整的 UrnaDB 产品体系。这些模块构成了一个相互协作、功能完善的 UrnaDB 产品，架构图如下：</p>
 <img src="/images/architecture.png" alt="architecture" width="100%" />
 <p>UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。UrnaDB 的服务端对外提供数据交互接口是基于 HTTP 协议的 RESTful API ，只需要通过支持 HTTP 协议客户端软件就可以进行数据操作，这里推荐使用 curl 软件进行数据交互操作，也可以使用官方提供的多语言 SDK 来集成使用，具体如何使用请查阅 SDK 部分的文档内容。</p>
-<p>UrnaDB 未来版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。</p>
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-amber-200 hx-bg-amber-100 hx-text-amber-900 dark:hx-border-amber-200/30 dark:hx-bg-amber-900/30 dark:hx-text-amber-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Warning</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在未来的 UrnaDB 版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。</p></div>
+  </div>
+</div>
 
         </div>
         <div class="hx-mt-16"></div>

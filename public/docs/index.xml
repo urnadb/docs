@@ -185,7 +185,13 @@
     &lt;a href=&#34;#%e6%9c%8d%e5%8a%a1%e8%bf%9b%e7%a8%8b&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在此存储引擎设计的基础上，UrnaDB 构建了内置的 HTTP 协议服务器用于数据事物处理，在 UrnaDB 内部有多种数据结构的抽象层，进一步构成了完整的 UrnaDB 产品体系。这些模块构成了一个相互协作、功能完善的 UrnaDB 产品，架构图如下：&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/architecture.png&#34; alt=&#34;architecture&#34; width=&#34;100%&#34; /&gt;
 &lt;p&gt;UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。UrnaDB 的服务端对外提供数据交互接口是基于 HTTP 协议的 RESTful API ，只需要通过支持 HTTP 协议客户端软件就可以进行数据操作，这里推荐使用 curl 软件进行数据交互操作，也可以使用官方提供的多语言 SDK 来集成使用，具体如何使用请查阅 SDK 部分的文档内容。&lt;/p&gt;
-&lt;p&gt;UrnaDB 未来版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。&lt;/p&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-amber-200 hx-bg-amber-100 hx-text-amber-900 dark:hx-border-amber-200/30 dark:hx-bg-amber-900/30 dark:hx-text-amber-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;在未来的 UrnaDB 版本将引入更复杂的数据库集群架构，包括分布式存储、多副本机制与高可用性支持，以满足在大规模数据处理、高并发访问以及故障容错方面的实际需求，从而逐步演进为一款支持横向扩展的分布式数据库系统。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 
       </description>
     </item>
@@ -1773,7 +1779,7 @@
     </item>
     
     <item>
-      <title>原子事物</title>
+      <title>事物设计</title>
       <link>http://localhost:1313/guide/transaction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -1781,8 +1787,78 @@
       <description>
         
         
-        &lt;p&gt;事务 &lt;strong&gt;Transaction&lt;/strong&gt; 是数据库系统中的基础机制，&lt;strong&gt;Transaction&lt;/strong&gt; 用于保证数据操作时的正确性与可靠性而提出的一组核心约束。事物必须具备的 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;ACID&lt;/strong&gt;&lt;/span&gt; 四个核心特性，&lt;strong&gt;ACID&lt;/strong&gt; 的缩写缩写源自于：原子性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;A&lt;/strong&gt;&lt;/span&gt;tomicity、一致性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;C&lt;/strong&gt;&lt;/span&gt;onsistency、隔离性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;I&lt;/strong&gt;&lt;/span&gt;solation 和持久性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/span&gt;urability；有了 &lt;strong&gt;ACID&lt;/strong&gt; 的约束确保了一组数据库操作即使在故障时也能保持数据的一致性和可靠性，实现数据从一个合法状态向另一个合法状态的转换，使其执行运算过程中没有其他异常状态的产生。&lt;/p&gt;
-&lt;p&gt;目前工业级主流数据库产品 Oracle、SQLServer、MySQL、PostgreSQL、Redis、MongoDB、DynamoDB 都有对 &lt;strong&gt;Transaction&lt;/strong&gt; 特性的支持，但具体实现细节有着天壤之别。同样按照数据库类型分类：关系型数据库如 Oracle、SQL Server、MySQL、PostgreSQL 的事务实现通常基于 SQL 标准并完整支持 ACID 特性；而 NoSQL 数据库如 Redis、MongoDB、DynamoDB 的事务机制则没有统一标准，通常根据系统设计在原子性、隔离性等方面提供不同级别的支持，部分系统甚至仅支持单操作原子性。&lt;/p&gt;
+        &lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z&#34;/&gt;&lt;/svg&gt;Tip&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;事务 &lt;strong&gt;Transaction&lt;/strong&gt; 是数据库系统中的基础机制，&lt;strong&gt;Transaction&lt;/strong&gt; 用于保证数据操作时的正确性与可靠性而提出的一组核心约束。事物必须具备的 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;ACID&lt;/strong&gt;&lt;/span&gt; 四个核心特性，&lt;strong&gt;ACID&lt;/strong&gt; 的缩写缩写源自于：原子性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;A&lt;/strong&gt;&lt;/span&gt;tomicity、一致性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;C&lt;/strong&gt;&lt;/span&gt;onsistency、隔离性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;I&lt;/strong&gt;&lt;/span&gt;solation 和持久性 &lt;span style=&#34;color:red&#34;&gt;&lt;strong&gt;D&lt;/strong&gt;&lt;/span&gt;urability；有了 &lt;strong&gt;ACID&lt;/strong&gt; 的约束确保了一组数据库操作即使在故障时也能保持数据的一致性和可靠性，实现数据从一个合法状态向另一个合法状态的转换，使其执行运算过程中没有其他异常状态的产生。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;目前工业级主流数据库产品 MySQL、PostgreSQL、Redis、MongoDB、DynamoDB 都有对 &lt;strong&gt;Transaction&lt;/strong&gt; 特性的支持，但具体实现细节有着天壤之别。同样按照数据库类型分类：关系型数据库如 PostgreSQL 的事务实现通常基于 SQL 标准并完整支持 ACID 特性；而 NoSQL 数据库如 Redis、MongoDB、DynamoDB 的事务机制则没有统一标准，通常根据系统设计在原子性、隔离性等方面提供不同级别的支持，部分系统甚至仅支持单操作原子性。&lt;/p&gt;
+&lt;p&gt;传统关系数据库的 SQL 语言表达能力强大，SQL 可以通过复杂的 JOIN、子查询、聚合函数、窗口函数等表达复杂的业务逻辑，一条 SQL 语句就能完成多表关联、分组统计、排序分页等操作。使用者就需要花费大量的时间来学习和掌握使用 SQL 语法包括复杂的子查询、窗口函数、索引原理、执行计划分析、事务隔离级别、锁机制、MVCC 原理、查询优化技巧、性能调优、高可用架构等。&lt;/p&gt;
+&lt;p&gt;传统关系型 SQL 数据库在技术实现层面同样存在较高门槛，其核心组件如 SQL 解析器、查询优化器和执行引擎的设计与实现复杂度极高，不仅需要长期的工程投入，还伴随着持续的维护成本，这种复杂性需要博士生级别的多学科知识，对于小规模团队或独立开发者而言，通常是不现实的选择。&lt;/p&gt;
+&lt;h2&gt;🆚 差异性对比&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-差异性对比&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#-%e5%b7%ae%e5%bc%82%e6%80%a7%e5%af%b9%e6%af%94&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;维度&lt;/th&gt;
+          &lt;th&gt;SQL 数据库&lt;/th&gt;
+          &lt;th&gt;UrnaDB&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SQL 注入&lt;/td&gt;
+          &lt;td&gt;⚠️ 高风险&lt;/td&gt;
+          &lt;td&gt;✅ 无风险&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;性能可预测&lt;/td&gt;
+          &lt;td&gt;❌ 不可预测&lt;/td&gt;
+          &lt;td&gt;✅ 可预测&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;查询优化&lt;/td&gt;
+          &lt;td&gt;⚠️ 复杂&lt;/td&gt;
+          &lt;td&gt;✅ 无需优化，一级索引和二级索引&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;事务隔离&lt;/td&gt;
+          &lt;td&gt;⚠️ 4 种级别，复杂&lt;/td&gt;
+          &lt;td&gt;✅ MVCC 简单，基于版本的冲突检测&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;解析开销&lt;/td&gt;
+          &lt;td&gt;⚠️ 10-70ms&lt;/td&gt;
+          &lt;td&gt;✅ 0.3ms，简单的 JSON 解析器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;锁竞争&lt;/td&gt;
+          &lt;td&gt;⚠️ 严重&lt;/td&gt;
+          &lt;td&gt;✅ MVCC 无锁读，可 2PL 锁升级&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Schema 变更&lt;/td&gt;
+          &lt;td&gt;⚠️ 锁表&lt;/td&gt;
+          &lt;td&gt;✅ 无 Schema，动态修改 Schema 结构&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;维护成本&lt;/td&gt;
+          &lt;td&gt;⚠️ 需要 DBA&lt;/td&gt;
+          &lt;td&gt;✅ 低维护，一个人就能胜任&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;扩展性&lt;/td&gt;
+          &lt;td&gt;⚠️ 困难&lt;/td&gt;
+          &lt;td&gt;✅ 简单，按需通过配置启用插件功能&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;学习曲线&lt;/td&gt;
+          &lt;td&gt;⚠️ 陡峭&lt;/td&gt;
+          &lt;td&gt;✅ 平缓，导入对应语言 SDK 即可使用&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
       </description>
     </item>
