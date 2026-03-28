@@ -8,6 +8,8 @@ weight: 8
 
 事务 **Transaction** 是数据库系统中的基础机制，**Transaction** 用于保证数据操作时的正确性与可靠性而提出的一组核心约束。事务必须具备的 <span style="color:red">**ACID**</span> 四个核心特性，ACID 的缩写缩写源自于：原子性 <span style="color:red">**A**</span>tomicity、一致性 <span style="color:red">**C**</span>onsistency、隔离性 <span style="color:red">**I**</span>solation 和持久性 <span style="color:red">**D**</span>urability。ACID 约束确保了一组数据库操作，即使在运算故障时也能保持数据的一致性和可靠性，实现数据从一个合法状态向另一个合法状态的转换，使其执行运算过程中没有异常状态的产生。
 
+<img src="/images/txn-state.png" alt="transaction" width="100%" />
+
 目前工业级主流数据库产品 MySQL、PostgreSQL、Redis、MongoDB、DynamoDB 都有对 Transaction 特性的支持，但具体实现细节有着天壤之别。同样按照数据库类型分类：关系型数据库如 PostgreSQL 的事务实现通常基于 **SQL** 标准并完整支持 ACID 特性；而 NoSQL 数据库如 Redis、DynamoDB 的事务机制则没有统一标准，通常根据系统设计在原子性、隔离性等方面提供不同级别的支持，部分系统甚至仅支持单操作原子性。
 
 关系型数据库的 SQL 语言表达能力强大，SQL 可以通过复杂的 JOIN、子查询、聚合函数、窗口函数等表达复杂的业务逻辑，一条 SQL 语句就能完成多表关联、分组统计、排序分页等操作。使用者就需要花费大量的时间来学习和掌握使用 SQL 语法包括复杂的子查询、窗口函数、索引原理、执行计划分析、事务隔离级别、锁机制、MVCC 原理、查询优化技巧、性能调优、高可用架构等。
@@ -27,7 +29,7 @@ NoSQL 相较于关系型 SQL 数据库在实现层面通常更加简化，通过
 > [!TIP]
 > UrnaDB 中的批量原子事务操作是针对的 Table 命名空间中的数据记录所设计。在之前的 [API 交互](http://localhost:1313/guide/operations/#-table-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4)文档中有提到 Table 命名空间在初始化完成之后会自动分配一个全局锁。在默认单个原子事务请求下，UrnaDB 内部的事务处理器会使用本次事务请求中所涉及到的 Table 对应锁进行并发数据竞争的保护，多个 Table 命名空间在并发事务请求下是互不影响的，但在涉及到多个 Table 命名空间数据记录进行交集运算的事务时就不适用了。
 
-<img src="/images/txns-race.png" alt="architecture" width="100%" />
+<img src="/images/txns-race.png" alt="transaction" width="100%" />
 
 ## 🆚 差异性
 
