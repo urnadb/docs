@@ -1815,7 +1815,7 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;Redis 在运行期间支持通过 SDK 或 API 动态加载并执行用户自定义的 Lua 脚本，这依赖于内置 Lua VM 提供脚本执行能力。该设计在增强可编程性的同时，也对执行环境的隔离性与资源控制提出了更高的要求，如果宿主机（这里是指 Redis 数据库）缺乏严格的沙箱机制与执行限制，可能引发诸如沙箱逃逸、长时间阻塞、如死循环，以及内存滥用等问题。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;下文将通过具体示例分析这些潜在的安全风险，恶意代码示例如下：&lt;/p&gt;
+&lt;p&gt;下文将通过具体恶意代码示例，分析这些潜在的安全风险，如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-lua&#34; data-lang=&#34;lua&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 死循环攻击&lt;/span&gt;
