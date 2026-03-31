@@ -1842,12 +1842,26 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;内置的 VM 执行环境可能引入沙箱逃逸或资源滥用问题，如死循环、内存耗尽。&lt;/li&gt;
-&lt;li&gt;脚本执行增加了系统的不可预测性，影响稳定性和调试难度。&lt;/li&gt;
-&lt;li&gt;引入额外语言 Lua、JavaScript 意味着需要额外的运行时和安全隔离机制。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;因此这类基于 VM 的扩展机制在提升能力的同时，也增加了系统设计复杂度和潜在的安全隐患，需要谨慎权衡。&lt;/p&gt;
+&lt;p&gt;上述任意代码，如果被恶意用户提交到 Redis 的 Lua VM 中执行，可能会导致系统行为不可预测，从而影响整体稳定性与调试难度，例如脚本中的异常逻辑如死循环或大量内存分配可能耗尽数据库资源，使 Lua VM 长时间被占用，进而阻塞其他脚本或相关操作的正常执行。&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;lua-time-limit 5000  &lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 默认 5 秒&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;Redis 并未彻底解决 Lua 脚本带来的执行隔离问题，而是通过单线程模型、执行时间限制和受控 API，将风险从 “系统级崩溃” 降低为可观测、可干预的阻塞问题。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 &lt;h2&gt;⏱️ 高性能&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-高性能&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e9%ab%98%e6%80%a7%e8%83%bd&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;首先需要明确这里的 &lt;strong&gt;“高性能”&lt;/strong&gt; 并非泛指 UrnaDB 的整体性能，而是聚焦于其在高并发场景下处理海量事务时的吞吐能力。数据库事务的处理性能不仅受磁盘 I/O、CPU 和 RAM 等硬件因素影响，还与系统内部设计密切相关。本节将忽略外部环境因素，重点从 UrnaDB 的数据结构设计以及事务锁机制出发，探讨其对 UrnaDB 事务吞吐能力的影响。&lt;/p&gt;
 &lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200&#34;&gt;
