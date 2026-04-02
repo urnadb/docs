@@ -1901,7 +1901,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;上面案例最终结果是数据不一致，A 账户的钱凭空消失了，B 账户却没有增加金额！按正常的业务逻辑 SQL 事务设计，事务计算是要符合 ACID 原则的，一组数据要么成功要么失败，不会出现其他状态；Redis Lua 只适合 &lt;strong&gt;可以容忍部分失败&lt;/strong&gt; 的场景，不适合金融转账这种严格要求 ACID 的场景。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;上面案例最终结果是数据不一致，A 账户的钱凭空消失了，B 账户却没有增加金额！按正常的业务逻辑 SQL 事务设计，事务计算是要符合 ACID 原则的，一组数据操作要么成功要么失败，不会出现其他状态；Redis Lua 只适合 &lt;strong&gt;可以容忍部分失败&lt;/strong&gt; 的场景，不适合金融转账这种严格要求 ACID 的场景。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;h2&gt;⏱️ 高性能&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-高性能&#34;&gt;&lt;/span&gt;
