@@ -1919,7 +1919,7 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&#34;/&gt;&lt;/svg&gt;Warning&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;数据库的事务锁的粒度如行级、页级或表级是影响事务处理性能的关键因素，它在并发度与锁管理开销之间形成权衡：粒度越细，并发性越高但管理成本越大；粒度越粗，管理成本较低但冲突概率更高。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;数据库的事务锁的粒度如行级、页级或表级是影响事务处理性能的关键因素，它在并发度与锁管理开销之间形成权衡：粒度越细，并发性越高但管理成本越大；粒度越粗，管理成本较低但冲突概率更高。所以影响到数据库的事务并发吞吐量关键是要素是数据库中的锁持有时间，如果同一条数据的锁持有时间越长，那么其他同样需要处理这条数据的事务就会陷入长时间阻塞状态 ⌛️ ，。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200&#34;&gt;
@@ -2004,7 +2004,7 @@
       &lt;tr&gt;
           &lt;td&gt;ACID 支持&lt;/td&gt;
           &lt;td&gt;✅ 完整支持&lt;/td&gt;
-          &lt;td&gt;❌ 不支持，Lua 串行执行，有被攻击风险&lt;/td&gt;
+          &lt;td&gt;❌ 不支持，Lua 串行，有被攻击风险&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;原子性&lt;/td&gt;
