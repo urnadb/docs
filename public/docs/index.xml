@@ -1984,6 +1984,8 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;并发冲突的本质在于事务之间访问数据集的重叠程度，由此可以推导出数据库系统的并发性能在很大程度上取决于事务访问数据集的重叠程度，而减少访问范围能够有效降低冲突概率。基于这一原则，主流数据库系统在并发控制策略上进行了大量优化，例如 MySQL 和 PostgreSQL 采用 MVCC 以降低读写之间的互斥，而 Redis 则通过 Compare-And-Swap 乐观并发机制减少锁竞争，从而提升整体吞吐量。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;UrnaDB 的批量事务操作也参考了传统 SQL 数据库的 MVCC 的设计，在默认批量事务请求处理下也是使用的多个数据版本快照的方式供事务执行运算操作。多个并行处理的事务之间操作的数据都是 Snapshot 副本，每个事务的运算都是基于 Snapshot 快照副本，从而实现了无事务锁干预来提升数据库整体事务吞吐量，多个事务 MVCC 处理示意图如下：&lt;/p&gt;
+&lt;img src=&#34;http://localhost:1313/images/multi-txns-race.png&#34; alt=&#34;transaction&#34; width=&#34;100%&#34; /&gt;
 &lt;h2&gt;⚛️ 原子事务&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-原子事务&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e5%8e%9f%e5%ad%90%e4%ba%8b%e5%8a%a1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;🆚 产品差异性&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-产品差异性&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e4%ba%a7%e5%93%81%e5%b7%ae%e5%bc%82%e6%80%a7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
