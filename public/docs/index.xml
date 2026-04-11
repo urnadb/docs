@@ -1986,6 +1986,13 @@
 &lt;/div&gt;
 &lt;p&gt;UrnaDB 的批量事务操作也参考了传统 SQL 数据库的 MVCC 的设计，在默认批量事务请求处理下也是使用的多个数据版本快照的方式供事务执行运算操作。多个并行处理的事务之间操作的数据都是 Snapshot 副本，每个事务的运算都是基于 Snapshot 快照副本，从而实现了无事务锁干预来提升数据库整体事务吞吐量，多个事务 MVCC 处理示意图如下：&lt;/p&gt;
 &lt;img src=&#34;http://localhost:1313/images/multi-txns-race.png&#34; alt=&#34;transaction&#34; width=&#34;100%&#34; /&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 的事务处理器基于 MVCC 管理并发事务访问的数据版本，对于同时执行的多个事务，当其访问的数据存在重叠时，系统会在提交阶段根据事务的提交顺序进行冲突检测，并决定是合并变更还是回滚冲突事务。&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 &lt;h2&gt;⚛️ 原子事务&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-原子事务&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e5%8e%9f%e5%ad%90%e4%ba%8b%e5%8a%a1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;🆚 产品差异性&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-产品差异性&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e4%ba%a7%e5%93%81%e5%b7%ae%e5%bc%82%e6%80%a7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
