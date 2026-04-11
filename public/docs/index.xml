@@ -1990,9 +1990,10 @@
   &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Important&lt;/p&gt;
 
   &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
-    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 的事务处理器基于 MVCC 管理并发事务访问的数据版本，对于同时执行的多个事务，当其访问的数据存在重叠时，系统会在提交阶段根据事务的提交顺序进行冲突检测，并决定是合并变更还是回滚冲突事务。&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;UrnaDB 的事务处理器基于 MVCC 管理并发事务访问的数据版本，对于同时执行的多个事务，当其访问的数据存在重叠时，系统会在提交阶段根据事务的提交顺序进行冲突检测，并决定是合并变更还是回滚冲突事务。并发优化的核心在于降低事务之间的数据访问重叠，让多个事务之间 &lt;strong&gt;“尽量少碰同一批数据”&lt;/strong&gt; ，MVCC 通过为每个事务维护独立的数据版本，使事务能够在各自的版本视图上执行操作，从而实现读写解耦，减少锁竞争并提升系统整体并发性能。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;当数据规模 N 远大于并发事务数量 T 时，即为 𝑁 ≫ 𝑇 数学公式，事务访问集合之间的交集概率显著降低，系统冲突率趋于较低水平，在此条件下 MVCC 模型能够有效提升系统并发能力，从而提高整体事务吞吐量。&lt;/p&gt;
 &lt;h2&gt;⚛️ 原子事务&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-原子事务&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e5%8e%9f%e5%ad%90%e4%ba%8b%e5%8a%a1&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h2&gt;🆚 产品差异性&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-产品差异性&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#-%e4%ba%a7%e5%93%81%e5%b7%ae%e5%bc%82%e6%80%a7&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
