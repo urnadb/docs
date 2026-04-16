@@ -219,8 +219,8 @@ curl -X POST "http://192.168.101.252:2668/txns" \
     "serialization": false
 }'
 ```
-> [!IMPORTANT]
-> 上述请求会对名为 **users** 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 `INSERT` 和 `UPDATE` 组合事务语句；需要注意的是 **serialization** 字段的值，如果不传入 **serialization** 字段，UrnaDB 事务处理器默认会以值为 **false** 进行处理。这里的 **serialization** 对应前文中提到的
+> [!WARNING]
+> 上述请求会对名为 **users** 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 `INSERT` 和 `UPDATE` 组合事务语句。需要注意的是 **serialization** 字段的值，如果不传入 **serialization** 字段，UrnaDB 事务处理器默认会以值为 **false** 进行处理。这里的 **serialization** 对应前文中提到的类似于关系型 SQL 数据库串行化模式，但是比 SQL 数据库更为灵活，关系数据库需要在配置文件中调节，UrnaDB 的设计则是在每次事务请求通过 **serialization** 字段来决定是否开启串行化模式。
 
 ## 🆚 产品差异性
 
