@@ -220,7 +220,7 @@ curl -X POST "http://192.168.101.252:2668/txns" \
 }'
 ```
 > [!WARNING]
-> 上述请求会对名为 **users** 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 `INSERT` 和 `UPDATE` 组合事务语句，需要注意的是 **serialization** 字段的值，如果不传入 **serialization** 字段，UrnaDB 事务处理器默认会以值为 **false** 进行处理。此处的 serialization 对应前文提到的关系型数据库中的事务串行化模式，但在使用方式上更加灵活。关系型数据库通常需要在配置中统一设置事务隔离级别，而 UrnaDB 则通过在每次事务请求中指定 serialization 字段，动态决定是否启用串行化模式。
+> 上述请求会对名为 **users** 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 `INSERT` 和 `UPDATE` 组合事务语句，需要注意的是 **serialization** 字段的值，如果不传入 **serialization** 字段，UrnaDB 事务处理器默认会以值为 false 进行处理。此处的 serialization 对应前文提到的关系型数据库中的事务串行化模式，但在使用方式上更加灵活。关系型数据库通常需要在配置中统一设置事务隔离级别，而 UrnaDB 则通过在每次事务请求中指定 serialization 字段，动态决定是否启用串行化模式。
 
 ## 🆚 产品差异性
 
