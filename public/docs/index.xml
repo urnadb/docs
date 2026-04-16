@@ -2100,8 +2100,7 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;上述请求会对名为 &lt;strong&gt;users&lt;/strong&gt; 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 &lt;code&gt;INSERT&lt;/code&gt; 和 &lt;code&gt;UPDATE&lt;/code&gt; 组合事务语句，需要注意的是 &lt;strong&gt;serialization&lt;/strong&gt; 字段的值，如果不传入 &lt;strong&gt;serialization&lt;/strong&gt; 字段，UrnaDB 事务处理器默认会以值为 false 进行处理。此处的 &lt;a href=&#34;#serialization&#34; &gt;&lt;strong&gt;serialization&lt;/strong&gt;&lt;/a&gt;  对应前文提到的关系型数据库中的事务串行化模式，但在使用方式上更加灵活，关系型数据库通常需要在配置中统一设置事务隔离级别，而 UrnaDB 则通过在每次事务请求中指定 serialization 字段，动态决定是否启用串行化模式。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;h2&gt;📘 Operation 说明表&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-operation-说明表&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#-operation-%e8%af%b4%e6%98%8e%e8%a1%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;批量原子事务操作 JSON Body 请求中的 &lt;strong&gt;operation&lt;/strong&gt; 字段用于标识当前 Mutation 的操作类型，不同类型对应不同的数据结构变更需求，客户端必须根据操作类型提供相应字段，否则事务请求将被拒绝，不同操作类型说明表格如下：&lt;/p&gt;
+&lt;p&gt;批量原子事务操作 JSON Body 请求中的 &lt;strong&gt;operation&lt;/strong&gt; 字段用于标识当前 Mutation 的操作类型，不同类型对应不同的数据结构变更需求，客户端必须根据操作类型提供相应字段，否则事务请求将被拒绝。不同操作类型说明表格如下：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
