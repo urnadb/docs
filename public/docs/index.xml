@@ -2101,7 +2101,7 @@
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;h2&gt;📘 Operation 定义表&lt;span class=&#34;hx-absolute -hx-mt-20&#34; id=&#34;-operation-定义表&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#-operation-%e5%ae%9a%e4%b9%89%e8%a1%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;事务操作的 JSON Body 中的 &lt;code&gt;operation&lt;/code&gt; 字段用于标识当前 &lt;strong&gt;Mutation&lt;/strong&gt; 的操作类型，不同类型对应不同的数据结构要求，客户端必须根据操作类型提供相应字段，否则请求将被拒绝，不同操作类型表格如下：&lt;/p&gt;
+    &lt;a href=&#34;#-operation-%e5%ae%9a%e4%b9%89%e8%a1%a8&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;事务操作的 JSON Body 中的 &lt;code&gt;operation&lt;/code&gt; 字段用于标识当前 &lt;strong&gt;Mutation&lt;/strong&gt; 的操作类型，不同类型对应不同的数据结构要求，客户端必须根据操作类型提供相应字段，否则事务请求将被拒绝，不同操作类型说明表格如下：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
