@@ -219,8 +219,21 @@ curl -X POST "http://192.168.101.252:2668/txns" \
     "serialization": false
 }'
 ```
+
+
 > [!WARNING]
-> 上述请求会对名为 **users** 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 `INSERT` 和 `UPDATE` 组合事务语句，需要注意的是 **serialization** 字段的值，如果不传入 **serialization** 字段，UrnaDB 事务处理器默认会以值为 false 进行处理。此处的 serialization 对应前文提到的关系型数据库中的事务串行化模式，但在使用方式上更加灵活。关系型数据库通常需要在配置中统一设置事务隔离级别，而 UrnaDB 则通过在每次事务请求中指定 serialization 字段，动态决定是否启用串行化模式。
+> 上述请求会对名为 **users** 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 `INSERT` 和 `UPDATE` 组合事务语句，需要注意的是 **serialization** 字段的值，如果不传入 **serialization** 字段，UrnaDB 事务处理器默认会以值为 false 进行处理。此处的 serialization 对应前文提到的关系型数据库中的事务串行化模式，但在使用方式上更加灵活，关系型数据库通常需要在配置中统一设置事务隔离级别，而 UrnaDB 则通过在每次事务请求中指定 serialization 字段，动态决定是否启用串行化模式。
+
+## 📘 Operation 定义表
+
+事务操作的 JSON Body 中的 `operation` 字段用于标识当前 **Mutation** 的操作类型，不同类型对应不同的数据结构要求，客户端必须根据操作类型提供相应字段，否则请求将被拒绝，不同操作类型表格如下：
+
+
+| Operation | 描述 | 必填字段 | 可选字段 | 说明 |
+|----------|------|----------|----------|------|
+| INSERT   | 插入数据 | `name`, `values` | - | 向指定 Table 写入一条或多条记录 |
+| UPDATE   | 更新数据 | `name`, `where`, `values` | - | 根据条件更新符合条件的数据 |
+| REMOVE   | 删除数据 | `name`, `where` | - | 根据条件删除数据 |
 
 ## 🆚 产品差异性
 
