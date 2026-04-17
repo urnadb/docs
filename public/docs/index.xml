@@ -2054,7 +2054,7 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;&lt;strong&gt;Mutations&lt;/strong&gt; 通过对多个原子操作进行封装与组合，对外提供批量原子事务的抽象，使多个操作在逻辑上表现为一个整体事务。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;使用 UrnaDB 批量原子事务时，客户端只需向 &lt;code&gt;https://.../txns&lt;/code&gt; 端点发送 HTTP 协议的 POST 请求，服务器端收到事务请求之后即可执行批量事务操作，需要注意的是事务中涉及的 Table 命名空间必须已提前创建。下面是使用 &lt;code&gt;curl&lt;/code&gt; 发送批量原子事务请求的例子：&lt;/p&gt;
+&lt;p&gt;使用 UrnaDB 批量原子事务时，客户端只需向 &lt;code&gt;https://.../txns&lt;/code&gt; 端点发送 HTTP 协议的 POST 请求，服务器端收到事务请求之后即可执行批量事务操作，需要注意的是事务中涉及的 Table 命名空间必须已提前创建；下面是使用 HTTP 客户端软件发送批量原子事务请求的示例：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X POST &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://192.168.101.252:2668/txns&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;\
@@ -2100,7 +2100,7 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;上述请求会对名为 &lt;strong&gt;users&lt;/strong&gt; 的 Table 命名空间执行批量原子操作，类似于关系数据库中的 &lt;code&gt;INSERT&lt;/code&gt; 和 &lt;code&gt;UPDATE&lt;/code&gt; 组合事务语句，需要注意的是 &lt;strong&gt;serialization&lt;/strong&gt; 字段的值，如果不传入 &lt;strong&gt;serialization&lt;/strong&gt; 字段，UrnaDB 事务处理器默认会以值为 false 进行处理。此处的 &lt;a href=&#34;#serialization&#34; &gt;&lt;strong&gt;serialization&lt;/strong&gt;&lt;/a&gt;  对应前文提到的关系型数据库中的事务串行化模式，但在使用方式上更加灵活，关系型数据库通常需要在配置中统一设置事务隔离级别，而 UrnaDB 则通过在每次事务请求中指定 serialization 字段，动态决定是否启用串行化模式。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;批量原子事务操作 JSON Body 请求中的 &lt;strong&gt;operation&lt;/strong&gt; 字段用于标识当前 Mutation 的操作类型，不同类型对应不同的数据结构变更需求，客户端必须根据操作类型提供相应字段，否则事务请求将被拒绝；不同操作类型说明表格如下：&lt;/p&gt;
+&lt;p&gt;批量原子事务操作 JSON Body 请求中的 &lt;strong&gt;operation&lt;/strong&gt; 字段用于标识当前 Mutation 的操作类型，不同类型对应不同的数据结构变更需求，客户端必须根据操作类型提供相应字段，否则事务请求将被拒绝；不同 Operation 类型说明表格如下：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
