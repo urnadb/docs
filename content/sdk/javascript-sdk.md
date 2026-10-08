@@ -58,3 +58,11 @@ console.log(`内存可用: ${info.memoryFree}`);
 console.log(`内存总量: ${info.memoryTotal}`);
 console.log(`数据库存储总量: ${info.totalSpaceUsed}`);
 ```
+
+开发者在客户端可以通过以上的 API 示例，来获取服务器端数据库的指标数据。
+
+
+## 📈 Table 命名空间
+
+> [!TIP]
+> Table 命名空间用于存储结构化数据，其数据组织方式与传统关系型数据库的 Schema 模型最为接近。为了降低开发者的学习和迁移成本，Table 命名空间的 SDK API 采用了与传统关系型数据库 ORM 框架相近的设计，使开发者能够以熟悉的方式完成数据的创建、查询、更新和删除操作。 

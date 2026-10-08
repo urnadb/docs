@@ -26,7 +26,7 @@
   <meta itemprop="name" content="JavaScript SDK">
   <meta itemprop="description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
 🚀 快速开始 Tip">
-  <meta itemprop="wordCount" content="149">
+  <meta itemprop="wordCount" content="166">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JavaScript SDK">
   <meta name="twitter:description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
@@ -264,6 +264,12 @@
                 class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
               >🚀 快速开始</a>
             </li>
+          <li>
+              <a
+                href="#-table-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >📈 Table 命名空间</a>
+            </li>
           </ul>
   
               
@@ -475,6 +481,10 @@
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
         <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#-%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b">🚀 快速开始
         </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#-table-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4">📈 Table 命名空间
+        </a>
       </li></ul>
       <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
         <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
@@ -553,7 +563,7 @@
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 获取当前的数据库服务器运行状态
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">info</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">systemInfo</span>();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">info</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">serverInfo</span>();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// 远程数据库服务器指标
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`键数量: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">keyCount</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
@@ -573,6 +583,15 @@
     <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
   </button>
 </div>
+</div>
+<p>开发者在客户端可以通过以上的 API 示例，来获取服务器端数据库的指标数据。</p>
+<h2>📈 Table 命名空间<span class="hx-absolute -hx-mt-20" id="-table-命名空间"></span>
+    <a href="#-table-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>Tip</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>Table 命名空间用于存储结构化数据，其数据组织方式与传统关系型数据库的 Schema 模型最为接近。为了降低开发者的学习和迁移成本，Table 命名空间的 SDK API 采用了与传统关系型数据库 ORM 框架相近的设计，使开发者能够以熟悉的方式完成数据的创建、查询、更新和删除操作。</p></div>
+  </div>
 </div>
 
         </div>
