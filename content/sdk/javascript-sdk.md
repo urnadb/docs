@@ -65,4 +65,76 @@ console.log(`数据库存储总量: ${info.totalSpaceUsed}`);
 ## 📈 Table 命名空间
 
 > [!TIP]
-> Table 命名空间用于存储结构化数据，其数据组织方式与传统关系型数据库的 Schema 模型最为接近。为了降低开发者的学习和迁移成本，Table 命名空间的 SDK API 采用了与传统关系型数据库 ORM 框架相近的设计，使开发者能够以熟悉的方式完成数据的创建、查询、更新和删除操作。 
+> Table 命名空间用于存储结构化数据，其数据组织方式与传统关系型数据库的 Schema 模型最为接近。为了降低开发者的学习和迁移成本，Table 命名空间的 SDK API 采用了与传统关系型数据库 ORM 框架相近的设计，使开发者能够以熟悉的方式完成数据的创建、查询、更新和删除操作。
+
+下面是一个创建一个名为 **users** 的 Table 命名空间 API 操作示例：
+
+```javascript
+test("should create table", async () => {
+    // 创建一个名为 users 的命名空间
+    const result = await db.createTable("users");
+    // 如果创建成功 result.status 的值为 success
+    assert.equal(result.status, "success");
+});
+```
+
+向已有的名为 **users** 的 Table 命名空间中插入数值 API 操作示例：
+
+
+```javascript
+test("should insert row data into table", async () => {
+    // 类似于 SQL 关系数据库中的 INSERT INTO 语句操作
+    const result = await db.tables("users").put(rows => {
+        rows
+            .set("name", "Leon Ding")
+            .set("age", 26)
+            .set("address", address => {
+                address
+                    .put("🌍 nation", "China")
+                    .put("🌆 city", "Shanghai")
+                    .put("📧 zipcode", 2000001);
+            })
+            .set("hobbies", ["🏸️ badminton", "🎮 games", "🎵 music"]);
+    });
+
+    assert.equal(result.status, "success");
+});
+```
+
+根据条件来实现数据记录更新，类似于关系数据库 SQL 的 UPDATE 语句，更新 API 操作示例如下：
+
+
+```javascript
+test("should update table row data", async () => {
+    // 更新 name 值为 Leon Ding 的 age 和 address 字段
+    const result = await db.tables("users").patch(patch => {
+        patch
+            .where(where => {
+                where.eq("name", "Leon Ding");
+            })
+            .sets(sets => {
+                sets
+                    .put("age", 27)
+                    .put("address", address => {
+                        address
+                            .put("🌆 city", "New York")
+                    })
+            });
+    });
+
+    assert.equal(result.status, "success");
+});
+```
+
+根据条件删除数据记录类似于 SQL 关系数据库中的 DELETE 语句，删除 API 操作示例如下：
+
+```javascript
+test("should delete table row data", async () => {
+    // 删除 users 表中字段 name 值为 Leon Ding 的数据记录
+    const result = await db.tables("users").delete(where => {
+        where.eq("name", "Leon Ding");
+    });
+
+    assert.equal(result.status, "success");
+});
+```

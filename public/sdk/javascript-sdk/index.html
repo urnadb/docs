@@ -26,7 +26,7 @@
   <meta itemprop="name" content="JavaScript SDK">
   <meta itemprop="description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
 🚀 快速开始 Tip">
-  <meta itemprop="wordCount" content="166">
+  <meta itemprop="wordCount" content="362">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JavaScript SDK">
   <meta name="twitter:description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
@@ -592,6 +592,104 @@
   <div class="hx-w-full hx-min-w-0 hx-leading-7">
     <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>Table 命名空间用于存储结构化数据，其数据组织方式与传统关系型数据库的 Schema 模型最为接近。为了降低开发者的学习和迁移成本，Table 命名空间的 SDK API 采用了与传统关系型数据库 ORM 框架相近的设计，使开发者能够以熟悉的方式完成数据的创建、查询、更新和删除操作。</p></div>
   </div>
+</div>
+<p>下面是一个创建一个名为 <strong>users</strong> 的 Table 命名空间 API 操作示例：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should create table&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 创建一个名为 users 的命名空间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">createTable</span>(<span style="color:#e6db74">&#34;users&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 如果创建成功 result.status 的值为 success
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">status</span>, <span style="color:#e6db74">&#34;success&#34;</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<p>向已有的名为 <strong>users</strong> 的 Table 命名空间中插入数值 API 操作示例：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should insert row data into table&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 类似于 SQL 关系数据库中的 INSERT INTO 语句操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">tables</span>(<span style="color:#e6db74">&#34;users&#34;</span>).<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">rows</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rows</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Leon Ding&#34;</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#ae81ff">26</span>)
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;address&#34;</span>, <span style="color:#a6e22e">address</span> =&gt; {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">address</span>
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;🌍 nation&#34;</span>, <span style="color:#e6db74">&#34;China&#34;</span>)
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;🌆 city&#34;</span>, <span style="color:#e6db74">&#34;Shanghai&#34;</span>)
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;📧 zipcode&#34;</span>, <span style="color:#ae81ff">2000001</span>);
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;hobbies&#34;</span>, [<span style="color:#e6db74">&#34;🏸️ badminton&#34;</span>, <span style="color:#e6db74">&#34;🎮 games&#34;</span>, <span style="color:#e6db74">&#34;🎵 music&#34;</span>]);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">status</span>, <span style="color:#e6db74">&#34;success&#34;</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<p>根据条件来实现数据记录更新，类似于关系数据库 SQL 的 UPDATE 语句，更新 API 操作示例如下：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should update table row data&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 更新 name 值为 Leon Ding 的 age 和 address 字段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">tables</span>(<span style="color:#e6db74">&#34;users&#34;</span>).<span style="color:#a6e22e">patch</span>(<span style="color:#a6e22e">patch</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">patch</span>
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">where</span>(<span style="color:#a6e22e">where</span> =&gt; {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">where</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Leon Ding&#34;</span>);
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">sets</span>(<span style="color:#a6e22e">sets</span> =&gt; {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">sets</span>
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;age&#34;</span>, <span style="color:#ae81ff">27</span>)
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;address&#34;</span>, <span style="color:#a6e22e">address</span> =&gt; {
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">address</span>
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;🌆 city&#34;</span>, <span style="color:#e6db74">&#34;New York&#34;</span>)
+</span></span><span style="display:flex;"><span>                    })
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">status</span>, <span style="color:#e6db74">&#34;success&#34;</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
+</div>
+<p>根据条件删除数据记录类似于 SQL 关系数据库中的 DELETE 语句，删除 API 操作示例如下：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should delete table row data&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 删除 users 表中字段 name 值为 Leon Ding 的数据记录
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">tables</span>(<span style="color:#e6db74">&#34;users&#34;</span>).<span style="color:#66d9ef">delete</span>(<span style="color:#a6e22e">where</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">where</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;Leon Ding&#34;</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">status</span>, <span style="color:#e6db74">&#34;success&#34;</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
 </div>
 
         </div>
