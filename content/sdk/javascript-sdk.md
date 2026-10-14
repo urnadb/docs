@@ -203,6 +203,8 @@ test("should build a transaction with multiple table", async () => {
 });
 ```
 
+这段 UrnaDB SDK 代码在关系型数据库 SQL 中对应的是事务中组合执行 INSERT 和 UPDATE 操作，并使用可串行化隔离级别，该 SQL 语句示例如下：
+
 ```sql
 BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 

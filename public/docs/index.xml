@@ -470,6 +470,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;这段 UrnaDB SDK 代码在关系型数据库 SQL 中对应的是事务中组合执行 INSERT 和 UPDATE 操作，并使用可串行化隔离级别，该 SQL 语句示例如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TRANSACTION&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ISOLATION&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;LEVEL&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SERIALIZABLE&lt;/span&gt;;
