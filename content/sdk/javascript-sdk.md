@@ -138,3 +138,18 @@ test("should delete table row data", async () => {
     assert.equal(result.status, "success");
 });
 ```
+
+根据条件查询数据记录似于 SQL 关系数据库中的 SELECT 语句，查询 API 操作示例如下：
+
+```javascript
+test("should query table row data", async () => {
+    // 查询 users 表中的 name 字段为 Leon Ding 的数据记录
+    const result = await db.tables("users").query(where => {
+        where.eq("name", "Leon Ding");
+    });
+
+    assert.equal(result.status, "success");
+
+    assert.equal(result.data[0].address["🌆 city"], "Singapore");
+});
+```
