@@ -150,6 +150,6 @@ test("should query table row data", async () => {
 
     assert.equal(result.status, "success");
 
-    assert.equal(result.data[0].address["🌆 city"], "Singapore");
+    assert.equal(result.data[0].address["🌆 city"], "Shanghai");
 });
 ```
