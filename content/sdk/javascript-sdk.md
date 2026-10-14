@@ -117,7 +117,7 @@ test("should update table row data", async () => {
                     .put("age", 27)
                     .put("address", address => {
                         address
-                            .put("🌆 city", "New York")
+                            .put("🌆 city", "Shanghai")
                     })
             });
     });
@@ -152,4 +152,75 @@ test("should query table row data", async () => {
 
     assert.equal(result.data[0].address["🌆 city"], "Shanghai");
 });
+```
+
+> [!IMPORTANT]
+> 在 UrnaDB 的 Table 命名空间提供了类似于关系型数据库 SQL 事务的操作机制，支持在同一个事务中对多个不同 Table 命名空间中的数据记录进行操作，并通过统一的事务提交确保这些操作作为一个整体完成。
+
+```javascript
+
+test("should build a transaction with multiple table", async () => {
+
+    const db = UrnaDB.OpenConnection({
+        host: "192.168.3.20",
+        port: 2668,
+        token: "connection-secret-token"
+    });
+
+    // UrnaDB ES6 SDK Transaction Example:
+    const result = await db.tables().transaction(txns => {
+        txns
+            // Enable serializable isolation level for this transaction
+            .serializable(true)
+            .put("users", rows => {
+                rows
+                    .set("name", "Leon Ding")
+                    .set("age", 26)
+                    .set("address", address => {
+                        address
+                            .put("🌍 nation", "China")
+                            .put("🌆 city", "Shanghai")
+                            .put("📧 zipcode", 200001);
+                    })
+                    .set("hobbies", ["🏸️ badminton", "🎮 games", "🎵 music"]);
+            })
+            .patch("users", patch => {
+                patch
+                    .where(where => {
+                        where.eq("name", "Leon Ding");
+                    })
+                    .sets(sets => {
+                        sets
+                            .put("address", address => {
+                                address
+                                    .put("🌆 city", "Singapore");
+                            })
+                    });
+            });
+    });
+
+    assert.equal(result.status, "success");
+});
+```
+
+```sql
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+INSERT INTO users (name, age, address, hobbies)
+VALUES (
+    'Leon Ding',
+    26,
+    '{"🌍 nation": "China", "🌆 city": "Shanghai", "📧 zipcode": 200001}',
+    '["🏸️ badminton", "🎮 games", "🎵 music"]'
+);
+
+UPDATE users
+SET address = jsonb_set(
+    address,
+    '{🌆 city}',
+    '"Singapore"'
+)
+WHERE name = 'Leon Ding';
+
+COMMIT;
 ```
