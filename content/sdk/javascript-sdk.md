@@ -158,7 +158,7 @@ test("should query table row data", async () => {
 > 在 UrnaDB 的 Table 命名空间提供了类似于关系型数据库 SQL 事务的操作机制，支持在同一个事务中对多个不同 Table 命名空间中的数据记录进行操作，并通过统一的事务提交确保这些操作作为一个整体完成。
 
 
-下面是 UrnaDB 中的数据库事物处理 API 代码调用示例如下： 
+下面是 UrnaDB 中的数据库事物处理 API 代码调用示例，该示例会对 **users** 表进行数据记录插入操作和对插入操作之后的 **address** 字段进行原子更新操作，代码示例如下：
 
 ```javascript
 
