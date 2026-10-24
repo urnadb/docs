@@ -26,7 +26,7 @@
   <meta itemprop="name" content="JavaScript SDK">
   <meta itemprop="description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
 🚀 快速开始 Tip">
-  <meta itemprop="wordCount" content="584">
+  <meta itemprop="wordCount" content="593">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JavaScript SDK">
   <meta name="twitter:description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
@@ -720,6 +720,7 @@
     <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在 UrnaDB 的 Table 命名空间提供了类似于关系型数据库 SQL 事务的操作机制，支持在同一个事务中对多个不同 Table 命名空间中的数据记录进行操作，并通过统一的事务提交确保这些操作作为一个整体完成。</p></div>
   </div>
 </div>
+<p>下面是 UrnaDB 中的数据库事物处理 API 代码调用示例，该示例会对 <strong>users</strong> 表进行数据记录插入操作和对插入操作之后的 <strong>address</strong> 字段进行原子更新操作，代码示例如下：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>
