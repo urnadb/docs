@@ -206,7 +206,7 @@ test("should build a transaction with multiple table", async () => {
 });
 ```
 
-这段 UrnaDB SDK 代码在关系型数据库 SQL 中对应的是事务中组合执行 INSERT 和 UPDATE 操作，并使用可串行化隔离级别，该 SQL 语句示例如下：
+这段 UrnaDB SDK 代码在关系型数据库 SQL 中对应的是事务中的 INSERT 和 UPDATE 组合语句，并使用了可串行化隔离级别，该 SDK 代码对应的 SQL 语句示例如下：
 
 ```sql
 BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
@@ -230,4 +230,29 @@ WHERE name = 'Leon Ding';
 COMMIT;
 ```
 
+
+## 📂 Document 命名空间
+
+> [!TIP]
+> Document 命名空间的结构类似 MongoDB 中的 Document 结构，其 Document 通常直接映射编程语言中的 class 的一条记录，OOP 面向对象编程中的对象可以直接映射为 Document 记录，类似于传统关系 SQL 数据库中的一组行记录的抽象 Schema 模型。
+
+
+下面的示例演示如何创建一个名为 **user.profile** 的 Document 对象，并通过 `db.save()` 方法将其保存到数据库中，示例代码如下：
+
+```javascript
+test("should save a single document", async () => {
+    // 创建一条名为 user.profile 的 document 类型的记录
+    const doc = Document.from("user.profile", {
+        name: "Leon Ding",
+        age: 26,
+        email: "ding_ms@outlook.com"
+    });
+
+    // 通过 save 方法保存 document 记录
+    const results = await db.save(doc);
+});
+```
+
+> [!IMPORTANT]
+> 需要注意在整个 UrnaDB SDK 中 `db.save()` 方法，统一用于将 Document 和 Variant 对象持久化存储到数据库中，不适用于其他的数据类型。
 
