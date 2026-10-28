@@ -280,5 +280,5 @@ test("should save multiple documents", async () => {
 });
 ```
 
-> [!WARNING]
-> xxx
+> [!IMPORTANT]
+> 除了用于持久化存储的 **db.save()** 方法外，Document 对象还提供了一系列内置方法，例如 `has()`、`merge()` 和 `search()` ，帮助开发者便捷地操作和处理 Document 数据。开发者可以根据具体的业务需求，灵活组合这些 API，实现更复杂的业务逻辑。
