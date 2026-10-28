@@ -254,5 +254,31 @@ test("should save a single document", async () => {
 ```
 
 > [!IMPORTANT]
-> 需要注意在整个 UrnaDB SDK 中 `db.save()` 方法，统一用于将 Document 和 Variant 对象持久化存储到数据库中，不适用于其他的数据类型。
+> 需要注意在整个 UrnaDB SDK 中 `db.save()` 方法，统一用于将 **Document** 和 **Variant** 对象持久化存储到数据库中，不适用于其他的数据类型。
 
+
+下面的示例演示如何使用 `db.save()` 方法一次性保存多个 Document 对象，其 `db.save()` 方法是支持可变参数调用，因此可以在同一次调用中传入多个待保存的对象，并通过返回结果检查各对象的保存状态，代码示例如下：
+
+```javascript
+test("should save multiple documents", async () => {
+    const doc1 = Document.from("user.config", {
+        theme: "dark",
+        language: "zh-CN"
+    });
+
+    const doc2 = Document.from("user.settings", {
+        notifications: true,
+        autoSave: false
+    });
+
+    // 一次性保存多个 Document 对象
+    const results = await db.save(doc1, doc2);
+
+    results.forEach(result => {
+        assert.equal(result.status, "success");
+    });
+});
+```
+
+> [!WARNING]
+> xxx
