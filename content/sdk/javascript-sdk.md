@@ -331,6 +331,8 @@ test("should search field value", () => {
 });
 ```
 
+下面的示例演示如何使用 Document 对象的 `has()` 方法检查指定字段是否存在。该方法支持通过字段名称检查普通字段，也支持使用点分隔路径检查嵌套对象中的字段，当指定字段存在时返回 true 值，否则返回 false 值，代码示例如下：
+
 ```javascript
 test("should check if field exists", () => {
     const document = Document.from("userinfo", {

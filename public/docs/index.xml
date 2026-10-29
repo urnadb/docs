@@ -638,6 +638,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;下面的示例演示如何使用 Document 对象的 &lt;code&gt;has()&lt;/code&gt; 方法检查指定字段是否存在。该方法支持通过字段名称检查普通字段，也支持使用点分隔路径检查嵌套对象中的字段，当指定字段存在时返回 true 值，否则返回 false 值，代码示例如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;test&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;should check if field exists&amp;#34;&lt;/span&gt;, () =&amp;gt; {
