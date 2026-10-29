@@ -307,3 +307,44 @@ test("should merge data", () => {
     assert.equal(built.email, "ding_ms@outlook.com");
 });
 ```
+
+```javascript
+test("should search field value", () => {
+    const document = Document.from("userinfo", {
+        name: "Leon Ding",
+        age: 26,
+        address: {
+            city: "Shanghai",
+            zipcode: 200001
+        }
+    });
+
+    // 搜索源 Document 对象某个字段的值
+    assert.equal(document.search("name"), "Leon Ding");
+    assert.equal(document.search("age"), 26);
+    assert.equal(document.search("address.city"), "Shanghai");
+    assert.equal(document.search("address.zipcode"), 200001);
+    assert.equal(document.search("nonexistent"), undefined);
+});
+```
+
+```javascript
+test("should check if field exists", () => {
+    const document = Document.from("userinfo", {
+        name: "Leon Ding",
+        age: 26,
+        address: {
+            city: "Shanghai",
+            zipcode: 200001
+        }
+    });
+
+    // 查看某个字段查询是否存在
+    assert.equal(document.has("name"), true);
+    assert.equal(document.has("age"), true);
+    assert.equal(document.has("address.city"), true);
+    assert.equal(document.has("address.zipcode"), true);
+    assert.equal(document.has("address.country"), false);
+    assert.equal(document.has("phone"), false);
+});
+```
