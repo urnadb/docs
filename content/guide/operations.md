@@ -365,7 +365,7 @@ curl -X POST "http://192.168.101.252:2668/records/142857" \
 对已经存在的 **142857** 记录执行删除操作，这个对应着关系数据库 SQL 中的 `DROP TABLE ...` 语句，代码如下：
 
 ```bash
-curl -X DELETE "http://192.168.101.252:2668/records/142857" \
+curl -X DELETE "http://192.168.101.252:2668/document/142857" \
   -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI"
 ```
 

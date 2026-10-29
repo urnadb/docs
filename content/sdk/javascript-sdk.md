@@ -353,3 +353,6 @@ test("should check if field exists", () => {
     assert.equal(document.has("phone"), false);
 });
 ```
+
+## 📦 Variant 命名空间
+
