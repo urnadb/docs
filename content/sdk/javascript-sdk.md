@@ -288,7 +288,7 @@ test("should save multiple documents", async () => {
 
 ```javascript
 test("should merge data", () => {
-   // 创建包含初始字段的 Document 对象
+    // 创建包含初始字段的 Document 对象
     const document = Document.from("user", {
         name: "Leon Ding",
         age: 25
