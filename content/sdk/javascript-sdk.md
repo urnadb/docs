@@ -284,7 +284,8 @@ test("should save multiple documents", async () => {
 > [!IMPORTANT]
 > 除了用于持久化存储的 **db.save()** 方法外，Document 对象还提供了一系列内置方法，例如 `has()`、`merge()` 和 `search()` ，帮助开发者便捷地操作和处理 Document 数据，开发者可以根据具体的业务需求，灵活组合这些 API 实现更复杂的业务逻辑。
 
-下面是 Document 对象中的 `merge()` 方法使用示例，该示例会将一个新对象合并到源 **document** 对象中，代码例子如下：
+
+下面的示例演示如何使用 Document 对象的 `merge()` 方法合并数据，该方法将传入对象中的字段合并到当前 Document 对象中：如果字段已存在，则更新其值，如果字段不存在，则添加该字段。最后通过 `build()` 方法获取合并后的数据，并验证各字段的值，代码示例如下：
 
 ```javascript
 test("should merge data", () => {
@@ -307,6 +308,8 @@ test("should merge data", () => {
     assert.equal(built.email, "ding_ms@outlook.com");
 });
 ```
+
+下面的示例演示如何使用 Document 对象的 `search()` 方法查询字段值，该方法支持通过字段名称访问对应的值，也支持使用点分隔路径查询嵌套对象中的字段，当指定字段不存在时方法会返回 **undefined** 值，代码示例如下：
 
 ```javascript
 test("should search field value", () => {

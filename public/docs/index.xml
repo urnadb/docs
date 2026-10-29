@@ -578,7 +578,7 @@
     &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;除了用于持久化存储的 &lt;strong&gt;db.save()&lt;/strong&gt; 方法外，Document 对象还提供了一系列内置方法，例如 &lt;code&gt;has()&lt;/code&gt;、&lt;code&gt;merge()&lt;/code&gt; 和 &lt;code&gt;search()&lt;/code&gt; ，帮助开发者便捷地操作和处理 Document 数据，开发者可以根据具体的业务需求，灵活组合这些 API 实现更复杂的业务逻辑。&lt;/p&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;下面是 Document 对象中的 &lt;code&gt;merge()&lt;/code&gt; 方法使用示例，该示例会将一个新对象合并到源 &lt;strong&gt;document&lt;/strong&gt; 对象中，代码例子如下：&lt;/p&gt;
+&lt;p&gt;下面的示例演示如何使用 Document 对象的 &lt;code&gt;merge()&lt;/code&gt; 方法合并数据，该方法将传入对象中的字段合并到当前 Document 对象中：如果字段已存在，则更新其值，如果字段不存在，则添加该字段。最后通过 &lt;code&gt;build()&lt;/code&gt; 方法获取合并后的数据，并验证各字段的值，代码示例如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;test&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;should merge data&amp;#34;&lt;/span&gt;, () =&amp;gt; {
@@ -609,6 +609,7 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;下面的示例演示如何使用 Document 对象的 &lt;code&gt;search()&lt;/code&gt; 方法查询字段值，该方法支持通过字段名称访问对应的值，也支持使用点分隔路径查询嵌套对象中的字段，当指定字段不存在时方法会返回 &lt;strong&gt;undefined&lt;/strong&gt; 值，代码示例如下：&lt;/p&gt;
 &lt;div class=&#34;hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;test&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;should search field value&amp;#34;&lt;/span&gt;, () =&amp;gt; {

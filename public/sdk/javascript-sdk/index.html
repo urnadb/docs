@@ -26,7 +26,7 @@
   <meta itemprop="name" content="JavaScript SDK">
   <meta itemprop="description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
 🚀 快速开始 Tip">
-  <meta itemprop="wordCount" content="875">
+  <meta itemprop="wordCount" content="884">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JavaScript SDK">
   <meta name="twitter:description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
@@ -892,7 +892,7 @@
     <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>除了用于持久化存储的 <strong>db.save()</strong> 方法外，Document 对象还提供了一系列内置方法，例如 <code>has()</code>、<code>merge()</code> 和 <code>search()</code> ，帮助开发者便捷地操作和处理 Document 数据，开发者可以根据具体的业务需求，灵活组合这些 API 实现更复杂的业务逻辑。</p></div>
   </div>
 </div>
-<p>下面是 Document 对象中的 <code>merge()</code> 方法使用示例，该示例会将一个新对象合并到源 <strong>document</strong> 对象中，代码例子如下：</p>
+<p>下面的示例演示如何使用 Document 对象的 <code>merge()</code> 方法合并数据，该方法将传入对象中的字段合并到当前 Document 对象中：如果字段已存在，则更新其值，如果字段不存在，则添加该字段。最后通过 <code>build()</code> 方法获取合并后的数据，并验证各字段的值，代码示例如下：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should merge data&#34;</span>, () =&gt; {
@@ -923,6 +923,7 @@
   </button>
 </div>
 </div>
+<p>下面的示例演示如何使用 Document 对象的 <code>search()</code> 方法查询字段值，该方法支持通过字段名称访问对应的值，也支持使用点分隔路径查询嵌套对象中的字段，当指定字段不存在时方法会返回 <strong>undefined</strong> 值，代码示例如下：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should search field value&#34;</span>, () =&gt; {
