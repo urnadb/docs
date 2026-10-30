@@ -242,14 +242,14 @@ COMMIT;
 ```javascript
 test("should save a single document", async () => {
     // 创建一条名为 user.profile 的 document 类型的记录
-    const doc = Document.from("user.profile", {
+    const profile = Document.from("user.profile", {
         name: "Leon Ding",
         age: 26,
         email: "ding_ms@outlook.com"
     });
 
     // 通过 save 方法保存 document 记录
-    const results = await db.save(doc);
+    const results = await db.save(profile);
 });
 ```
 
