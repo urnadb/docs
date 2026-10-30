@@ -869,18 +869,18 @@
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should save multiple documents&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">doc1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Document</span>.<span style="color:#a6e22e">from</span>(<span style="color:#e6db74">&#34;user.config&#34;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user_config</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Document</span>.<span style="color:#a6e22e">from</span>(<span style="color:#e6db74">&#34;user.config&#34;</span>, {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;dark&#34;</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">language</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;zh-CN&#34;</span>
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">doc2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Document</span>.<span style="color:#a6e22e">from</span>(<span style="color:#e6db74">&#34;user.settings&#34;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user_settings</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Document</span>.<span style="color:#a6e22e">from</span>(<span style="color:#e6db74">&#34;user.settings&#34;</span>, {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">notifications</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">autoSave</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 一次性保存多个 Document 对象
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">doc1</span>, <span style="color:#a6e22e">doc2</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">user_config</span>, <span style="color:#a6e22e">user_settings</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">results</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">result</span> =&gt; {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">assert</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">status</span>, <span style="color:#e6db74">&#34;success&#34;</span>);

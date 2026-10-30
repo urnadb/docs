@@ -262,18 +262,18 @@ test("should save a single document", async () => {
 ```javascript
 test("should save multiple documents", async () => {
 
-    const doc1 = Document.from("user.config", {
+    const user_config = Document.from("user.config", {
         theme: "dark",
         language: "zh-CN"
     });
 
-    const doc2 = Document.from("user.settings", {
+    const user_settings = Document.from("user.settings", {
         notifications: true,
         autoSave: false
     });
 
     // 一次性保存多个 Document 对象
-    const results = await db.save(doc1, doc2);
+    const results = await db.save(user_config, user_settings);
 
     results.forEach(result => {
         assert.equal(result.status, "success");
