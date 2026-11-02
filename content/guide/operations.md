@@ -6,7 +6,7 @@ next: guide/transaction
 weight: 7
 ---
 
-UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Record 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。后续的文档统一称之为 NameSpace 命名空间，同一命名空间中存储都是同一类型的数据模型的数据，了解不同命名空间的数据模型及其特性，有助于开发者根据业务需求选择最合适的数据模型，从而高效实现上层业务功能。
+UrnaDB 内部提供了多种数据结构抽象，例如 Table 、Document 、 Variant 、Lock 类型，这些数据类型对应着常见的业务代码所需使用的数据结构。后续的文档统一称之为 NameSpace 命名空间，同一命名空间中存储都是同一类型的数据模型的数据，了解不同命名空间的数据模型及其特性，有助于开发者根据业务需求选择最合适的数据模型，从而高效实现上层业务功能。
 
 > [!IMPORTANT]
 > 客户端与 UrnaDB 服务端之间的数据交互通过 **PQL** 协议，PQL（Patch Query Language）是一种基于 HTTP + JSON 的数据操作与查询协议，为客户端与服务器之间的结构化数据交换提供了统一、简单且可扩展的接口，任何能够发起 HTTP 请求的软件都可以作为 PQL 客户端；以下内容将介绍如何使用 PQL API 与服务器进行数据交换示例。
@@ -270,20 +270,20 @@ curl -X DELETE "http://192.168.31.221:2668/tables/users" \
 > [!WARNING]
 > Table 是一组多个对象记录组成集合，同一个 Table 命名空间随着不断插入新的数据，会导致 Table 越来越大并且有锁的开销，多条记录共享一把 Table 锁有性能损失，所以不建议在单个 Table 命名空间中存储数据较多条数据记录。
 
-## 📂 Record 命名空间
+## 📂 Document 命名空间
 
 > [!TIP]
-> **Record** 命名空间的结构类似 MongoDB 中的 Document 结构，Record 通常直接映射编程语言中的 class 的一条记录，OOP 面向对象编程中的对象可以直接映射为 Record 记录。在高并发场景下 Record 一条记录对应一把锁，有着事物处理性能高的优势。Record 一段创建就不能改了，适应场景就是更新不频繁的数据，例如社交论坛系统中帖子功能，一条帖子可以对应一条 Record 记录，如果更新了直接设置一条新的 Record 映射即可。
+> **Document** 命名空间用于存储一份 JSON 文档，可以将编程语言中的对象映射为独立的 Document。例如，社交论坛中的一篇帖子可以保存为一份 Document，并通过文档名称访问。
 
 
-创建一条名为 **142857** 的 Record 命名空间，并设置所需存储的数据记录值。例如一张帖子的抽象，操作示例如下：
+创建一份名为 **142857** 的 Document，并设置所需存储的数据内容。例如一篇帖子，操作示例如下：
 
 ```bash
-curl -X PUT "http://192.168.101.252:2668/records/142857" \
+curl -X PUT "http://192.168.101.252:2668/documents/142857" \
   -H "Content-Type: application/json" \
   -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -d '{
-    "record": {
+    "document": {
       "title": "Hello UrnaDB: My First Post",
       "author": "Leon Ding",
       "content": "This is a forum post stored inside UrnaDB.\n\n",
@@ -301,26 +301,26 @@ curl -X PUT "http://192.168.101.252:2668/records/142857" \
 ```json
 {
     "status": "success",
-    "message": "record created successfully"
+    "message": "document created successfully"
 }
 ```
 
 > [!IMPORTANT]
-> 这个 **142857** 可以看作是一篇文章的 POST ID 编号，业务层只需要提供这个 ID 就可以查询到这条帖子数据，类似于关系数据库中一条记录的唯一主键；同样在创建 Record 记录数据时可以指定 `ttl` 字段，`ttl` 的值单位是秒用来设置 Record 的生命周期。
+> 这个 **142857** 可以看作是一篇文章的 POST ID 编号，业务层只需要提供这个 ID 就可以查询到这份 Document；创建 Document 时可以指定 `ttl` 字段，单位为秒，用来设置它的生命周期。
 
-在 Record 命名空间中查询一条名为 **142857** 的数据记录，操作示例如下：
+查询名为 **142857** 的 Document，操作示例如下：
 
 ```bash
-curl -X GET http://192.168.31.221:2668/records/142857 \
+curl -X GET http://192.168.31.221:2668/documents/142857 \
   -H "Auth-Token: dw8PDCPRQcrIVIekL4UheS9ra"
 ```
 
-如果执行成功会返回 **142857** 中存储的完整数据记录：
+如果执行成功会返回 **142857** 中存储的完整文档：
 
 ```json
 {
     "status": "success",
-    "message": "record queried successfully",
+    "message": "document queried successfully",
     "data": {
         "author": "Leon Ding",
         "category": "tech",
@@ -336,10 +336,10 @@ curl -X GET http://192.168.31.221:2668/records/142857 \
 }
 ```
 
-对已存在的 **142857** 数据记录查询某个 `column` 操作，类似于关系数据库 SQL 中的 `SELECT column FROM ...` 语句，例如搜索查询操作示例：
+查询已有的 **142857** Document 中的某个 `column`，类似于关系数据库 SQL 中的 `SELECT column FROM ...` 语句，示例如下：
 
 ```bash
-curl -X POST "http://192.168.101.252:2668/records/142857" \
+curl -X POST "http://192.168.101.252:2668/documents/142857" \
   -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI" \
   -H "Content-Type: application/json" \
   -d '{
@@ -362,19 +362,19 @@ curl -X POST "http://192.168.101.252:2668/records/142857" \
 }
 ```
 
-对已经存在的 **142857** 记录执行删除操作，这个对应着关系数据库 SQL 中的 `DROP TABLE ...` 语句，代码如下：
+删除已经存在的 **142857** Document，代码如下：
 
 ```bash
-curl -X DELETE "http://192.168.101.252:2668/document/142857" \
+curl -X DELETE "http://192.168.101.252:2668/documents/142857" \
   -H "Auth-Token: yv2PH82JXfm2UpScAQK37iJVI"
 ```
 
-如果上面请求执行成功会删除对应的 **142857** 中所存储的数据记录，HTTP 会响应返回 JSON 格式的内容如下：
+如果上面请求执行成功会删除名为 **142857** 的 Document，HTTP 会响应返回 JSON 格式的内容如下：
 
 ```json
 {
     "status": "success",
-    "message": "record deleted successfully"
+    "message": "document deleted successfully"
 }
 ```
 

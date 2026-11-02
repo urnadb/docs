@@ -1,7 +1,7 @@
 ---
 title: 数据恢复
 type: docs
-prev: guide/transcation
+prev: guide/transaction
 weight: 9
 ---
 
