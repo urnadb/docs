@@ -1,5 +1,6 @@
 baseURL: https://docs.urnadb.org/
 languageCode: zh-cn
+defaultContentLanguage: zh-cn
 title: UrnaDB Document
 
 params:
