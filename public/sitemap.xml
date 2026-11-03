@@ -15,15 +15,15 @@
   </url><url>
     <loc>http://localhost:1313/changelog/release/</loc>
   </url><url>
-    <loc>http://localhost:1313/guide/</loc>
-  </url><url>
     <loc>http://localhost:1313/guide/deployment/</loc>
   </url><url>
-    <loc>http://localhost:1313/sdk/</loc>
+    <loc>http://localhost:1313/guide/</loc>
   </url><url>
     <loc>http://localhost:1313/changelog/</loc>
   </url><url>
     <loc>http://localhost:1313/guide/configure/</loc>
+  </url><url>
+    <loc>http://localhost:1313/sdk/</loc>
   </url><url>
     <loc>http://localhost:1313/community/</loc>
   </url><url>
