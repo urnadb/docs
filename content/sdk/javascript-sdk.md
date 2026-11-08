@@ -358,3 +358,14 @@ test("should check if field exists", () => {
 
 > [!TIP]
 > Variant 命名空间用于存储具有动态类型特征的数据，支持 **Integer** 、 **Float** 、**String** 等数据类型，每个 Variant 命名空间的数据类型由首次创建并写入的数据决定，后续写入的数据必须遵循该命名空间已确定的类型。此外 SDK 提供的 Variant 对象还封装了一系列内置方法，例如 `incr()` 方法，可用于执行数值递增操作，简化数据操作流程。
+
+创建一个名为 **views** 的 Variant 命名空间，其 **views** 里存储的是 Integer 类型，下面 API 操作示例：
+
+
+```javascript
+test("should save a single variant", async () => {
+    // 创建一个名为 views 的 Variant 对象值为 0 
+    const view = Variant.of("views", 0);
+    const results = await db.save(view);
+});
+```

@@ -26,7 +26,7 @@
   <meta itemprop="name" content="JavaScript SDK">
   <meta itemprop="description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
 🚀 快速开始 Tip">
-  <meta itemprop="wordCount" content="912">
+  <meta itemprop="wordCount" content="950">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JavaScript SDK">
   <meta name="twitter:description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
@@ -999,6 +999,23 @@
   <div class="hx-w-full hx-min-w-0 hx-leading-7">
     <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>Variant 命名空间用于存储具有动态类型特征的数据，支持 <strong>Integer</strong> 、 <strong>Float</strong> 、<strong>String</strong> 等数据类型，每个 Variant 命名空间的数据类型由首次创建并写入的数据决定，后续写入的数据必须遵循该命名空间已确定的类型。此外 SDK 提供的 Variant 对象还封装了一系列内置方法，例如 <code>incr()</code> 方法，可用于执行数值递增操作，简化数据操作流程。</p></div>
   </div>
+</div>
+<p>创建一个名为 <strong>views</strong> 的 Variant 命名空间，其 <strong>views</strong> 里存储的是 Integer 类型，下面 API 操作示例：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should save a single variant&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 创建一个名为 views 的 Variant 对象值为 0 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">view</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Variant</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#34;views&#34;</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">results</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">view</span>);
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
 </div>
 
         </div>
