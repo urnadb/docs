@@ -1000,11 +1000,11 @@
     <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>Variant 命名空间用于存储具有动态类型特征的数据，支持 <strong>Integer</strong> 、 <strong>Float</strong> 、<strong>String</strong> 等数据类型，每个 Variant 命名空间的数据类型由首次创建并写入的数据决定，后续写入的数据必须遵循该命名空间已确定的类型。此外 SDK 提供的 Variant 对象还封装了一系列内置方法，例如 <code>incr()</code> 方法，可用于执行数值递增操作，简化数据操作流程。</p></div>
   </div>
 </div>
-<p>创建一个名为 <strong>views</strong> 的 Variant 命名空间，其 <strong>views</strong> 里存储的是 Integer 类型，下面 API 操作示例：</p>
+<p>创建一个名为 <strong>page.views</strong> 的 Variant 命名空间，其 <strong>page.views</strong> 里存储的是 Integer 类型，下面 API 操作示例：</p>
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
 
 <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">test</span>(<span style="color:#e6db74">&#34;should save a single variant&#34;</span>, <span style="color:#66d9ef">async</span> () =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 创建名为 views、初始值为 0 的 Variant 对象
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 创建名为 page.views、初始值为 0 的 Variant 对象
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">view</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Variant</span>.<span style="color:#66d9ef">of</span>(<span style="color:#e6db74">&#34;page.views&#34;</span>, <span style="color:#ae81ff">0</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">view</span>);
 </span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
