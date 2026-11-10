@@ -361,11 +361,10 @@ test("should check if field exists", () => {
 
 创建一个名为 **views** 的 Variant 命名空间，其 **views** 里存储的是 Integer 类型，下面 API 操作示例：
 
-
 ```javascript
 test("should save a single variant", async () => {
-    // 创建一个名为 views 的 Variant 对象值为 0 
-    const view = Variant.of("views", 0);
-    const results = await db.save(view);
+    // 创建名为 views、初始值为 0 的 Variant 对象
+    const view = Variant.of("page.views", 0);
+    const result = await db.save(view);
 });
 ```
