@@ -752,10 +752,11 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">token</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;connection-secret-token&#34;</span>
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// UrnaDB ES6 SDK Transaction Example:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 对多个 table 命名空间中存储的数据进行事物操作，示例如下：
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">tables</span>().<span style="color:#a6e22e">transaction</span>(<span style="color:#a6e22e">txns</span> =&gt; {
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">txns</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Enable serializable isolation level for this transaction
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 默认不调用此方法，事物采用 MVCC 模式处理事物并发处理时序问题，
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// 使用并且调用 serializable 方法会将事物升级为 2PL 模式。
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            .<span style="color:#a6e22e">serializable</span>(<span style="color:#66d9ef">true</span>)
 </span></span><span style="display:flex;"><span>            .<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;users&#34;</span>, <span style="color:#a6e22e">rows</span> =&gt; {
 </span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">rows</span>

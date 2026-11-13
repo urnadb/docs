@@ -170,10 +170,11 @@ test("should build a transaction with multiple table", async () => {
         token: "connection-secret-token"
     });
 
-    // UrnaDB ES6 SDK Transaction Example:
+    // 对多个 table 命名空间中存储的数据进行事物操作，示例如下：
     const result = await db.tables().transaction(txns => {
         txns
-            // Enable serializable isolation level for this transaction
+            // 默认不调用此方法，事物采用 MVCC 模式处理事物并发处理时序问题，
+            // 使用并且调用 serializable 方法会将事物升级为 2PL 模式。
             .serializable(true)
             .put("users", rows => {
                 rows
