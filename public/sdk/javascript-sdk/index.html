@@ -26,7 +26,7 @@
   <meta itemprop="name" content="JavaScript SDK">
   <meta itemprop="description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
 🚀 快速开始 Tip">
-  <meta itemprop="wordCount" content="1027">
+  <meta itemprop="wordCount" content="1072">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="JavaScript SDK">
   <meta name="twitter:description" content="每个编程语言版本的 SDK 都基于对应语言的语言特性进行实现，JavaScript 版本的 SDK 同样如此，完全基于 ES6 标准编写，充分利用 JavaScript 灵活的函数式编程能力。因此 UrnaDB JavaScript SDK 在 API 设计上采用 Lambda 函数式风格，将函数作为一等公民，使 API 更加简洁、灵活，并能够充分发挥 JavaScript 的语言特性，为熟悉 JavaScript 和函数式编程的开发者提供自然、友好的编程体验。
@@ -308,6 +308,12 @@
                 class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
               >📦 Variant 命名空间</a>
             </li>
+          <li>
+              <a
+                href="#-claim-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >🔒 Claim 命名空间</a>
+            </li>
           </ul>
   
               
@@ -504,6 +510,10 @@
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
         <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#-variant-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4">📦 Variant 命名空间
+        </a>
+      </li>
+      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#-claim-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4">🔒 Claim 命名空间
         </a>
       </li></ul>
       <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
@@ -1047,6 +1057,40 @@
   <div class="hx-w-full hx-min-w-0 hx-leading-7">
     <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>在操作 Variant 命名空间时需要区分两种情况，首次创建并初始化 Variant 对象时，该对象尚未持久化到数据库，因此不支持调用 <code>incr()</code> 方法；只有当对应的 Variant 命名空间已存在于数据库中，且其存储的数据类型为 Integer 时，才支持调用 <code>incr()</code> 方法进行数值递增或递减操作。</p></div>
   </div>
+</div>
+<h2>🔒 Claim 命名空间<span class="hx-absolute -hx-mt-20" id="-claim-命名空间"></span>
+    <a href="#-claim-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200">
+  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>Tip</p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p>Claim 命名空间是 UrnaDB 数据库中一种特殊的数据模型，用于存储客户端申请的分布式锁，UrnaDB 数据库服务器端负责维护锁的状态，并协调分布式锁的申请与释放，从而为分布式环境下的并发访问控制提供支持。</p></div>
+  </div>
+</div>
+<p>下面通过一个具体示例，演示如何使用 Claim 命名空间的分布式锁保护共享资源，避免多个客户端同时访问或修改同一资源，代码示例如下：</p>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+
+<div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// 创建一个名为 user.profile 分布式锁，租期为 30 秒
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">claim</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Claim</span>.<span style="color:#a6e22e">acquire</span>(<span style="color:#e6db74">&#34;user.profile&#34;</span>, <span style="color:#ae81ff">30</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 使用 using 函数方法采用闭包的方式完成业务逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">claim</span>.<span style="color:#a6e22e">using</span>(<span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">claim</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 执行业务逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">edit</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 手动延长分布式锁的有效期
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">claim</span>.<span style="color:#a6e22e">extend</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 继续执行业务逻辑
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">save</span>();
+</span></span><span style="display:flex;"><span>});</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 hx-top-0">
+  <button
+    class="hextra-code-copy-btn hx-group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
+    title="Copy code"
+  >
+    <div class="copy-icon group-[.copied]/copybtn:hx-hidden hx-pointer-events-none hx-h-4 hx-w-4"></div>
+    <div class="success-icon hx-hidden group-[.copied]/copybtn:hx-block hx-pointer-events-none hx-h-4 hx-w-4"></div>
+  </button>
+</div>
 </div>
 
         </div>

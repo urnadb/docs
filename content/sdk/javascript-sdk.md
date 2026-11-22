@@ -388,3 +388,29 @@ test("should incr a variant", async () => {
 
 > [!IMPORTANT]
 > 在操作 Variant 命名空间时需要区分两种情况，首次创建并初始化 Variant 对象时，该对象尚未持久化到数据库，因此不支持调用 `incr()` 方法；只有当对应的 Variant 命名空间已存在于数据库中，且其存储的数据类型为 Integer 时，才支持调用 `incr()` 方法进行数值递增或递减操作。
+
+
+## 🔒 Claim 命名空间
+
+> [!TIP]
+> Claim 命名空间是 UrnaDB 数据库中一种特殊的数据模型，用于存储客户端申请的分布式锁，UrnaDB 数据库服务器端负责维护锁的状态，并协调分布式锁的申请与释放，从而为分布式环境下的并发访问控制提供支持。
+
+
+下面通过一个具体示例，演示如何使用 Claim 命名空间的分布式锁保护共享资源，避免多个客户端同时访问或修改同一资源，代码示例如下：
+
+```javascript
+// 创建一个名为 user.profile 分布式锁，租期为 30 秒
+const claim = Claim.acquire("user.profile", 30);
+
+// 使用 using 函数方法采用闭包的方式完成业务逻辑
+await claim.using(async (claim) => {
+    // 执行业务逻辑
+    await edit();
+
+    // 手动延长分布式锁的有效期
+    await claim.extend();
+
+    // 继续执行业务逻辑
+    await save();
+});
+```
