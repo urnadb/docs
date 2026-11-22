@@ -402,9 +402,9 @@ test("should incr a variant", async () => {
 // 创建一个名为 user.profile 分布式锁，租期为 30 秒
 const claim = Claim.acquire("user.profile", 30);
 
-// 使用 using 函数方法采用闭包的方式完成业务逻辑
+// 使用 using 方法设计采用函数式闭包方式的设计
 await claim.using(async (claim) => {
-    // 执行业务逻辑
+    // 在持有分布式锁期间执行的业务逻辑
     await edit();
 
     // 手动延长分布式锁的有效期
