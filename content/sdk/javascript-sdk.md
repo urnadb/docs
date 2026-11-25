@@ -415,19 +415,20 @@ await claim.using(async (claim) => {
 
 上述 API 采用基于 Lambda 函数的函数式风格进行设计，而其 `using` 方法的内部实现仍然采用传统的命令式编程方式；为了对比两种 API 设计风格，下面将使用常规的命令式 API 实现相同的功能，具体代码示例如下：
 
+
 ```javascript
-// 创建一个 Claim 分布式客户端句柄
+// 创建分布式锁客户端，指定锁名称和租约时长（秒）
 const claim = new Claim("user.profile", 30);
 
 try {
-    // 向服务器端请求具体的分布式锁，有可能会失败
+    // 尝试获取分布式锁，获取失败时将抛出异常
     await claim.acquire();
     // 执行业务逻辑
     await updated();
-    // 需要时可以手动续期
+    // 根据业务执行时间，按需续期以延长锁的有效期
     await claim.extend();
 } finally {
-    // 强制一定要释放分布式锁
+    // 无论业务执行成功还是失败，都尝试释放分布式锁
     await claim.release();
 }
 ```
