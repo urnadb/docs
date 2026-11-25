@@ -406,11 +406,28 @@ const claim = Claim.acquire("user.profile", 30);
 await claim.using(async (claim) => {
     // 在持有分布式锁期间执行的业务逻辑
     await edit();
-
     // 手动延长分布式锁的有效期
     await claim.extend();
-
     // 继续执行业务逻辑
     await save();
 });
+```
+
+上述 API 采用基于 Lambda 函数的函数式风格进行设计，而其 `using` 方法的内部实现仍然采用传统的命令式编程方式；为了对比两种 API 设计风格，下面将使用常规的命令式 API 实现相同的功能，具体代码示例如下：
+
+```javascript
+// 创建一个 Claim 分布式客户端句柄
+const claim = new Claim("user.profile", 30);
+
+try {
+    // 向服务器端请求具体的分布式锁，有可能会失败
+    await claim.acquire();
+    // 执行业务逻辑
+    await updated();
+    // 需要时可以手动续期
+    await claim.extend();
+} finally {
+    // 强制一定要释放分布式锁
+    await claim.release();
+}
 ```
